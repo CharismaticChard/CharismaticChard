@@ -21,8 +21,8 @@ ReactDOM.render(
       <div className="mainContainer">
         <div className="headerContainer">
           <div className="dropdown headerItem">
-            <img src="./assets/menu.png" width="100"/>
-            <div className="dropdown-content">
+            <p>Menu</p>
+            <div className="dropdown-content" alt="Menu">
               <Link to="/">Home</Link>
               <Link to="/input">Input</Link>
             </div>
