@@ -1,5 +1,5 @@
 var twilioMessages = require('./twilio.js');
-var helperTwilio = require('./helper_twilio.js')
+var helperTwilio = require('./helper_twilio.js');
 
 module.exports.twilioMiddleware = function (req, res) {
   var messages = helperTwilio.generateMessage(req.body); 
@@ -9,4 +9,4 @@ module.exports.twilioMiddleware = function (req, res) {
       console.log('message received');
     }); 
   }
-}
+};
