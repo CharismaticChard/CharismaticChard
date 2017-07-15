@@ -29,6 +29,7 @@
     "grunt-pg": "https://github.com/watsoncj/grunt-pg.git",
     "grunt-run": "^0.7.0",
     "jest": "^20.0.4",
+    "jquery": "^3.2.1",
     "jsdom": "^11.1.0",
     "knex": "^0.12.9",
     "morgan": "^1.8.1",

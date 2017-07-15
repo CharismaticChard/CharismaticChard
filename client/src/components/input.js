@@ -3,15 +3,39 @@ import Button from 'react-bootstrap/lib/Button';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 const mapStateToProps = state => {
   return {
     numbers: state.numbers.numbers
   };
 };
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 //grab user input and display to screen on submit
 //dynamically allow for addition of form fields
 const Input = ({numbers}) => {
+  let formObj = {};
+
+  const send = () => {
+    //invoke dispatch on formObj
+    //formObj = {};
+  };
+
+  const formSubmit = event => {
+    e.preventDefault();
+    var data = {};
+    var items = document.getElementsByClassName('itemsForm');
+    var formData = new FormData(items);
+    var iterator = formData.entries();
+    for (var pair of iterator) {
+      data[pair[0]] = pair[1];
+    }
+    console.log('here');
+  };
+
   return (
     <div>
       <h1>Hello Input</h1>
@@ -22,7 +46,7 @@ const Input = ({numbers}) => {
           <hr/>
         </div>
         <div className="inputBody">
-          <FormGroup>
+          <FormGroup className="itemsForm">
             <div className="formContainer">
               <div className="formItem">
                 <FormControl className="formItemBit" type="text" placeholder="Item Name..." />
@@ -40,7 +64,7 @@ const Input = ({numbers}) => {
             <hr/>
           </FormGroup>
           <br></br>
-          <FormGroup>
+          <FormGroup className="tipTaxTotalForm">
             <div className="formContainer">
               <div className="formItem">
                 <FormControl type="number" placeholder="Tax..." />
@@ -54,7 +78,7 @@ const Input = ({numbers}) => {
             </div>
             <hr/>
           </FormGroup>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" onClick={formSubmit}>Submit</Button>
         </div>
       </div>
     </div>
