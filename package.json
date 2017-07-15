@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-core": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
@@ -33,10 +34,18 @@
     "passport-twitter": "^1.0.4",
     "pg": "^6.1.5",
     "react": "^15.4.2",
+    "react-bootstrap": "^0.31.1",
     "react-dom": "^15.4.2",
+    "twilio": "^3.5.0",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "redis": "^2.7.1",
     "redux": "^3.7.2",
-    "twilio": "^3.5.0"
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.3.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
@@ -62,7 +71,8 @@
   },
   "babel": {
     "plugins": [
-      "transform-es2015-modules-commonjs"
+      "transform-es2015-modules-commonjs",
+      "transform-object-rest-spread"
     ]
   }
 }
