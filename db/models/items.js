@@ -4,8 +4,12 @@ const Item = db.Model.extend({
   tableName: 'items',
   hasTimestamps: true,
 
-  items: function () {
-    return this.hasMany('Item');
+  split: function () {
+    return this.belongsTo('Split');
+  },
+
+  profile: function () {
+    return this.belongsTo('Profile');
   }
 });
 
