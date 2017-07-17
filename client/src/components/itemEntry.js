@@ -1,20 +1,21 @@
 import React from 'react';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-import DropdownFriendList from './dropdownFriendList.js';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+
 
 
 class ItemEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title : "person"
+      title: "person"
     };
   }
 
-  changeTitle (title) { 
+  changeTitle (e) { 
     this.setState({
-      title: title
-    })
+      title: e.target.title
+    });
   }
 
   render() {
@@ -24,7 +25,7 @@ class ItemEntry extends React.Component {
         <td>{this.props.item.price}</td>
         <td>
           <DropdownButton bsStyle="success" title={this.state.title} id='split-button-basic-Success'>
-            {this.props.friendsInfo ? this.props.friendsInfo.map((friendInfo, index) => {return <DropdownFriendList key={index} changeTitle={this.changeTitle.bind(this)} friendsInfo={friendInfo} /> }): null}
+            {this.props.friendsInfo.map((friendInfo, index) => {return <MenuItem key={index} onClick={this.changeTitle.bind(this)} title={friendInfo.friendName}>{friendInfo.friendName}</MenuItem>; })}
           </DropdownButton>
         </td>
       </tr>
