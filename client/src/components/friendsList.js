@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Table from 'react-bootstrap/lib/Table';
-import ItemEntry from './itemEntry.js';
 
 
 var dummyInputBillData= {
@@ -14,30 +13,26 @@ var dummyInputBillData= {
 
 
 
-const ItemList = () => {
+const FriendsList = () => {
   return (
     <Table responsive>
       <thead>
         <tr>
-          <th>Items</th>
-          <th>Price</th>
+          <th>Friends</th>
+          <th>Numbers</th>
         </tr>
       </thead>
       <tbody>
-        { dummyInputBillData.items !== null ? dummyInputBillData.items.map( (item, index) => { return <ItemEntry key={index} item={item} />; }) : null }   
         <tr>
           <td>tip</td>
-          <td>{dummyInputBillData.tip}</td>
         </tr>
         <tr>
           <td>tax</td>
-          <td>{dummyInputBillData.tax}</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <th>total</th>
-          <th>{dummyInputBillData.total}</th>
         </tr>
       </tfoot>
     </Table>
@@ -45,5 +40,5 @@ const ItemList = () => {
 };
 
 
-export default ItemList;
+export default FriendsList;
 

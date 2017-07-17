@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import AddFriends from './addFriends.js';
 import ItemList from './itemList.js';
+import FriendsList from './friendsList.js';
 
 
 
@@ -17,24 +18,24 @@ class Output extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Row className="show-grid">
- 
-        <Col xs={6} md={4}>
-          <ItemList />
-        </Col>
-
-        <Col xs={6} md={4}>
-          
-        </Col>
-
-        <Col xsHidden md={4} >
-          <AddFriends />
-        </Col>
-
-
-        </Row>
-      </Grid>
+      <div>
+        <Grid>
+          <Row className="show-grid">
+            <Col xs={6} md={4}>
+              <ItemList />
+            </Col>
+            <Col xs={6} md={4}>
+              <FriendsList />
+            </Col>
+            <Col xsHidden md={4} >
+              <AddFriends />
+            </Col>
+          </Row>
+        </Grid>
+        <div>
+          <input type="button" value="submit"/>  
+        </div>
+      </div>
     );
   }
 }
