@@ -9,20 +9,38 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 class AddFriends extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      name: null,
+      number:null
     };
   }
 
   close() {
     this.setState({ showModal: false });
+    this.props.friendInfo(this.state.name, this.state.number); 
   }
 
   open() {
     this.setState({ showModal: true });
+
   }
+
+  friendName(e){
+    this.setState({
+      name: e.target.value
+    })
+  }
+
+  friendNumber(e){
+    this.setState({
+      number: e.target.value
+    })
+  }
+
+
 
   render() {
     return (
@@ -42,7 +60,7 @@ class AddFriends extends React.Component {
                   Name
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="email" placeholder="Friend's Name" />
+                  <FormControl type="email" placeholder="Friend's Name" onChange={this.friendName.bind(this)}/>
                 </Col>
               </FormGroup>
 
@@ -51,7 +69,7 @@ class AddFriends extends React.Component {
                   Number
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="email" placeholder="xxx-xxx-xxxx" />
+                  <FormControl type="email" placeholder="xxx-xxx-xxxx" onChange={this.friendNumber.bind(this)}/>
                 </Col>
               </FormGroup>
             </Form>

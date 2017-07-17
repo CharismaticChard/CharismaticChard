@@ -19,7 +19,7 @@ const ItemList = () => {
     <Table responsive>
       <thead>
         <tr>
-          <th>Items</th>
+          <th>Item</th>
           <th>Price</th>
         </tr>
       </thead>

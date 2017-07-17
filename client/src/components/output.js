@@ -16,6 +16,29 @@ import FriendsList from './friendsList.js';
 
 class Output extends React.Component {
 
+  constructor () {
+    super();
+    this.state = {
+      friendInfo: {
+        friendsName: [],
+        friendsNumbers :[]
+      }
+    }
+  }
+
+  friendInfo(name, number) {
+    // console.log('name', name);
+    // console.log('number', number);
+    var insertName = this.state.friendInfo.friendsName.concat(name);
+    var insertNumber =this.state.friendInfo.friendsNumbers.concat(number);
+    this.setState({
+      friendInfo: {
+        friendsName: insertName, 
+        friendsNumbers: insertNumber
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -25,10 +48,11 @@ class Output extends React.Component {
               <ItemList />
             </Col>
             <Col xs={6} md={4}>
-              <FriendsList />
+                {console.log('friendsName', this.state.friendInfo)}                       
+              <FriendsList friendInfo={this.state.friendInfo} />
             </Col>
             <Col xsHidden md={4} >
-              <AddFriends />
+              <AddFriends friendInfo={this.friendInfo.bind(this)}/>
             </Col>
           </Row>
         </Grid>
