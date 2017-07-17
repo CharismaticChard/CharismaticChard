@@ -2,9 +2,9 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Table from 'react-bootstrap/lib/Table';
-// import FriendEntry from './friendEntry.js';
+import FriendEntry from './friendEntry.js';
 
-const FriendsList = ({friendInfo}) => {
+const FriendsList = ({friendsInfo}) => {
   return (
     <Table responsive>
       <thead>
@@ -14,7 +14,7 @@ const FriendsList = ({friendInfo}) => {
         </tr>
       </thead>
       <tbody>
-      
+        { friendsInfo !== null ? friendsInfo.map( (friendInfo, index) => { return <FriendEntry key={index} friendInfo={friendInfo}/> }) : null }
       </tbody>
       <tfoot>
       </tfoot>

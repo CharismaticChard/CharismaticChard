@@ -31,13 +31,13 @@ class AddFriends extends React.Component {
   friendName(e){
     this.setState({
       name: e.target.value
-    })
+    });
   }
 
   friendNumber(e){
     this.setState({
       number: e.target.value
-    })
+    });
   }
 
 

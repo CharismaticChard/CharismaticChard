@@ -19,24 +19,19 @@ class Output extends React.Component {
   constructor () {
     super();
     this.state = {
-      friendInfo: {
-        friendsName: [],
-        friendsNumbers :[]
-      }
-    }
+      friendsInfo: []
+    };
   }
 
   friendInfo(name, number) {
-    // console.log('name', name);
-    // console.log('number', number);
-    var insertName = this.state.friendInfo.friendsName.concat(name);
-    var insertNumber =this.state.friendInfo.friendsNumbers.concat(number);
+    var friendInformation = {
+      friendName: name,
+      friendNumber: number 
+    }
+    var info= this.state.friendsInfo.concat(friendInformation);
     this.setState({
-      friendInfo: {
-        friendsName: insertName, 
-        friendsNumbers: insertNumber
-      }
-    })
+      friendsInfo: info
+    });
   }
 
   render() {
@@ -48,8 +43,7 @@ class Output extends React.Component {
               <ItemList />
             </Col>
             <Col xs={6} md={4}>
-                {console.log('friendsName', this.state.friendInfo)}                       
-              <FriendsList friendInfo={this.state.friendInfo} />
+              <FriendsList friendsInfo={this.state.friendsInfo} />
             </Col>
             <Col xsHidden md={4} >
               <AddFriends friendInfo={this.friendInfo.bind(this)}/>
