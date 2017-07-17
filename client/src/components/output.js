@@ -27,7 +27,7 @@ class Output extends React.Component {
     var friendInformation = {
       friendName: name,
       friendNumber: number 
-    }
+    };
     var info= this.state.friendsInfo.concat(friendInformation);
     this.setState({
       friendsInfo: info
@@ -40,7 +40,7 @@ class Output extends React.Component {
         <Grid>
           <Row className="show-grid">
             <Col xs={6} md={4}>
-              <ItemList />
+              <ItemList friendsInfo={this.state.friendsInfo}/>
             </Col>
             <Col xs={6} md={4}>
               <FriendsList friendsInfo={this.state.friendsInfo} />
