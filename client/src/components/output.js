@@ -83,7 +83,7 @@ class Output extends React.Component {
       // change the debtors state to debtorinfo array 
       this.setState({
         debtors: debtorInfo
-      });
+      }, this.helperSetState);
       // if there are some debtors  
     } else if( debtors.length > 0){ 
       // check global names array if given name doesn't exist in the names array  
@@ -149,21 +149,3 @@ class Output extends React.Component {
 
 
 export default Output;
-
-
-
-
-
-// {
-//         name: 'Kai', 
-//         phone: '+16508155855', 
-//         debtTotal: 16.54,
-//         items : [ 
-//           { itemName : 'salad',
-//             itemPrice : 11.32,
-//             quantity: 1
-//           }, 
-//         ],
-//         tax : 2.22,
-//         tip : 3.00
-//       }

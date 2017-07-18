@@ -21,7 +21,6 @@ class ItemEntry extends React.Component {
   }
 
   debtor() {
-    // console.log('chekcing ')
     this.props.collectSplitItemInfo(this.state.name, this.state.item, this.state.price);
   }
 
