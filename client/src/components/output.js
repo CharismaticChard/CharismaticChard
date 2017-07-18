@@ -21,7 +21,7 @@ var dummyInputBillData= {
 };
 
 
-
+let names = []; 
 // smart container 
 // need to access redux 
 class Output extends React.Component {
@@ -30,42 +30,77 @@ class Output extends React.Component {
     super();
     this.state = {
       friendsInfo: [],
+      debtorsBasicInfo: [],
       debtors: []
     };
   }
 
   friendInfo(name, number) {
-    var friendInformation = {
+    let friendInformation = {
       friendName: name,
       friendNumber: number 
     };
-    var info= this.state.friendsInfo.concat(friendInformation);
+    let info= this.state.friendsInfo.concat(friendInformation);
     this.setState({
       friendsInfo: info
     });
   }
 
   collectSplitItemInfo(name, item, price) {
-
     let numbers = this.state.friendsInfo;
     let number = null; 
     numbers.forEach( (person) => {
       if( name === person.friendName) {
-        number = person.friendNumber
+        number = person.friendNumber;
       }
     });
-    // name, number ,price , item 
+    let itemAndPrice = { 
+        itemName: item, 
+        price: price, 
+        quantity:1 
+    };
     let debtor = {
       name: name,
       number: number,
-      debtTotal: item,
-      item: price
+      items:[ ]
     };
-    var debtorInfo = this.state.debtors.concat(debtor);
-    this.setState({
-      debtors: debtorInfo
-    });
+    let debtors = this.state.debtors;
+    let debtorInfo = null; 
+    if( debtors.length === 0) {
+      debtor.items.push(itemAndPrice);
+      debtorInfo = this.state.debtors.concat(debtor);
+      this.setState({
+        debtors: debtorInfo
+      });
+    } else if( debtors.length > 0){
+      if ( names.indexOf(name) === -1 ){
+        debtor.items.push(itemAndPrice);
+        debtorInfo = this.state.debtors.concat(debtor);
+        this.setState({
+          debtors: debtorInfo
+        }, this.inner);
+      } else {
+        for ( let i = 0; i < debtors.length; i++) {
+          if( debtors[i].name === name) {
+            debtors[i].items.push(itemAndPrice)
+          } 
+        }
+      }
+    }
   }
+
+  inner () {
+    var debtors = this.state.debtors;
+    for (let i = 0; i < debtors.length; i++) {
+      if(names.indexOf(debtors[i].name) === -1){
+        names.push(debtors[i].name); 
+      }
+    }
+  }
+
+
+
+
 
 
   render() {
@@ -81,12 +116,12 @@ class Output extends React.Component {
               <FriendsList friendsInfo={this.state.friendsInfo} />
             </Col>
             <Col xsHidden md={4} >
-            {    console.log('storage:::', this.state.debtors)}
+              {console.log('storage:::', this.state.debtors)}
             </Col>
           </Row>
         </Grid>
         <div>
-          <Button bsStyle="primary" bsSize="small">Send</Button>
+          <Button bsStyle="primary" bsSize="small">Calculate</Button>
         </div>
       </div>
     );
@@ -95,3 +130,21 @@ class Output extends React.Component {
 
 
 export default Output;
+
+
+
+
+
+// {
+//         name: 'Kai', 
+//         phone: '+16508155855', 
+//         debtTotal: 16.54,
+//         items : [ 
+//           { itemName : 'salad',
+//             itemPrice : 11.32,
+//             quantity: 1
+//           }, 
+//         ],
+//         tax : 2.22,
+//         tip : 3.00
+//       }
