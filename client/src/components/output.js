@@ -54,53 +54,72 @@ class Output extends React.Component {
         number = person.friendNumber;
       }
     });
+
+    // get name, item, price, number information 
+    // set the given item and price value as itemName and price value 
     let itemAndPrice = { 
-        itemName: item, 
-        price: price, 
-        quantity:1 
+      itemName: item, 
+      price: price, 
+      quantity:1 
     };
+    // create debtor data structure 
+    // set the given name and number as name and number value 
     let debtor = {
       name: name,
       number: number,
       items:[ ]
     };
+
     let debtors = this.state.debtors;
+    // initialize debtorInfo as null 
     let debtorInfo = null; 
+    // if there are no debtors, then push itemsAndPrice object into debtor items array
     if( debtors.length === 0) {
       debtor.items.push(itemAndPrice);
+      // concat debtor object to debtors(state) 
+      // reassign debtorInfo 
+      // don't PUSH, use concat to insert the object into an array
       debtorInfo = this.state.debtors.concat(debtor);
+      // change the debtors state to debtorinfo array 
       this.setState({
         debtors: debtorInfo
       });
-    } else if( debtors.length > 0){
+      // if there are some debtors  
+    } else if( debtors.length > 0){ 
+      // check global names array if given name doesn't exist in the names array  
       if ( names.indexOf(name) === -1 ){
+        // push itemAndPrice object into the debtor item array => create new debtor 
         debtor.items.push(itemAndPrice);
+        // reassign the debtorInfo concatting new debtor to store at the debtors array 
         debtorInfo = this.state.debtors.concat(debtor);
+        // change the debtors state with new debtorInfo 
         this.setState({
           debtors: debtorInfo
-        }, this.inner);
+          // as soon as change the state, fire helperSetState function to grab all debtor's name 
+        }, this.helperSetState);
       } else {
+        // if the debtor already exists, iterate the debtors array  
         for ( let i = 0; i < debtors.length; i++) {
+          // find the debtor object 
           if( debtors[i].name === name) {
-            debtors[i].items.push(itemAndPrice)
+            // push the new itemAndPrice object into the same debtor item array 
+            debtors[i].items.push(itemAndPrice);
           } 
         }
       }
     }
   }
 
-  inner () {
+  helperSetState () {
     var debtors = this.state.debtors;
     for (let i = 0; i < debtors.length; i++) {
+      // if the debtor doens't exist in the names array 
       if(names.indexOf(debtors[i].name) === -1){
+        // push the new debtor's name into the names array 
         names.push(debtors[i].name); 
       }
     }
   }
-
-
-
-
 
 
   render() {
