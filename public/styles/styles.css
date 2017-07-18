@@ -71,9 +71,6 @@ html,body{
 .formItem {
     padding: 10px;
     flex: 1 1 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
 }
 
 .formItemBit {
@@ -81,3 +78,21 @@ html,body{
     margin: 5px;
     flex: 1 1 auto;
 }
+
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.inputItem {
+    flex: 1 1 auto;
+    margin: 5px;
+}
+
+.inputItemBit {
+    padding: 5px;
+    margin: 5px;
+}
+
+

@@ -1,76 +1,113 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
-import { setInputs } from '../actions/inputActions.js';
+import { setIterator, setItems, setTax, setTotal, setTip } from '../actions/inputActions.js';
 
 const mapStateToProps = state => {
   return {
-    numbers: state.numbers.numbers
+    iterator: state.input.iterator,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setInputs: () => dispatch(
-      setInputs()
-    )
+    setIterator: (input) => dispatch(
+      setIterator(input)
+    ),
+    setItems: (input) => dispatch(
+      setItems(input)
+    ),
+    setTax: (input) => dispatch(
+      setTax(input)
+    ),
+    setTotal: (input) => dispatch(
+      setTotal(input)
+    ),
+    setTip: (input) => dispatch(
+      setTip(input)
+    ),
   };
 };
-//grab user input and display to screen on submit
-//dynamically allow for addition of form fields
-const Input = ({numbers}) => {
-  return (
-    <div>
-      <h1>Hello Input</h1>
-      <p>{numbers}</p>
-      <div className="inputContainer">
-        <div className="inputHeader">
-          <h1>Input Receipt Items</h1>
-          <hr/>
+
+class Input extends React.Component {
+  handleSubmit() {
+    var p = this.props;
+    var $items = $('.items').find('input');
+    var items = [];
+    var pair = {};
+    $items.each((index, elem) => {
+      var keys = Object.keys(pair).length;
+      if (keys === 0) {
+        pair.item = $(elem).val();
+        $(elem).val('');
+      } else if (keys === 1) {
+        pair.price = $(elem).val();
+        items.push(pair);
+        $(elem).val('');
+        pair = {};
+      }
+    });
+    p.setItems(items);
+    p.setTax($('.tax').val());
+    $('.tax').val('');
+    p.setTotal($('.total').val());
+    $('.total').val('');
+    p.setTip($('.tip').val());
+    $('.tip').val('');
+  }
+
+  addItem() {
+    var iter = this.props.iterator;
+    var next = iter[iter.length - 1] + 1;
+    this.props.setIterator(next);
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="items">
+          {
+            this.props.iterator.map((i, key) => (
+              <div className="inputContainer formItem">
+                <div className="inputItem">
+                  <label className="inputItemBit">Item</label>
+                  <input type="text" key={key} className="inputItemBit" />
+                </div>
+                <div className="inputItem">
+                  <label className="inputItemBit">Price</label>
+                  <input type="text" key={key + 1} className="inputItemBit"/>
+                </div>
+              </div>
+            ))
+          }
         </div>
-        <div className="inputBody">
-          <div className="itemsForm">
-            <div className="formContainer">
-              <div className="formItem">
-                <input className="formItemBit" type="text" placeholder="Item Name..." />
-                <input className="formItemBit" type="number" placeholder="Price..." />
-              </div>
-              <div className="formItem">
-                <input className="formItemBit" type="text" placeholder="Item Name..." />
-                <input className="formItemBit" type="number" placeholder="Price..." />
-              </div>
-              <div className="formItem">
-                <input className="formItemBit" type="text" placeholder="Item Name..." />
-                <input className="formItemBit" type="number" placeholder="Price..." />
-              </div>
-            </div>
-            <button type="button" className="btn btn-default" aria-label="Left Align">
-              <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              <p>Add Items</p>
-            </button>
-            <hr/>
+        <div className="inputContainer formItem">
+          <div className="inputItem">
+            <label className="inputItemBit">Tax</label>
+            <input type="text" className="inputItemBit tax"/>
           </div>
-          <br></br>
-          <div className="tipTaxTotalForm">
-            <div className="formContainer">
-              <div className="formItem">
-                <input className="formItemBit" type="number" placeholder="Tax..." />
-              </div>
-              <div className="formItem">
-                <input className="formItemBit" type="number" placeholder="Total..." />
-              </div>
-              <div className="formItem">
-                <input className="formItemBit" type="number" placeholder="Tip..." />
-              </div>
-            </div>
-            <hr/>
+          <div className="inputItem">
+            <label className="inputItemBit">Total</label>
+            <input type="text" className="inputItemBit total"/>
           </div>
-          <Button type="submit">Submit</Button>
+          <div className="inputItem">
+            <label className="inputItemBit">Tip</label>
+            <input type="text" className="inputItemBit tip"/>
+          </div>
+        </div>
+        <div className="inputContainer formItem">
+          <div className="inputItem">
+            <Button onClick={this.addItem.bind(this)}>Add Items</Button>
+          </div>
+          <div className="inputItem">
+            <Button type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default connect(mapStateToProps)(Input);
+export default connect(mapStateToProps, mapDispatchToProps)(Input);
