@@ -39,8 +39,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-
-
 let names = []; 
 // smart container 
 // need to access redux 
