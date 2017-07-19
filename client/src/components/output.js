@@ -77,34 +77,25 @@ class Output extends React.Component {
     };
 
     let debtors = this.state.debtors;
-    let debtorInfo = null; 
-
-
-
-
-
     if ( debtors.length === 0) {
-
-
-      debtor.items.push(itemAndPrice);
-      debtorInfo = this.state.debtors.concat(debtor);
-      this.setState({
-        debtors: debtorInfo
-      }, this.helperSetState);
-
-
-
+      this.addFirstDebtor(debtor, itemAndPrice);
     } else if( debtors.length > 0){ 
       if ( names.indexOf(name) === -1 ) {
-
-        console.log('first if');
+        console.log('new debtor!');
         this.addDebtor(debtor, itemAndPrice);
-
       } else {
+        console.log('existing debtor');
         this.findDebtor(debtors, name, itemAndPrice);
       }
-
     }
+  }
+
+  addFirstDebtor(debtor, itemAndPrice) {
+    debtor.items.push(itemAndPrice);
+    var debtorInfo = this.state.debtors.concat(debtor);
+    this.setState({
+      debtors: debtorInfo
+    }, this.helperSetState);
   }
 
 
