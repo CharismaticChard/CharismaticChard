@@ -1,8 +1,20 @@
 import React from 'react';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
+import { connect } from 'react-redux';
 
+const mapStateToProps = state => {
+  return {
+    friendInfo: state.output.friendInfo,
+    collectSplitItemInfo: state.output.collectSplitItemInfo,
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+
+  };
+};
 
 class ItemEntry extends React.Component {
   constructor(props) {
@@ -23,7 +35,6 @@ class ItemEntry extends React.Component {
   debtor() {
     this.props.collectSplitItemInfo(this.state.name, this.state.item, this.state.price);
   }
-
 
   render() {
     return (
