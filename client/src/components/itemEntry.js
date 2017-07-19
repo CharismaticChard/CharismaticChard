@@ -43,7 +43,7 @@ class ItemEntry extends React.Component {
         <td>{this.props.item.price}</td>
         <td>
           <DropdownButton bsStyle="success" title={this.state.name} id='split-button-basic-Success'>
-            {this.props.friendsInfo.map((friendInfo, index) => {return <MenuItem key={index} onClick={this.changeTitle.bind(this)} title={friendInfo.friendName}>{friendInfo.friendName}</MenuItem>; })}
+            {this.props.friendsInfo.map((friendInfo, index) => { return <MenuItem key={index} onClick={this.changeTitle.bind(this) } title={friendInfo.friendName}>{friendInfo.friendName}</MenuItem>; })}
           </DropdownButton>
         </td>
       </tr>
