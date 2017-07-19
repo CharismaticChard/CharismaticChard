@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
-import { setIterator, setItems, setTax, setTotal, setTip } from '../actions/inputActions.js';
+import { setIterator, removeIterator, setItems, setTax, setTotal, setTip } from '../actions/inputActions.js';
 
 const mapStateToProps = state => {
   return {
@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setIterator: (input) => dispatch(
       setIterator(input)
+    ),
+    removeIterator: (input) => dispatch(
+      removeIterator(input)
     ),
     setItems: (input) => dispatch(
       setItems(input)
@@ -64,20 +67,25 @@ class Input extends React.Component {
     this.props.setIterator(next);
   }
 
+  removeItem() {
+    var last = this.props.iterator.length - 1;
+    this.props.removeIterator(last);
+  }
+
   render() {
     return (
       <div>
         <div className="items">
           {
             this.props.iterator.map((i, key) => (
-              <div className="inputContainer formItem">
+              <div key={key} className="inputContainer formItem">
                 <div className="inputItem">
                   <label className="inputItemBit">Item</label>
-                  <input type="text" key={key} className="inputItemBit" />
+                  <input type="text" className="inputItemBit" />
                 </div>
                 <div className="inputItem">
                   <label className="inputItemBit">Price</label>
-                  <input type="text" key={key + 1} className="inputItemBit"/>
+                  <input type="text" className="inputItemBit"/>
                 </div>
               </div>
             ))
@@ -100,6 +108,9 @@ class Input extends React.Component {
         <div className="inputContainer formItem">
           <div className="inputItem">
             <Button onClick={this.addItem.bind(this)}>Add Items</Button>
+          </div>
+          <div className="inputItem">
+            <Button onClick={this.removeItem.bind(this)}>Remove Item</Button>
           </div>
           <div className="inputItem">
             <Button type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
