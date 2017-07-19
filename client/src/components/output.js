@@ -52,6 +52,7 @@ class Output extends React.Component {
   }
 
   collectSplitItemInfo(name, item, price) {
+
     let numbers = this.state.friendsInfo;
     let number = null;
     numbers.forEach( (person) => {
@@ -59,7 +60,10 @@ class Output extends React.Component {
         number = person.friendNumber;
       }
     });
-
+    console.log('name', name);
+    console.log('item', item);
+    console.log('price', price);
+    console.log('number', number);
     let itemAndPrice = {
       itemName: item,
       price: price,
@@ -74,28 +78,44 @@ class Output extends React.Component {
 
     let debtors = this.state.debtors;
     let debtorInfo = null; 
+
+
+
+
+
     if ( debtors.length === 0) {
+
+
       debtor.items.push(itemAndPrice);
       debtorInfo = this.state.debtors.concat(debtor);
       this.setState({
         debtors: debtorInfo
       }, this.helperSetState);
+
+
+
     } else if( debtors.length > 0){ 
       if ( names.indexOf(name) === -1 ) {
-        debtor.items.push(itemAndPrice);
-        debtorInfo = this.state.debtors.concat(debtor);
-        this.setState({
-          debtors: debtorInfo
-        }, this.helperSetState);
+
+        console.log('first if');
+        this.addDebtor(debtor, itemAndPrice);
+
       } else {
-        for ( let i = 0; i < debtors.length; i++) {
-          if( debtors[i].name === name) {
-            debtors[i].items.push(itemAndPrice);
-          }
-        }
+        this.findDebtor(debtors, name, itemAndPrice);
       }
+
     }
   }
+
+
+  addDebtor(debtor, itemAndPrice) {
+    debtor.items.push(itemAndPrice);
+    var debtorInfo = this.state.debtors.concat(debtor);
+    this.setState({
+      debtors: debtorInfo
+    }, this.helperSetState);
+  }
+
 
   helperSetState () {
     var debtors = this.state.debtors;
@@ -105,6 +125,18 @@ class Output extends React.Component {
       }
     }
   }
+
+  findDebtor(debtors, name, itemAndPrice) {
+    for ( let i = 0; i < debtors.length; i++) {
+      if( debtors[i].name === name) {
+        debtors[i].items.push(itemAndPrice);
+      }
+    }
+  }
+
+
+
+
 
   submitDebtors() {
     this.props.setDebtors(this.state.debtors);
