@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const ItemList = ({items, tax, total, tip}) => {
+const ItemList = ({items, tax, total, tip, collectSplitItemInfo, friendsInfo}) => {
   return (
     <Table responsive>
       <thead>
@@ -33,7 +33,7 @@ const ItemList = ({items, tax, total, tip}) => {
       <tbody>
         { items !== null ? 
           items.map( (item, index) => { 
-            return <ItemEntry key={index} item={item} />; 
+            return <ItemEntry collectSplitItemInfo={collectSplitItemInfo} friendsInfo={friendsInfo} key={index} item={item} />; 
           }) 
           : null 
         }   
@@ -58,6 +58,5 @@ const ItemList = ({items, tax, total, tip}) => {
     </Table>
   );
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);

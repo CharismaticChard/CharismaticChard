@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    // debtors: state.output.debtors,
+    debtors: state.output.debtors,
   };
 };
 
@@ -16,65 +16,20 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const sampleDataDebtors = {
-  debtors: [
-    {
-      name: 'Kai', 
-      phone: '+16508155855', 
-      debtTotal: 16.54,
-      items : [ 
-        { itemName : 'salad',
-          itemPrice : 11.32,
-          quantity: 1
-        }, 
-      ],
-      tax : 2.22,
-      tip : 3.00
-    },
-    
-    {
-      name: 'Carlos', 
-      phone: '+14433109844', 
-      debtTotal: 20.00,
-      items : [ 
-        { itemName : 'tacos',
-          itemPrice : 15.00,
-          quantity: 1
-        } 
-      ],
-      tax: 2.00,
-      tip: 3.00
-    },
-
-    {
-      name: 'Joe', 
-      phone: '+17146844358', 
-      debtTotal: 23.43,
-      items : [ 
-        { itemName : 'burger',
-          itemPrice : 18.01,
-          quantity: 1
-        }
-      ],
-      tax : 2.21,
-      tip : 3.21
-    }
-  ]
-};
-
 class Confirmation extends React.Component {
   render() {
+    console.log(this.props.debtors);
     return (
       <div>
         <div>
           {
-            sampleDataDebtors.debtors.map( (debtor, index) => (
-              <div>
+            this.props.debtors.map( (debtor, index) => (
+              <div key={index}>
                 <p>{debtor.name}</p>
                 <p>{debtor.phone}</p>
                 {
                   debtor.items.map( (item, index) => (
-                    <div>
+                    <div key={index}>
                       <p>{item.itemName}</p>
                       <p>{item.itemPrice}</p>
                       <p>{item.quantity}</p>
