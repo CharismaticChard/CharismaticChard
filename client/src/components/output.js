@@ -15,6 +15,7 @@ import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
 const mapStateToProps = state => {
   return {
     debtors: state.output.debtors,
+    friendsInfo: state.output.friendsInfo
   };
 };
 
@@ -23,17 +24,20 @@ const mapDispatchToProps = dispatch => {
     setDebtors: (input) => dispatch(
       setDebtors(input)
     ),
+    setFriendsInfo: (input) => dispatch(
+      setFriendsInfo(input)
+    ),
   };
 };
 
 let names = []; 
+let foodList = []; 
 
 class Output extends React.Component {
   constructor () {
     super();
     this.state = {
       friendsInfo: [],
-      debtorsBasicInfo: [],
       debtors: []
     };
   }
@@ -52,7 +56,6 @@ class Output extends React.Component {
   }
 
   collectSplitItemInfo(name, item, price) {
-
     let numbers = this.state.friendsInfo;
     let number = null;
     numbers.forEach( (person) => {
@@ -60,10 +63,6 @@ class Output extends React.Component {
         number = person.friendNumber;
       }
     });
-    console.log('name', name);
-    console.log('item', item);
-    console.log('price', price);
-    console.log('number', number);
     let itemAndPrice = {
       itemName: item,
       price: price,
@@ -81,10 +80,8 @@ class Output extends React.Component {
       this.addFirstDebtor(debtor, itemAndPrice);
     } else if( debtors.length > 0){ 
       if ( names.indexOf(name) === -1 ) {
-        console.log('new debtor!');
         this.addDebtor(debtor, itemAndPrice);
       } else {
-        console.log('existing debtor');
         this.findDebtor(debtors, name, itemAndPrice);
       }
     }
@@ -92,6 +89,7 @@ class Output extends React.Component {
 
   addFirstDebtor(debtor, itemAndPrice) {
     debtor.items.push(itemAndPrice);
+    foodList.push(itemAndPrice.itemName); 
     var debtorInfo = this.state.debtors.concat(debtor);
     this.setState({
       debtors: debtorInfo
@@ -101,12 +99,31 @@ class Output extends React.Component {
 
   addDebtor(debtor, itemAndPrice) {
     debtor.items.push(itemAndPrice);
+    foodList.push(itemAndPrice.itemName); 
     var debtorInfo = this.state.debtors.concat(debtor);
     this.setState({
       debtors: debtorInfo
     }, this.helperSetState);
   }
 
+
+
+  findDebtor(debtors, name, itemAndPrice) {
+    for ( let i = 0; i < debtors.length; i++) {
+      if ( debtors[i].name === name ) {
+        foodList.push(itemAndPrice.itemName); 
+        debtors[i].items.push(itemAndPrice);
+      } 
+      if ( foodList.indexOf(itemAndPrice.itemName) !== -1 && debtors[i].name !== name ) {
+        var items = debtors[i].items; 
+        for ( var j = 0; j < items.length; j++ ) {
+          if( items[j].itemName === itemAndPrice.itemName ) {
+            items.splice(j, 1);
+          } 
+        }
+      }
+    }
+  }
 
   helperSetState () {
     var debtors = this.state.debtors;
@@ -117,20 +134,9 @@ class Output extends React.Component {
     }
   }
 
-  findDebtor(debtors, name, itemAndPrice) {
-    for ( let i = 0; i < debtors.length; i++) {
-      if( debtors[i].name === name) {
-        debtors[i].items.push(itemAndPrice);
-      }
-    }
-  }
-
-
-
-
-
   submitDebtors() {
     this.props.setDebtors(this.state.debtors);
+    this.props.setFriendsInfo(this.state.friendsInfo);
   }
 
   render() {
@@ -138,6 +144,8 @@ class Output extends React.Component {
       <div>
         <Grid>
           <Row className="show-grid">
+            {console.log('storageDebtor:', this.state.debtors)}
+            {console.log('foodList:', foodList)}
             <Col xs={10} md={5}>
               <ItemList friendsInfo={this.state.friendsInfo} collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
             </Col>

@@ -4,6 +4,10 @@ import Modal from 'react-bootstrap/lib/Modal';
 import Table from 'react-bootstrap/lib/Table';
 import FriendEntry from './friendEntry.js';
 
+
+
+
+
 const FriendsList = ({friendsInfo}) => {
   return (
     <Table responsive>
