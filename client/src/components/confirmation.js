@@ -64,7 +64,7 @@ class Confirmation extends React.Component {
                       </div>
                       <div className="row">
                         <label className="col-xs-6">Price: </label>
-                        <p className="col-xs-6">{item.price}</p>
+                        <p className="col-xs-6">{item.itemPrice}</p>
                       </div>
                       <div className="row">
                         <label className="col-xs-6">Quantity: </label>
@@ -75,15 +75,15 @@ class Confirmation extends React.Component {
                 }
                 <div  className="row">
                   <label className="col-xs-6">Tax: </label>
-                  <p className="col-xs-6">{this.splitTax(45)}</p>
+                  <p className="col-xs-6">{this.splitTax(debtor.debtTotal)}</p>
                 </div>
                 <div  className="row">
                   <label className="col-xs-6">Tip: </label>
-                  <p className="col-xs-6">{this.splitTip(45)}</p>
+                  <p className="col-xs-6">{this.splitTip(debtor.debtTotal)}</p>
                 </div>
                 <div  className="row">
                   <label className="col-xs-6">Total: </label>
-                  <p className="col-xs-6"></p>
+                  <p className="col-xs-6">{debtor.debtTotal}</p>
                 </div>
                 <hr/>
               </div>
