@@ -9,6 +9,7 @@ const reducer = combineReducers({
   numbers,
   input,
   output,
+  final,
 });
 
 export default reducer;
