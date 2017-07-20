@@ -87,7 +87,7 @@ class Output extends React.Component {
   addFirstDebtor(debtor, itemAndPrice) {
     debtor.items.push(itemAndPrice);
     foodList.push(itemAndPrice.itemName); 
-    var debtorInfo = this.state.debtors.concat(debtor);
+    let debtorInfo = this.state.debtors.concat(debtor);
     this.setState({
       debtors: debtorInfo
     }, this.helperSetState);
@@ -96,7 +96,7 @@ class Output extends React.Component {
   addDebtor(debtor, itemAndPrice) {
     debtor.items.push(itemAndPrice);
     foodList.push(itemAndPrice.itemName); 
-    var debtorInfo = this.state.debtors.concat(debtor);
+    let debtorInfo = this.state.debtors.concat(debtor);
     this.setState({
       debtors: debtorInfo
     }, this.helperSetState);
@@ -120,7 +120,7 @@ class Output extends React.Component {
   }
 
   helperSetState () {
-    var debtors = this.state.debtors;
+    let debtors = this.state.debtors;
     for (let i = 0; i < debtors.length; i++) {
       if (names.indexOf(debtors[i].name) === -1) {
         names.push(debtors[i].name); 
