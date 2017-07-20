@@ -23,30 +23,35 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const Home = ({numbers, name, fetchNumbers, setNumbers}) => {
-  let input;
-  const send = () => {
-    console.log(input.value);
-    setNumbers(input.value);
-    input.value = '';
-  };
+class Home extends React.Component {
+  componentWillMount() {
 
-  const keyDown = event => {
-    if (event.key === 'Enter') {
-      send();
-    }
-  };
+  }
 
-  return (
-    <div>
-      <h1>Hello World!</h1>
-      <p>{numbers}</p>
-      <p>{name}</p>
-      <Button onClick={fetchNumbers}>Get Number</Button>
-      <br></br>
-      Change Number: <input ref={node => { input = node; } } onKeyPress={keyDown}/>
-    </div>
-  );
-};
+  render() {
+    let input;
+    const send = () => {
+      this.props.setNumbers(input.value);
+      input.value = '';
+    };
+
+    const keyDown = event => {
+      if (event.key === 'Enter') {
+        send();
+      }
+    };
+
+    return (
+      <div>
+        <h1>Hello World!</h1>
+        <p>{this.props.numbers}</p>
+        <p>{this.props.name}</p>
+        <Button onClick={this.props.fetchNumbers}>Get Number</Button>
+        <br></br>
+        Change Number: <input ref={node => { input = node; } } onKeyPress={this.keyDown}/>
+      </div>
+    );
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
