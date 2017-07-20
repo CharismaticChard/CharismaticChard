@@ -19,7 +19,7 @@ class ItemEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "person",
+      name: 'person',
       item: this.props.item.item,
       price: this.props.item.price
     };

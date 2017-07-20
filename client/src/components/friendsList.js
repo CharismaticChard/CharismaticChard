@@ -27,7 +27,7 @@ const FriendsList = ({friendsInfo}) => {
         </tr>
       </thead>
       <tbody>
-        {  friendsInfo.map( (friendInfo, index) => { return <FriendEntry key={index} friendInfo={friendInfo}/>; })}
+        { friendsInfo.map( (friendInfo, index) => { return <FriendEntry key={index} friendInfo={friendInfo}/>; })}
       </tbody>
       <tfoot>
       </tfoot>

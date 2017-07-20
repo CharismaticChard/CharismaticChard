@@ -35,7 +35,7 @@ class AddFriends extends React.Component {
     this.state = {
       showModal: false,
       name: null,
-      number:null
+      number: null
     };
   }
 
@@ -53,13 +53,13 @@ class AddFriends extends React.Component {
 
   }
 
-  friendName(e){
+  friendName(e) {
     this.setState({
       name: e.target.value
     });
   }
 
-  friendNumber(e){
+  friendNumber(e) {
     this.setState({
       number: e.target.value
     });
@@ -68,7 +68,7 @@ class AddFriends extends React.Component {
   render() {
     return (
       <div>
-        <Button bsStyle="primary" bsSize="small"  onClick={this.open.bind(this)} >
+        <Button bsStyle="primary" bsSize="small" onClick={this.open.bind(this)} >
           Add Friends
         </Button>
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
