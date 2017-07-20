@@ -11,14 +11,11 @@ const sendStateToServer = (split) => {
 };
 
 const fetchUserNameAndPhone = () => {
-  return () => {
+  return (dispatch) => {
     axios.get('/api/profile-info')
       .then(res => {
-        console.log(res);
-        setSplitterName(res.data.display);
-        setSplitterPhone(res.data.phone);
-        // dispatch({type: 'SET_SPLITTER_NAME', payload: res.data.display});
-        // dispatch({type: 'SET_SPLITTER_PHONE', payload: res.data.phone});
+        dispatch({type: 'SET_SPLITTER_NAME', payload: res.data.display});
+        dispatch({type: 'SET_SPLITTER_PHONE', payload: res.data.phone});
       })
       .catch(err => {
         console.log(err);
