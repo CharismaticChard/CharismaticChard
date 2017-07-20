@@ -18,6 +18,7 @@ const mapStateToProps = state => {
     tax: state.input.tax,
     total: state.input.total,
     tip: state.input.tip,
+    splitter: state.final.splitter, 
   };
 };
 
@@ -76,6 +77,11 @@ class Confirmation extends React.Component {
     }); 
     this.dataStructure(debtors);
   }
+
+
+
+
+
 
   dataStructure (debtors) {
     let finalDataStrcture = {

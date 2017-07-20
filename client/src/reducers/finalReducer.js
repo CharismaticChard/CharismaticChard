@@ -7,7 +7,7 @@ export default function reducer(state =
     splitter: {
       name: '',
       phone: '',
-      items: [],
+      items: null,
     },
     debtors: []
   }, action) {
