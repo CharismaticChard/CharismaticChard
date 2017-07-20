@@ -80,6 +80,23 @@ class Confirmation extends React.Component {
 
 
 
+  splitterInfo (name) {
+    console.log('checking!');
+    let splitter = {
+      name: name, 
+      phone: this.props.splitter.phone,
+      debtTotal: null,
+      items : [ 
+        { itemName : 'pizza',
+          itemPrice : 10.23,
+          quantity: 1
+        } 
+      ],
+      tax : 1.00,
+      tip : 2.12
+    };
+    console.log('splitter',splitter); 
+  }
 
 
 
