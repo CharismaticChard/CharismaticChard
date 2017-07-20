@@ -11,14 +11,12 @@ import { connect } from 'react-redux';
 
 import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
 
-
 const mapStateToProps = state => {
   return {
     debtors: state.output.debtors,
     friendsInfo: state.output.friendsInfo
   };
 };
-
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -30,8 +28,6 @@ const mapDispatchToProps = dispatch => {
     ),
   };
 };
-
-
 
 class AddFriends extends React.Component {
   constructor(props) {
@@ -69,8 +65,6 @@ class AddFriends extends React.Component {
     });
   }
 
-
-
   render() {
     return (
       <div>
@@ -82,7 +76,6 @@ class AddFriends extends React.Component {
             <Modal.Title>Add a friend</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             <Form horizontal>
               <FormGroup controlId="formInlineName">
                 <Col componentClass={ControlLabel} sm={2}>
@@ -92,7 +85,6 @@ class AddFriends extends React.Component {
                   <FormControl type="email" placeholder="Friend's Name" onChange={this.friendName.bind(this)}/>
                 </Col>
               </FormGroup>
-
               <FormGroup controlId="formHorizontalNumber">
                 <Col componentClass={ControlLabel} sm={2}>
                   Number
@@ -111,6 +103,5 @@ class AddFriends extends React.Component {
     );
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFriends);

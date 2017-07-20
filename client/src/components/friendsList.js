@@ -6,7 +6,6 @@ import FriendEntry from './friendEntry.js';
 import { connect } from 'react-redux';
 import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
 
-
 const mapStateToProps = state => {
   return {
     friendsInfo: state.output.friendsInfo
@@ -17,7 +16,6 @@ const mapDispatchToProps = dispatch => {
   return {
   };
 };
-
 
 const FriendsList = ({friendsInfo}) => {
   return (
@@ -36,6 +34,5 @@ const FriendsList = ({friendsInfo}) => {
     </Table>
   );
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);

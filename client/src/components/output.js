@@ -93,7 +93,6 @@ class Output extends React.Component {
     }, this.helperSetState);
   }
 
-
   addDebtor(debtor, itemAndPrice) {
     debtor.items.push(itemAndPrice);
     foodList.push(itemAndPrice.itemName); 
@@ -102,7 +101,6 @@ class Output extends React.Component {
       debtors: debtorInfo
     }, this.helperSetState);
   }
-
 
   findDebtor(debtors, name, itemAndPrice) {
     for ( let i = 0; i < debtors.length; i++) {
