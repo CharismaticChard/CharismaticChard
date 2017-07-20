@@ -131,13 +131,7 @@ class Output extends React.Component {
   }
 
   submitDebtors() {
-    // console.log('debtors checkiiiing', this.state.debtors); 
     var debtors = this.state.debtors; 
-    // iterate the debtors 
-    // at each debtor object iterate the items 
-    // create new debtTotal array 
-    // push all item price and sum all price in debtTotal array 
-    
     var debtTotal =[]; 
     for ( var i = 0; i < debtors.length; i++) {
       var itemPrice = []; 
@@ -146,16 +140,12 @@ class Output extends React.Component {
       }
       debtTotal.push(itemPrice);
     }
-
     for ( var x = 0; x < debtTotal.length; x ++) {
       debtTotal[x] = debtTotal[x].reduce((a,b) => a+b); 
     }
-
     for ( var z = 0; z < debtors.length; z++) {
       debtors[z]['debtTotal'] = debtTotal[z]; 
     }
-    console.log('debtTotal::',debtors);
-
     this.props.setDebtors(this.state.debtors);
   }
 
