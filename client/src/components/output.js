@@ -96,7 +96,6 @@ class Output extends React.Component {
   }
 
 
-
   addFirstDebtor(debtor, itemAndPrice) {
     debtor.items.push(itemAndPrice);
     foodList.push(itemAndPrice.itemName); 
