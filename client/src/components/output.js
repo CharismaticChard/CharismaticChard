@@ -37,7 +37,6 @@ class Output extends React.Component {
   constructor () {
     super();
     this.state = {
-      friendsInfo: [],
       debtors: []
     };
   }
@@ -47,16 +46,14 @@ class Output extends React.Component {
       friendName: name,
       friendNumber: number
     };
-
     let info= this.state.friendsInfo.concat(friendInformation);
-
     this.setState({
       friendsInfo: info
     });
   }
 
   collectSplitItemInfo(name, item, price) {
-    let numbers = this.state.friendsInfo;
+    let numbers = this.props.friendsInfo;
     let number = null;
     numbers.forEach( (person) => {
       if( name === person.friendName) {
@@ -107,7 +104,6 @@ class Output extends React.Component {
   }
 
 
-
   findDebtor(debtors, name, itemAndPrice) {
     for ( let i = 0; i < debtors.length; i++) {
       if ( debtors[i].name === name ) {
@@ -136,7 +132,6 @@ class Output extends React.Component {
 
   submitDebtors() {
     this.props.setDebtors(this.state.debtors);
-    this.props.setFriendsInfo(this.state.friendsInfo);
   }
 
   render() {
@@ -144,14 +139,12 @@ class Output extends React.Component {
       <div>
         <Grid>
           <Row className="show-grid">
-            {console.log('storageDebtor:', this.state.debtors)}
-            {console.log('foodList:', foodList)}
             <Col xs={10} md={5}>
-              <ItemList friendsInfo={this.state.friendsInfo} collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
+              <ItemList collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
             </Col>
             <Col xs={6} md={4}>
-              <AddFriends friendInfo={this.friendInfo.bind(this)}/>
-              <FriendsList friendsInfo={this.state.friendsInfo} />
+              <AddFriends />
+              <FriendsList  />
             </Col>
             <Col xsHidden md={4} >
             </Col>

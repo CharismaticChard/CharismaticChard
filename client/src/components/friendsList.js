@@ -3,9 +3,20 @@ import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Table from 'react-bootstrap/lib/Table';
 import FriendEntry from './friendEntry.js';
+import { connect } from 'react-redux';
+import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
 
 
+const mapStateToProps = state => {
+  return {
+    friendsInfo: state.output.friendsInfo
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+  };
+};
 
 
 const FriendsList = ({friendsInfo}) => {
@@ -18,7 +29,7 @@ const FriendsList = ({friendsInfo}) => {
         </tr>
       </thead>
       <tbody>
-        { friendsInfo !== null ? friendsInfo.map( (friendInfo, index) => { return <FriendEntry key={index} friendInfo={friendInfo}/>; }) : null }
+        {  friendsInfo.map( (friendInfo, index) => { return <FriendEntry key={index} friendInfo={friendInfo}/>; })}
       </tbody>
       <tfoot>
       </tfoot>
@@ -27,5 +38,6 @@ const FriendsList = ({friendsInfo}) => {
 };
 
 
-export default FriendsList;
+// export default FriendsList;
 
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);
