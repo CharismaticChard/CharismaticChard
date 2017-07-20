@@ -13,16 +13,19 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
+    friendsInfo: state.output.friendsInfo,
     debtors: state.output.debtors,
     tax: state.input.tax,
     total: state.input.total,
     tip: state.input.tip,
-    friendsInfo: state.ouput.friendsInfo,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    sendStateToServer: (input) => dispatch(
+      sendStateToServer(input)
+    ),
   };
 };
 
@@ -44,13 +47,15 @@ class Confirmation extends React.Component {
   splitTax(debtorTotal) {
     let percent = debtorTotal / this.props.total;
     let debtorTax = this.props.tax * percent;
-    return debtorTax;
+    debtorTax= String(debtorTax).split("").slice(0,5).join("");
+    return Number(debtorTax);
   }
 
   splitTip(debtorTotal) {
     let percent = debtorTotal / this.props.total;
     let debtorTip = this.props.tip * percent;
-    return debtorTip;
+    debtorTip = String(debtorTip).split("").slice(0,5).join("");
+    return Number(debtorTip);
   }
 
   close() {
@@ -63,6 +68,40 @@ class Confirmation extends React.Component {
     this.debtors(); 
   }
 
+  debtors () {
+    let debtors = this.props.debtors; 
+    debtors.forEach((debtor) => {
+      debtor.tax = this.splitTax(debtor.debtTotal); 
+      debtor.tip = this.splitTip(debtor.debtTotal);
+    }); 
+    this.dataStructure(debtors);
+  }
+
+  dataStructure (debtors) {
+    let finalDataStrcture = {
+      splitTotal: this.props.total,
+      totalTax: this.props.tax,
+      totalTip: this.props.tip, 
+      splitName: null, 
+      splitter : {
+        name: 'Minji', 
+        phone: '+15108290026',
+        debtTotal: 13.35,
+        items : [ 
+          { itemName : 'pizza',
+            itemPrice : 10.23,
+            quantity: 1
+          } 
+        ],
+        tax : 1.00,
+        tip : 2.12
+      },
+      debtors : debtors
+    };
+    console.log('finalDataStrcture', finalDataStrcture);
+    // this.props.sendStateToServer(finalDataStrcture);
+  }
+  
 
 
   render() {
@@ -71,7 +110,7 @@ class Confirmation extends React.Component {
         <h1>Review Items</h1>
         <div className="container-fluid">
           {
-            this.props.debtors.map( (debtor, index) => (
+            this.props.debtors !== null ? this.props.debtors.map( (debtor, index) => (
               <div key={index}>
                 <div  className="row">
                   <label className="col-xs-6">Name: </label>
@@ -115,6 +154,7 @@ class Confirmation extends React.Component {
                 <hr/>
               </div>
             ))
+              : null
           }
         </div>
         <div>
