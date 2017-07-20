@@ -38,6 +38,4 @@ const FriendsList = ({friendsInfo}) => {
 };
 
 
-// export default FriendsList;
-
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);

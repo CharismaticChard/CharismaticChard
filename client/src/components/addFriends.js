@@ -112,6 +112,5 @@ class AddFriends extends React.Component {
   }
 }
 
-// export default AddFriends;
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddFriends);

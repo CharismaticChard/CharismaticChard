@@ -52,5 +52,4 @@ class ItemEntry extends React.Component {
   }
 }
 
-// export default ItemEntry;
 export default connect(mapStateToProps, mapDispatchToProps)(ItemEntry);
