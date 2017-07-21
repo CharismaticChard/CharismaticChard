@@ -4,7 +4,14 @@ export default function reducer(state =
     totalTax: 0,
     totalTip: 0,
     splitName: null,
-    splitter: null,
+    splitter: {
+      name: '',
+      phone: '',
+      items: null,
+      debtTotal: null,
+      tax: null,
+      tip: null
+    },
     debtors: []
   }, action) {
   switch (action.type) {
@@ -20,13 +27,9 @@ export default function reducer(state =
   case 'SET_SPLIT_NAME': {
     return {...state, splitName: action.payload};
   }
-  case 'SET_SPLITTER': {
-    return {...state, splitter: action.payload };
+  case 'SET_SPLITTER_NAME': {
+    return {...state, splitter: {...state.splitter, name: action.payload}};
   }
-
-
-
-
   case 'SET_SPLITTER_PHONE': {
     return {...state, splitter: {...state.splitter, phone: action.payload}};
   }
@@ -40,25 +43,11 @@ export default function reducer(state =
     return {...state, splitter: {...state.splitter, tax: action.payload}};
   }
   case 'SET_DEBTORS_TIP': {
-    console.log('**********', state);
     return {...state, splitter: {...state.splitter, tip: action.payload}};
   }
-
-
-
-
-
-
-  
   case 'SET_DEBTORS': {
     return {...state, debtors: action.payload};
   }
-
-
-
-
-
-
 
   default: {
     return state;
