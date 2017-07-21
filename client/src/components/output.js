@@ -11,7 +11,7 @@ import ItemList from './itemList.js';
 import FriendsList from './friendsList.js';
 import axios from 'axios';
 import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
-import { setSplitterName, setSplitterPhone, setSplitterItems } from '../actions/finalActions.js';
+import { setSplitterName, setSplitterPhone, setSplitterItems, setSplitterDebtTotal } from '../actions/finalActions.js';
 
 const mapStateToProps = state => {
   return {
@@ -20,6 +20,8 @@ const mapStateToProps = state => {
     splitter: state.final.splitter, 
   };
 };
+
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -37,6 +39,9 @@ const mapDispatchToProps = dispatch => {
     ),
     setSplitterItems: (input) => dispatch(
       setSplitterItems(input)
+    ),
+    setSplitterDebtTotal: (input) => dispatch(
+      setSplitterDebtTotal(input)
     ),
   };
 };
@@ -155,16 +160,18 @@ class Output extends React.Component {
     }
     for (var z = 0; z < debtors.length; z++) {
       debtors[z]['debtTotal'] = debtTotal[z]; 
+      // if( debtors[z].name === this.props.splitter.name.split(" ")[0]) {
+      //   this.splitterInfo(debtors[z]);
+      //   debtors.splice(z, 1) // slice(1);
+      // }
     }
-    this.splitterInfo(debtors[0]);
-    debtors = debtors.slice(1);
     this.props.setDebtors(debtors);
   }
 
   splitterInfo (info) {
     console.log('splitterInfo', info); 
-    // this.props.setSplitterName(this.props.splitter.name);
-    // this.props.setSplitterPhone(this.props.splitter.phone);
+    this.props.setSplitterDebtTotal(info.debtTotal);
+    this.props.setSplitterItems(info.items);
   }
 
 
