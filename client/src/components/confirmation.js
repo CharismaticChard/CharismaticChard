@@ -17,7 +17,8 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => {
   return {
     debtors: state.output.debtors,
-    final: state.final
+    final: state.final,
+    splitter: state.final.splitter
   };
 };
 
@@ -52,7 +53,6 @@ class Confirmation extends React.Component {
 
   open() {
     this.setState({ showModal: true });
-    console.log('final?', this.props.final);
     this.props.sendStateToServer(this.props.final);
   }
 
@@ -61,6 +61,49 @@ class Confirmation extends React.Component {
     return (
       <div>
         <h1>Review Items</h1>
+        <div className="container-fluid">
+          <div className="row">
+            <label className="col-xs-6">Name: </label>
+            <p className="col-xs-6">{this.props.splitter.name}</p>
+          </div>
+          <div className="row">
+            <label className="col-xs-6">Phone: </label>
+            <p className="col-xs-6">{this.props.splitter.phone}</p>
+          </div>
+          <label>Items</label>
+          {
+            this.props.splitter.items.map( (item, index) => (
+              <div key={index}>
+                <div className="row">
+                  <label className="col-xs-6">Name: </label>
+                  <p className="col-xs-6">{item.itemName}</p>
+                </div>
+                <div className="row">
+                  <label className="col-xs-6">Price: </label>
+                  <p className="col-xs-6">{item.itemPrice}</p>
+                </div>
+                <div className="row">
+                  <label className="col-xs-6">Quantity: </label>
+                  <p className="col-xs-6">{item.quantity}</p>
+                </div>
+                <hr />
+              </div>
+            ))
+          }
+          <div className="row">
+            <label className="col-xs-6">Tax: </label>
+            <p className="col-xs-6">{this.props.splitter.tax}</p>
+          </div>
+          <div className="row">
+            <label className="col-xs-6">Tip: </label>
+            <p className="col-xs-6">{this.props.splitter.tip}</p>
+          </div>
+          <div className="row">
+            <label className="col-xs-6">Total: </label>
+            <p className="col-xs-6">{this.props.splitter.debtTotal}</p>
+          </div>
+          <hr/>
+        </div>
         <div className="container-fluid">
           {
             this.props.debtors !== null ? this.props.debtors.map( (debtor, index) => (
@@ -71,7 +114,7 @@ class Confirmation extends React.Component {
                 </div>
                 <div className="row">
                   <label className="col-xs-6">Phone: </label>
-                  <p className="col-xs-6">{debtor.number}</p>
+                  <p className="col-xs-6">{debtor.phone}</p>
                 </div>
                 <label>Items</label>
                 {
