@@ -5,11 +5,11 @@ import Button from 'react-bootstrap/lib/Button';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import { connect } from 'react-redux';
-
 import AddFriends from './addFriends.js';
 import ItemList from './itemList.js';
 import FriendsList from './friendsList.js';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
 import {
   setSplitterItems, 
@@ -30,7 +30,6 @@ const mapStateToProps = state => {
     tax: state.input.tax
   };
 };
-
 
 
 const mapDispatchToProps = dispatch => {
@@ -63,10 +62,6 @@ const mapDispatchToProps = dispatch => {
     setSplitterTax: (input) => dispatch(
       setSplitterTax(input)
     ),
-
-
-
-
   };
 };
 
@@ -113,14 +108,10 @@ class Output extends React.Component {
     };
 
     let debtors = this.state.debtors;
-    if (debtors.length === 0) {
-      this.addFirstDebtor(debtor, itemAndPrice);
-    } else if (debtors.length > 0) { 
-      if (names.indexOf(name) === -1) {
-        this.addDebtor(debtor, itemAndPrice);
-      } else {
-        this.findDebtor(debtors, name, itemAndPrice);
-      }
+    if (names.indexOf(name) === -1) {
+      this.addDebtor(debtor, itemAndPrice);
+    } else {
+      this.findDebtor(debtors, name, itemAndPrice);
     }
   }
 
@@ -237,7 +228,7 @@ class Output extends React.Component {
           </Row>
         </Grid>
         <div>
-          <Button onClick={this.submitDebtors.bind(this)} bsStyle="primary" bsSize="small">Calculate</Button>
+          <Link className="btn btn-primary" to="/confirmation" onClick={this.submitDebtors.bind(this)}>Calculate</Link>
         </div>
       </div>
     );
