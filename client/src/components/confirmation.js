@@ -61,18 +61,25 @@ const mapDispatchToProps = dispatch => {
     setSplitterTax: (input) => dispatch(
       setSplitterTax(input)
     ),
-    setDebtors: (input) => dispatch(
-      setDebtors(input)
-    ),
-    setFriendsInfo: (input) => dispatch(
-      setFriendsInfo(input)
-    ),
+
     setSplitterItems: (input) => dispatch(
       setSplitterItems(input)
     ),
     setSplitterDebtTotal: (input) => dispatch(
       setSplitterDebtTotal(input)
     ),
+
+
+    setDebtors: (input) => dispatch(
+      setDebtors(input)
+    ),
+    setFriendsInfo: (input) => dispatch(
+      setFriendsInfo(input)
+    ),
+   
+
+
+   
     sendStateToServer: (input) => dispatch(
       sendStateToServer(input)
     ),
@@ -95,19 +102,19 @@ class Confirmation extends React.Component {
     //return that number
   }
 
-  splitTax(debtorTotal) {
-    let percent = debtorTotal / this.props.total;
-    let debtorTax = this.props.tax * percent;
-    debtorTax = String(debtorTax).split('').slice(0, 5).join('');
-    return Number(debtorTax);
-  }
+  // splitTax(debtorTotal) {
+  //   let percent = debtorTotal / this.props.total;
+  //   let debtorTax = this.props.tax * percent;
+  //   debtorTax = String(debtorTax).split('').slice(0, 5).join('');
+  //   return Number(debtorTax);
+  // }
 
-  splitTip(debtorTotal) {
-    let percent = debtorTotal / this.props.total;
-    let debtorTip = this.props.tip * percent;
-    debtorTip = String(debtorTip).split('').slice(0, 5).join('');
-    return Number(debtorTip);
-  }
+  // splitTip(debtorTotal) {
+  //   let percent = debtorTotal / this.props.total;
+  //   let debtorTip = this.props.tip * percent;
+  //   debtorTip = String(debtorTip).split('').slice(0, 5).join('');
+  //   return Number(debtorTip);
+  // }
 
   close() {
     this.setState({ showModal: false });
@@ -115,98 +122,91 @@ class Confirmation extends React.Component {
 
   open() {
     this.setState({ showModal: true });
-    this.debtors(); 
-  }
-
-  debtors () {
-    let debtors = this.props.debtors; 
-    debtors.forEach((debtor) => {
-      debtor.tax = this.splitTax(debtor.debtTotal); 
-      debtor.tip = this.splitTip(debtor.debtTotal);
-    }); 
-    this.splitterInfo(); 
+    console.log('final?',this.props.final);
+    this.props.sendStateToServer(this.props.final);
   }
 
 
 
-  splitterInfo () {
-    let name = this.props.splitter.name.split(' ')[0];
-    let phone = this.props.splitter.phone;
-    let debtors = this.props.debtors; 
-    var splitter = null; 
-    for ( let i = 0; i < debtors.length; i++) {
-      if ( name === debtors[i].name ) {
-        splitter = debtors.splice(i, 1);
-      }
-    }
 
-    let splitterData = {
-      name: name,
-      phone: phone,
-      debtTotal: splitter[0].debtTotal,
-      items: splitter[0].items,
-      tax: splitter[0].tax,
-      tip: splitter[0].tip
-    };
+  // splitterInfo () {
+  //   let name = this.props.splitter.name.split(' ')[0];
+  //   let phone = this.props.splitter.phone;
+  //   let debtors = this.props.debtors; 
+  //   var splitter = null; 
+  //   for ( let i = 0; i < debtors.length; i++) {
+  //     if ( name === debtors[i].name ) {
+  //       splitter = debtors.splice(i, 1);
+  //     }
+  //   }
 
-    // this.props.(splitterData.name); 
-    // this.props.setSplitterPhone(splitterData.phone); 
+  //   let splitterData = {
+  //     name: name,
+  //     phone: phone,
+  //     debtTotal: splitter[0].debtTotal,
+  //     items: splitter[0].items,
+  //     tax: splitter[0].tax,
+  //     tip: splitter[0].tip
+  //   };
 
-    this.props.setSplitTotal(this.props.total); 
-    this.props.setTotalTax(this.props.tax); 
-    this.props.setTotalTip(this.props.tip); 
-    this.props.setSplitterItems(splitter[0].items); 
-    this.props.setSplitterDebtTotal(splitter[0].debtTotal); 
-    this.props.setSplitterTax(splitter[0].items); 
-    this.props.setSplitterTip(splitter[0].tip);
-    this.props.setDebtors(debtors); 
+  //   // this.props.(splitterData.name); 
+  //   // this.props.setSplitterPhone(splitterData.phone); 
 
-    // console.log('this.propsfinal??!!!!!', this.props.final);
-    // this.props.sendStateToServer(this.props.final);
+  //   this.props.setSplitTotal(this.props.total); 
+  //   this.props.setTotalTax(this.props.tax); 
+  //   this.props.setTotalTip(this.props.tip); 
+  //   this.props.setSplitterItems(splitter[0].items); 
+  //   this.props.setSplitterDebtTotal(splitter[0].debtTotal); 
+  //   this.props.setSplitterTax(splitter[0].items); 
+  //   this.props.setSplitterTip(splitter[0].tip);
+  //   this.props.setDebtors(debtors); 
 
-    // setTimeout(function(){ 
-    //   console.log("this",this); 
-    //   console.log('this.props???', this.props); 
-    //   // console.log('after', this.props.final)
-    // }, 10000);
+  //   // console.log('this.propsfinal??!!!!!', this.props.final);
+  //   // this.props.sendStateToServer(this.props.final);
 
-    // console.log('after SETTIMEOUT', this.props.final);
+  //   // setTimeout(function(){ 
+  //   //   console.log("this",this); 
+  //   //   console.log('this.props???', this.props); 
+  //   //   // console.log('after', this.props.final)
+  //   // }, 10000);
 
-    // this.props.sendStateToServer(finalDataStrcture);
-    // console.log('splitterData',splitterData); 
-    this.dataStructure(splitterData, debtors);
+  //   // console.log('after SETTIMEOUT', this.props.final);
 
-  }
+  //   // this.props.sendStateToServer(finalDataStrcture);
+  //   // console.log('splitterData',splitterData); 
+  //   this.dataStructure(splitterData, debtors);
 
-
-
-  dataStructure (splitterData, debtors) {
-    let finalDataStrcture = {
-      splitTotal: this.props.total,
-      totalTax: this.props.tax,
-      totalTip: this.props.tip, 
-      splitName: this.props.splitName, 
-      splitter: splitterData,
-      debtors: debtors
-    };
-
-
-    console.log('finalDataStrcture', finalDataStrcture);
-    this.props.sendStateToServer(finalDataStrcture);
-
-
-
-    // this.props.setSplitTotal(this.props.total); 
-    // this.props.setTotalTax(this.props.tax); 
-    // this.props.setTotalTip(this.props.tip); 
-    // this.props.setSplitName(this.props.splitName); 
-    // console.log('FINALLLLLLL******', this.props.final);
-    // this.postRequest();
-  }
-  
-  // postRequest() {
-  //   this.props.sendStateToServer(this.props.final);
   // }
+
+
+
+  // dataStructure (splitterData, debtors) {
+  //   let finalDataStrcture = {
+  //     splitTotal: this.props.total,
+  //     totalTax: this.props.tax,
+  //     totalTip: this.props.tip, 
+  //     splitName: this.props.splitName, 
+  //     splitter: splitterData,
+  //     debtors: debtors
+  //   };
+
+
+  //   // console.log('finalDataStrcture', finalDataStrcture);
+  //   this.props.sendStateToServer(finalDataStrcture);
+
+
+
+  //   // this.props.setSplitTotal(this.props.total); 
+  //   // this.props.setTotalTax(this.props.tax); 
+  //   // this.props.setTotalTip(this.props.tip); 
+  //   // this.props.setSplitName(this.props.splitName); 
+  //   // console.log('FINALLLLLLL******', this.props.final);
+  //   // this.postRequest();
+  // }
+  
+  // // postRequest() {
+  // //   this.props.sendStateToServer(this.props.final);
+  // // }
 
 
 
@@ -249,11 +249,11 @@ class Confirmation extends React.Component {
                 }
                 <div className="row">
                   <label className="col-xs-6">Tax: </label>
-                  <p className="col-xs-6">{this.splitTax(debtor.debtTotal)}</p>
+                  <p className="col-xs-6">{debtor.tax}</p>
                 </div>
                 <div className="row">
                   <label className="col-xs-6">Tip: </label>
-                  <p className="col-xs-6">{this.splitTip(debtor.debtTotal)}</p>
+                  <p className="col-xs-6">{debtor.tip}</p>
                 </div>
                 <div className="row">
                   <label className="col-xs-6">Total: </label>
