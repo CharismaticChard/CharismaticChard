@@ -190,3 +190,16 @@ footer, .page-wrap:after {
 }
 */
 
+#body-login {
+    background-color: black;
+}
+
+#login {
+    margin-top: 100px;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
