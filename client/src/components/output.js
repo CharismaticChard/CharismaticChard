@@ -1,9 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
-import Grid from 'react-bootstrap/lib/Grid';
 import Button from 'react-bootstrap/lib/Button';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
 import { connect } from 'react-redux';
 import AddFriends from './addFriends.js';
 import ItemList from './itemList.js';
@@ -223,19 +219,19 @@ class Output extends React.Component {
         </div>
         <hr />
         <div>
-          <Grid>
-            <Row className="show-grid">
-              <Col xs={10} md={5}>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-xs-10 col-md-5">
                 <ItemList collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
-              </Col>
-              <Col xs={6} md={4}>
+              </div>
+              <div className="col-xs-12">
                 <AddFriends />
+              </div>
+              <div className="col-xs-12">
                 <FriendsList />
-              </Col>
-              <Col xsHidden md={4} >
-              </Col>
-            </Row>
-          </Grid>
+              </div>
+            </div>
+          </div>
           <footer>
             <hr className="footerHR"/>
             <Link className="btn btn-primary" to="/confirmation" onClick={this.submitDebtors.bind(this)}>Calculate</Link>

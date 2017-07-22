@@ -26,7 +26,6 @@ class ItemEntry extends React.Component {
     };
   }
 
-
   changeTitle (e) { 
     this.setState({
       name: e.target.title
@@ -39,10 +38,10 @@ class ItemEntry extends React.Component {
 
   render() {
     return (
-      <tr>
-        <td>{this.props.item.item}</td>
-        <td>{this.props.item.price}</td>
-        <td>
+      <div className="row">
+        <div className="col-xs-4">{this.props.item.item}</div>
+        <div className="col-xs-4">{this.props.item.price}</div>
+        <div className="col-xs-4">
           <DropdownButton 
             bsStyle="success" 
             title={this.state.name} 
@@ -66,8 +65,8 @@ class ItemEntry extends React.Component {
               ))
             }
           </DropdownButton>
-        </td>
-      </tr>
+        </div>
+      </div>
     );
   }
 }

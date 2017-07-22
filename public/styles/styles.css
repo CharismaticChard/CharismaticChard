@@ -144,16 +144,6 @@ footer, .page-wrap:after {
 }
 
 
-.inputTable > tbody > tr > td,
-.inputTable > tbody > tr > th,
-.inputTable > tfoot > tr > td,
-.inputTable > tfoot > tr > th,
-.inputTable > thead > tr > td,
-.inputTable > thead > tr > th,
-.inputTable {
-    border: none;
-}
-
 
 /*
 .formContainer {

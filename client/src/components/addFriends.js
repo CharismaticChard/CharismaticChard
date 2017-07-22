@@ -66,10 +66,17 @@ class AddFriends extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button bsStyle="primary" bsSize="small" onClick={this.open.bind(this)} >
-          Add Friends
-        </Button>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-xs-6">
+            <h4>Friends List</h4>
+          </div>
+          <div className="col-xs-6">
+            <Button bsStyle="primary" bsSize="small" onClick={this.open.bind(this)}>
+              Add Friends
+            </Button>
+          </div>
+        </div>
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
             <Modal.Title>Add a friend</Modal.Title>
