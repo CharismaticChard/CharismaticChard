@@ -159,14 +159,14 @@ class Output extends React.Component {
   splitTax(debtorTotal) {
     let percent = debtorTotal / this.props.total;
     let debtorTax = this.props.tax * percent;
-    debtorTax = String(debtorTax).split('').slice(0, 5).join('');
+    debtorTax = debtorTax.toFixed(2);
     return Number(debtorTax);
   }
 
   splitTip(debtorTotal) {
     let percent = debtorTotal / this.props.total;
     let debtorTip = this.props.tip * percent;
-    debtorTip = String(debtorTip).split('').slice(0, 5).join('');
+    debtorTip = debtorTip.toFixed(2);
     return Number(debtorTip);
   }
 
