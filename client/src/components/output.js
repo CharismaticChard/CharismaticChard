@@ -221,7 +221,7 @@ class Output extends React.Component {
         <div>
           <div className="container-fluid">
             <div className="row">
-              <div className="col-xs-10 col-md-5">
+              <div className="col-xs-12">
                 <ItemList collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
               </div>
               <div className="col-xs-12">

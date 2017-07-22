@@ -21,36 +21,39 @@ const mapDispatchToProps = dispatch => {
 
 const ItemList = ({items, tax, total, tip, collectSplitItemInfo}) => {
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-xs-4">Item</div>
-        <div className="col-xs-4">Price</div>
-        <div className="col-xs-4">Person</div>
+    <div className="row">
+      <div className="col-xs-12">
+        <div className="row">
+          <div className="col-xs-4">Item</div>
+          <div className="col-xs-4">Price</div>
+          <div className="col-xs-4">Person</div>
+        </div>
+        <hr />
+        {
+          items !== null ?
+          items.map( (item, index) => (
+            <ItemEntry collectSplitItemInfo={collectSplitItemInfo} key={index} item={item} />
+          ))
+          : null
+        }
+        <hr />
+        <div className="row">
+          <div className="col-xs-4">tip</div>
+          <div className="col-xs-4">{tip}</div>
+          <div className="col-xs-4"></div>
+        </div>
+        <div className="row">
+          <div className="col-xs-4">tax</div>
+          <div className="col-xs-4">{tax}</div>
+          <div className="col-xs-4"></div>
+        </div>
+        <div className="row">
+          <div className="col-xs-4">total</div>
+          <div className="col-xs-4">{total}</div>
+          <div className="col-xs-4"></div>
+        </div>
+        <hr />
       </div>
-      <hr />
-      { 
-        items !== null ? 
-        items.map( (item, index) => (
-          <ItemEntry collectSplitItemInfo={collectSplitItemInfo} key={index} item={item} />
-        )) 
-        : null 
-      }   
-      <div className="row">
-        <div className="col-xs-4">tip</div>
-        <div className="col-xs-4">{tip}</div>
-        <div className="col-xs-4"></div>
-      </div>
-      <div className="row">
-        <div className="col-xs-4">tax</div>
-        <div className="col-xs-4">{tax}</div>
-        <div className="col-xs-4"></div>
-      </div>
-      <div className="row">
-        <div className="col-xs-4">total</div>
-        <div className="col-xs-4">{total}</div>
-        <div className="col-xs-4"></div>
-      </div>
-      <hr />
     </div>
   );
 };
