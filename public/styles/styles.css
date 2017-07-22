@@ -150,7 +150,7 @@ footer, .page-wrap:after {
     padding: 5px;
     margin: 5px;
 }
-*/
+
 .logoDiv {
     text-align: center;
     margin-bottom: 60px;
@@ -192,9 +192,11 @@ img.displayed {
     text-align: center;
     padding: 10px;
 }
+
 #signup{
     color: #3FC3D8;
 }
+
 #signin {
     color: white;
     margin-right: 50px;
@@ -204,19 +206,21 @@ img.displayed {
     padding: 20px;
 }
 
-
 .other-signup{
     width: 150px; 
     background-color: #1398AD;
 }
+
 .external-sign-in{
     text-align: left;
     /*background-color: #1398AD*/
 }
+
 .external-sign-in-text{
     margin-left: 20px;
     margin-top:5px;
 }
+
 ::selection {
     background-color: #edff00;
     color: #111;
