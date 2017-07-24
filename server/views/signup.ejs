@@ -2,23 +2,22 @@
 <body id="body-login">
     <div class="container">
     <div class="col-sm-6 col-sm-offset-3" id="login">
-
+      
         <!-- <h1><span class="fa fa-sign-in"></span> Signup</h1> -->
 
         <!-- show any messages that come back with authentication -->
-        <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-        <% } %>
-
+      
         <div class="logoDiv">
-          <img src="./assets/splitter-logo-white.png" id="logo-white"/>
+          <img src="./assets/splitter-logo.png" id="logo-white"/>
         </div>
         <div class="signin-singup">
             <a id="signin" style="color: #3FC3D8" href="/login">SIGN IN</a>
-            <a id="signup" style="color: white" href="/signup">SIGN UP</a>
+            <a id="signup" style="color: grey" href="/signup">SIGN UP</a>
         </div>
-
         <form id="signup-form" action="/signup" method="post">
+           <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
             <div class="form-group">
                 <label>First Name</label>
                 <input type="text" class="form-control" name="first" placeholder="first name">
