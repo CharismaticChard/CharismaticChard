@@ -92,7 +92,7 @@ class Output extends React.Component {
     let debtors = this.state.debtors;
     if ( debtors.length === 0) {
       this.addDebtor(debtor, itemAndPrice);
-    } else if ( debtors.length > 0 ){ 
+    } else if ( debtors.length > 0 ) { 
       if ( names.indexOf(name) === -1 ) {
         this.addDebtor(debtor, itemAndPrice);
       } else {
@@ -131,7 +131,7 @@ class Output extends React.Component {
   helperSetState () {
     let debtors = this.state.debtors;
     for ( let i = 0; i < debtors.length; i++ ) {
-      if ( names.indexOf(debtors[i].name) === -1 ){
+      if ( names.indexOf(debtors[i].name) === -1 ) {
         names.push(debtors[i].name); 
       }
     }
