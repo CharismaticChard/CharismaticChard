@@ -1,49 +1,28 @@
 <% include head.ejs%>
 <body id="body-login">
     <div class="container">
-    <!-- <div class="col-sm-6 col-sm-offset-3" id="login"> -->
-
-
-
      <div class="profile-page-logo">
       <img src="./assets/splitter-logo.png" id="logo2"/>
     </div>
 
-
-
-
        <!-- LOCAL INFORMATION -->
         <div class="profile-info">
-            <!-- <div class="well"> -->
-
-                <% if (user.email) { %>
-                <p >
-                    <h2 style="font-family: 'Comfortaa';"><b><%= user.display %></b></h2><br>
-                    <!-- <strong>id</strong>: <%= user.id %><br> -->
-                    <strong>email</strong>: <%= user.email %><br>
-                    <strong>phone</strong>: <%= user.phone %>
-                </p>
-
-                <a href="/api/data_allocator/delete-profile" onclick="return confirm('Are you sure you want to delete your profile? \nOnce you delete it, you will not be able to recover it!');" class="btn btn-default">Delete Profile</a>
-
-                <a href="/update-profile" class="btn btn-default">Update</a>
-                <% } else { %>
-                <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
-
-            <!-- </div> -->
+            <% if (user.email) { %>
+            <p>
+                <h2><b><%= user.display %></b></h2><br>
+                <strong>email</strong>: <%= user.email %><br>
+                <strong>phone</strong>: <%= user.phone %>
+            </p>
+            <a href="/api/data_allocator/delete-profile" onclick="return confirm('Are you sure you want to delete your profile? \nOnce you delete it, you will not be able to recover it!');" class="btn btn-default">Delete Profile</a>
+            <a href="/update-profile" class="btn btn-default">Update</a>
+            <% } else { %>
+            <a href="/connect/local" class="btn btn-default">Connect Local</a>
+            <% } %>
         </div>
-
-    <!-- <div class="home-logout"> -->
+        <hr class="profile-line">
         <div class="signin-form">
             <a href="/" class="form-control " id="login-button" style="margin-bottom: 10px"> <label class='profile'>HOME</label></a>
-            <a href="/logout" class="form-control " id="login-button" style="background-color: #1398AD;" > <label class='profile'>Log Out</label></a>
+            <a href="/logout" class="form-control " id="login-button" style="background-color: #1398AD;" ><label class='profile'>Log Out</label></a>
         </div>
-    <!-- </div> -->
 
-
-    <!-- <div class="row"> -->
-
-     
-    <!-- </div> -->
 <% include foot.ejs%>
