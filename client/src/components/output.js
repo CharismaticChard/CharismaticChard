@@ -141,7 +141,6 @@ class Output extends React.Component {
     let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
     let debtorTax = this.props.tax * percent;
     debtorTax = debtorTax.toFixed(2);
-    console.log('debtorTax: ', debtorTax);
     return Number(debtorTax);
   }
 
