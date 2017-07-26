@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Nav from 'react-bootstrap/lib/Nav';
 import Modal from 'react-bootstrap/lib/Modal';
 import SidebarHepler from './sideBarHelper.js';
-
+import { LinkContainer } from 'react-router-bootstrap';
 
 class MainSidebars extends React.Component {
   constructor(props, context) {
@@ -32,12 +32,22 @@ class MainSidebars extends React.Component {
         </div>
         <SidebarHepler side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>
           <Nav>
-            <a href='/profile'>profile</a><br/>
-            <a href='/'>HOME</a><br/>
-            <a href='/history'>HISTORY</a><br/>
-            <a href='/output'>output => change the name</a><br/>
-            <a href='/input'>input => change the name</a><br/>
-            <a href='/login'>LOG OUT</a><br/>
+            <div className="side-bar-list">
+              <a href='/profile'>profile</a>
+            </div>
+
+            <div className="side-bar-list"> 
+              <a className="side-bar-list" href='/'>HOME</a>
+            </div>
+            <div className="side-bar-list">
+              <a href='/history'>HISTORY</a><br/>
+            </div>
+
+
+            <div className="side-bar-list">
+              <a href='/login'>LOG OUT</a><br/>
+            </div>
+
           </Nav>
         </SidebarHepler>
       </div>

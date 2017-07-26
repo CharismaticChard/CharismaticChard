@@ -3,9 +3,9 @@ import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
-import { setIterator, removeIterator, setItems, setTax, setTotal, setTip } from '../actions/inputActions.js';
+import { setIterator, removeIterator, setItems, setTax, setTotal, setTip, inputRedirect } from '../actions/inputActions.js';
 import { setSplitName } from '../actions/finalActions.js';
-
+import { LinkContainer } from 'react-router-bootstrap';
 const mapStateToProps = state => {
   return {
     iterator: state.input.iterator,
@@ -34,6 +34,9 @@ const mapDispatchToProps = dispatch => {
     ),
     setSplitName: (input) => dispatch(
       setSplitName(input)
+    ),
+    inputRedirect: (input) => dispatch(
+      inputRedirect(input)
     ),
   };
 };
@@ -65,6 +68,7 @@ class Input extends React.Component {
     $('.total').val('');
     p.setTip($('.tip').val());
     $('.tip').val('');
+    this.props.inputRedirect(true);
   }
 
   addItem() {
@@ -127,7 +131,11 @@ class Input extends React.Component {
             </div>
             <footer>
               <hr className="footerHR"/>
-              <Link className="btn btn-primary" to="/output" onClick={this.handleSubmit.bind(this)}>Submit</Link>
+              <LinkContainer to="/output" >
+                <Button className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>
+                  Submit
+                </Button>
+              </LinkContainer>
             </footer>
           </div>
         </div>

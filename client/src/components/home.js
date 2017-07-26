@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from 'react-bootstrap/lib/Button';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { fetchNumbers, setNumbers } from '../actions/testActions.js';
 import { fetchUserNameAndPhone } from '../actions/finalActions.js';
 

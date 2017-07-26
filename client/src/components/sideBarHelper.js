@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
-import Sidebar from 'react-sidebar';
+// import Sidebar from 'react-sidebar';
 import Nav from 'react-bootstrap/lib/Nav';
 import Modal from 'react-bootstrap/lib/Modal';
 // import { Link } from 'react-router-dom';

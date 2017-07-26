@@ -341,3 +341,13 @@ img.displayed {
     margin: 6px 0;
     transition: 0.4s;
 }
+
+.side-bar-list {
+    background-color: pink;
+    height: 100px;
+}
+
+Button .side-bar-button {
+    border: none;
+    background-color: pink;
+}
