@@ -193,31 +193,21 @@ class Output extends React.Component {
       <div>
         <div className="container-fluid">
           <div className="row">
-            <div className="logo text-center">
-              <img src="./assets/splitter-logo.png" className="mx-auto d-block" width="200"/>
+            <div className="col-xs-12">
+              <ItemList collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
+            </div>
+            <div className="col-xs-12">
+              <AddFriends />
+            </div>
+            <div className="col-xs-12">
+              <FriendsList />
             </div>
           </div>
         </div>
-        <hr />
-        <div>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-xs-12">
-                <ItemList collectSplitItemInfo={this.collectSplitItemInfo.bind(this)}/>
-              </div>
-              <div className="col-xs-12">
-                <AddFriends />
-              </div>
-              <div className="col-xs-12">
-                <FriendsList />
-              </div>
-            </div>
-          </div>
-          <footer>
-            <hr className="footerHR"/>
-            <Link className="btn btn-primary" to="/confirmation" onClick={this.submitDebtors.bind(this)}>Calculate</Link>
-          </footer>
-        </div>
+        <footer>
+          <hr className="footerHR"/>
+          <Link className="btn btn-primary" to="/confirmation" onClick={this.submitDebtors.bind(this)}>Calculate</Link>
+        </footer>
       </div>
     );
   }
