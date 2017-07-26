@@ -5,7 +5,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
 import sinon from 'sinon'; 
-import ConnectedAddFriends, { AddFriends } from '../../src/components/addFriends.js'
+import ConnectedAddFriends, { AddFriends } from '../../src/components/addFriends.js';
 
 // const SampleComponent = (props = {}) => (
 //   <div className="sample">
@@ -43,25 +43,25 @@ const thunk = ({ mapStateToProps, mapDispatchToProps }) => next => action => {
   }
 
   return next(action);
-}
+};
 
 const create = () => {
   const store = {
     mapStateToProps: jest.fn(() => ({})),
     mapDispatchToProps: jest.fn(),
   };
-  const next = jest.fn()
-  const invoke = (action) => thunk(store)(next)(action)
-  return {store, next, invoke}
+  const next = jest.fn();
+  const invoke = (action) => thunk(store)(next)(action);
+  return {store, next, invoke};
 }; 
 
 
 describe('A addFriends react component', function() {
   it('passes through non-function action', () => {
-    const { next, invoke } = create()
-    const action = {type: 'SET_FRIENDSINFO'}
-    invoke(action)
-    expect(next).toHaveBeenCalledWith(action)
+    const { next, invoke } = create();
+    const action = {type: 'SET_FRIENDSINFO'};
+    invoke(action);
+    expect(next).toHaveBeenCalledWith(action);
   });
 
   it('calls the function', () => {
@@ -88,13 +88,13 @@ describe('A addFriends react component', function() {
   it('should render "Name" without throwing an error', function() {
     expect(shallow(<AddFriends />).contains(<Col componentClass={ControlLabel} sm={2}>
                     Name
-                  </Col>)).toBe(true);
+    </Col>)).toBe(true);
   });
 
   it('should render "Number" without throwing an error', function() {
     expect(shallow(<AddFriends />).contains(<Col componentClass={ControlLabel} sm={2}>
                     Number
-                  </Col>)).toBe(true);
+    </Col>)).toBe(true);
   });
 
   it('should mount in a full DOM', function() {
@@ -104,23 +104,22 @@ describe('A addFriends react component', function() {
   it('should render to static HTML', function() {
     expect(render(<AddFriends />).text()).toEqual('Friends ListAdd Friends');
   });
-  
 
-  // it('calls open when Add Friends button trigger', function() {
-  //   const addFriendsButton = sinon.spy(); 
-  //   const wrapper = mount(
-  //     <AddFriends />
-  //   );
-  //   console.log('*********', wrapper.find('#add-friends') );
-  //   // wrapper.find('Button').node.props.onClick = addFriendsButton;
+  it('calls open when Add Friends button trigger', function() {
+    // const open = sinon.spy(); 
+    // const wrapper = mount(
+    //   <AddFriends />
+    // );
+    // sinon.spy(AddFriends.prototype, 'open');
+    // const wrapper = mount(<AddFriends />);
 
-  //   // wrapper.update();
+    // console.log('*********', wrapper.find('AddFriends').node.Open );
+    // wrapper.find('Button').node.props.onClick = addFriendsButton;
+    
+    // expect(AddFriends.prototype.open.calledOnce).toEqual(true);
 
-  //   // ReactTestUtils.Simulate.touchTap( ReactDOM.findDOMNode(wrapper.find('Button').node.props.onClick ));
-  //   // expect(wrapper.calledOnce).toEqual(true);
-  // });
-
-
-
-
+    // wrapper.update();
+    // ReactTestUtils.Simulate.touchTap( ReactDOM.findDOMNode(wrapper.find('Button').node.props.onClick ));
+    // expect(wrapper.calledOnce).toEqual(true);
+  });
 });
