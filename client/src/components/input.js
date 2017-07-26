@@ -82,14 +82,6 @@ class Input extends React.Component {
     return (
       <div>
         <div className="container-fluid">
-          <div className="row">
-            <div className="logo text-center">
-              <img src="./assets/splitter-logo.png" className="mx-auto d-block" width="200"/>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div className="container-fluid">
           <div className="inputContainer row formItem">
             <div className="inputItem col-md-4">
               <label className="inputItemBit">Split Name</label>
