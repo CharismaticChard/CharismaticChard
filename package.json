@@ -61,6 +61,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-promise-middleware": "^4.3.0",
     "redux-thunk": "^2.2.0",
+    "sortablejs": "^1.6.0",
     "twilio": "^3.5.0",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"

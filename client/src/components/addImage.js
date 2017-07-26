@@ -45,7 +45,9 @@ class AddImage extends React.Component {
         <p>Take Picture to Continue</p>
       </div>
       )
+    
     var { imagePreviewURL } = this.state;
+
     if (imagePreviewURL) {
       image = (
       <div className="col-xs-11 previewImageContainer">
@@ -53,6 +55,7 @@ class AddImage extends React.Component {
       </div>
       );
     }
+
     return (
       <div>
         <div className="container-fluid">
