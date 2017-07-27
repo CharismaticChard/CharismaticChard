@@ -2,18 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-const mapStateToProps = state => {
-  return {
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-  };
-};
 
 class Home extends React.Component {
-
   render() {
     return (
       <div>
@@ -36,4 +26,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
