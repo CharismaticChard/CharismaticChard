@@ -11,19 +11,11 @@ import { fetchSplitterHistory } from '../actions/historyAction.js';
 
 const mapStateToProps = state => {
   return {
-    // numbers: state.numbers.numbers,
-    // name: state.numbers.name,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // fetchNumbers: () => dispatch(
-    //   fetchNumbers()
-    // ),
-    // setNumbers: (numbers) => dispatch(
-    //   setNumbers(numbers)
-    // ),
     fetchUserNameAndPhone: () => dispatch(
       fetchUserNameAndPhone()
     ),

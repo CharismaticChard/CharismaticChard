@@ -54,9 +54,7 @@ class App extends React.Component {
               <Route exact path="/" component={() => <Home />} />
               <Route path="/history" render= {() => this.props.history ? <History /> : <Redirect to='/'/> } />
               <Route path="/addImage" component={() => <AddImage />} />
-
               <Route path="/input" component={() => <Input />} />
-
               <Route path="/output" component={() => <Output />} />
               <Route path="/confirmation" component={() => <Confirmation />} />
             </Switch>
