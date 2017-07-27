@@ -49,8 +49,6 @@ const mapDispatchToProps = dispatch => {
 class DragAndDrop extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
     this.grabListData = this.grabListData.bind(this);
     this.makeSortable = this.makeSortable.bind(this);
   }
