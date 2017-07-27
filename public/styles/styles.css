@@ -126,6 +126,7 @@ h6 {
     text-align: center;
 }
 
+
 .homeLogo {
     width: 200px;
 }
@@ -584,7 +585,6 @@ element.style {
     color: white;
 }
 
-
 .inputItem { 
     margin-top: 15px;
 }
@@ -619,6 +619,5 @@ element.style {
 
 .drag{
     width: 20px;
-    /*height: 20px;*/
     background-color: #08939D;
 }
