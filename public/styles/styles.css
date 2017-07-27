@@ -356,4 +356,15 @@ Button .side-bar-button {
     background-color: pink;
 }
 
+.history-line {
+    border: 10px 3px black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
+.split-history{
+    margin-bottom: 60px;
+    border: 5px solid #3FC3D8;
+    padding: 20px;
+
+}

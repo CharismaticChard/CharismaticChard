@@ -55,7 +55,7 @@ class App extends React.Component {
               <Route path="/history" render= {() => this.props.history ? <History /> : <Redirect to='/'/> } />
               <Route path="/addImage" component={() => <AddImage />} />
 
-              <Route path="/input" render= {() => this.props.input ? <Input /> : <Redirect to='/' /> } />
+              <Route path="/input" component={() => <Input />} />
 
               <Route path="/output" component={() => <Output />} />
               <Route path="/confirmation" component={() => <Confirmation />} />
@@ -69,5 +69,4 @@ class App extends React.Component {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-//            <Route path="/input" component={() => <Input />} />
 

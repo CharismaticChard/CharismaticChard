@@ -139,11 +139,8 @@ class Input extends React.Component {
   }
 }
 
-<<<<<<< HEAD
-export default connect(mapStateToProps, mapDispatchToProps)(Input);
-=======
-         
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
-          
->>>>>>> about to rebase and clean up the code
+     
+
+
