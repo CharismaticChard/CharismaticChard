@@ -8,9 +8,8 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-// import axios from 'axios';
 import browserHistory from 'react-router';
-
+import store from './store.js';
 import Home from './components/home.js';
 import Input from './components/input.js';
 import Output from './components/output.js';
@@ -19,14 +18,8 @@ import AddImage from './components/addImage.js';
 import History from './components/history.js';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import MainSidebars from './components/mainSideBar.js';
-import store from './store.js';
 import { connect } from 'react-redux';
-// import { history } from '../actions/historyActions.js';
-
-
 
 const mapStateToProps = state => {
   return {
