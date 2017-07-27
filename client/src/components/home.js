@@ -6,23 +6,23 @@ import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { fetchNumbers, setNumbers } from '../actions/testActions.js';
 import { fetchUserNameAndPhone } from '../actions/finalActions.js';
-
+import { LinkContainer } from 'react-router-bootstrap';
 
 const mapStateToProps = state => {
   return {
-    numbers: state.numbers.numbers,
-    name: state.numbers.name
+    // numbers: state.numbers.numbers,
+    // name: state.numbers.name,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchNumbers: () => dispatch(
-      fetchNumbers()
-    ),
-    setNumbers: (numbers) => dispatch(
-      setNumbers(numbers)
-    ),
+    // fetchNumbers: () => dispatch(
+    //   fetchNumbers()
+    // ),
+    // setNumbers: (numbers) => dispatch(
+    //   setNumbers(numbers)
+    // ),
     fetchUserNameAndPhone: () => dispatch(
       fetchUserNameAndPhone()
     ),
