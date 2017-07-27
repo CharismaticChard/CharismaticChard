@@ -1,25 +1,10 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Modal from 'react-bootstrap/lib/Modal';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-
-import { Link } from 'react-router-dom';
-// import { setFriendsInfo } from '../actions/outputActions.js';
-import { fetchSplitterHistory } from '../actions/historyAction.js';
-
 import { connect } from 'react-redux';
+import numeral from 'numeral';
 
 const mapStateToProps = state => {
   return {
-    // debtors: state.output.debtors,
-    // final: state.final,
-    // splitter: state.final.splitter
+    history: state.history.splitterHistory
   };
 };
 
@@ -33,15 +18,59 @@ const mapDispatchToProps = dispatch => {
 
 
 class History extends React.Component {
-  componentWillMount() {
-    this.props.fetchSplitterHistory();
-    console.log('fetchSplitterHistory');
-  }
-
   render() {
     return (
       <div>
-        <h1>checking!</h1>
+        <h3 className="homeWelcome">History</h3>
+        <div className="container-fluid">
+          { this.props.history.map((data, index) => (
+            <div className= "split-history" key={index}>
+              <div className="row">
+                <label className="col-xs-6">Split Name: </label>
+                <p className="col-xs-6">{data.split_name}</p>
+              </div>
+              <div className="row">
+                <label className="col-xs-6">Date: </label>
+                <p className="col-xs-6">{data.created_at.slice(0, 10)}</p>
+              </div>
+              <hr />
+              <label>Items:</label>
+              {
+                data.items.map( (item, index) => (
+                  <div key={index}>
+                    <div className="row">
+                      <label className="col-xs-6">Item Name: </label>
+                      <p className="col-xs-6">{item.item_name}</p>
+                    </div>
+                    <div className="row">
+                      <label className="col-xs-6">Price: </label>
+                      <p className="col-xs-6">{item.price}</p>
+                    </div>
+                    <div className="row">
+                      <label className="col-xs-6">Quantity: </label>
+                      <p className="col-xs-6">{item.quantity}</p>
+                    </div>
+                    <hr />
+                  </div>
+                ))
+              }
+              <div className="row">
+                <label className="col-xs-6">Tax: </label>
+                <p className="col-xs-6">{data.tax}</p>
+              </div>
+              <div className="row">
+                <label className="col-xs-6">Tip: </label>
+                <p className="col-xs-6">{data.tip}</p>
+              </div>
+              <div className="row">
+                <label className="col-xs-6">Total: </label>
+                <p className="col-xs-6">{numeral(data.total).format('$0,0.00')}</p>
+              </div>
+              <hr className="history-line"/>
+            </div>
+          ))
+          }  
+        </div>
       </div>
     );
   }

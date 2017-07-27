@@ -1,22 +1,14 @@
 export default function reducer(state = 
   {
     history: false,
-    input: false, 
-    output: false, 
-    confirmation: false
+    splitterHistory: null
   }, action) {
   switch (action.type) {
   case 'HISTORY': {
     return {...state, history: action.payload};
   }
-  case 'INPUT-LOADING': {
-    return {...state, input: action.payload};
-  }
-  case 'OUTPUT-LOADING': {
-    return {...state, output: action.payload};
-  }
-  case 'CONFIRMATION-LOADING': {
-    return {...state, confirmation: action.payload};
+  case 'SPLITTER-HISTORY': {
+    return {...state, splitterHistory: action.payload };
   }
   default: {
     return state;

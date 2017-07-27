@@ -28,33 +28,9 @@ const splitterHistory = (input) => {
   };
 };
 
-const inputLoading = (toggle) => {
-  return {
-    type: 'INPUT-LOADING',
-    payload: toggle,
-  };
-};
-
-
-const outputLoading = (toggle) => {
-  return {
-    type: 'OUTPUT-LOADING',
-    payload: toggle,
-  };
-};
-
-const confirmationLoading = (toggle) => {
-  return {
-    type: 'CONFIRMATION-LOADING',
-    payload: toggle,
-  };
-};
-
 
 export {
   history,
-  inputLoading,
-  outputLoading,
-  confirmationLoading,
-  fetchSplitterHistory
+  fetchSplitterHistory,
+  splitterHistory
 };

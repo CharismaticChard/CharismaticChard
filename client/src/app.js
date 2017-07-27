@@ -8,9 +8,9 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-// import axios from 'axios';
-import browserHistory from 'react-router';
 
+import browserHistory from 'react-router';
+import store from './store.js';
 import Home from './components/home.js';
 import Input from './components/input.js';
 import Output from './components/output.js';
@@ -19,13 +19,10 @@ import AddImage from './components/addImage.js';
 import History from './components/history.js';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import MainSidebars from './components/mainSideBar.js';
-import store from './store.js';
+
 import { connect } from 'react-redux';
 // import { history } from '../actions/historyActions.js';
-
 
 
 const mapStateToProps = state => {
@@ -54,9 +51,7 @@ class App extends React.Component {
               <Route exact path="/" component={() => <Home />} />
               <Route path="/history" render= {() => this.props.history ? <History /> : <Redirect to='/'/> } />
               <Route path="/addImage" component={() => <AddImage />} />
-
-              <Route path="/input" render= {() => this.props.input ? <Input /> : <Redirect to='/' /> } />
-
+              <Route path="/input" component={() => <Input />} />
               <Route path="/output" component={() => <Output />} />
               <Route path="/confirmation" component={() => <Confirmation />} />
             </Switch>
@@ -69,5 +64,3 @@ class App extends React.Component {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-//            <Route path="/input" component={() => <Input />} />
-

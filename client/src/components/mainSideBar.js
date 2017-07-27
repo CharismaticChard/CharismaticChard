@@ -58,7 +58,7 @@ class MainSidebars extends React.Component {
         <SidebarHepler side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>
           <Nav>
 
-            <a href='/login' className="side-bar-list">
+            <a href='/profile' className="side-bar-list">
               <div className="side-bar-list">
                 PROFILE
               </div>
