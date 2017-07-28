@@ -27,7 +27,7 @@ class SplitterHistoryItem extends React.Component {
           <Link className="btn btn-primary" to="/item">Item History</Link>
         </div>
         <div className="container-fluid">
-          { this.props.item.reverse().slice(0,10).map((data, index) => (
+          { this.props.item.reverse().slice(0, 10).map((data, index) => (
             <div className= "split-history" key={index}>
               <div className="row">
                 <label className="col-xs-6">Item: </label>

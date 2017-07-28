@@ -60,20 +60,20 @@ class MainSidebars extends React.Component {
             <img src="./assets/splitter-logo.png" className="homeLogo" />
           </Link>
         </Nav>
-        <SidebarHepler side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>
-          <Nav>
+        <SidebarHepler  side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>
+          <Nav className="side-bar"> 
             <a href='/profile' className="side-bar-list">
               <div className="side-bar-list">
                 PROFILE
               </div>
             </a>
             <LinkContainer to="/" className="side-bar-list" onClick={ () => this.updateModal(false)}>
-              <div className="side-bar-button">
+              <div className="side-bar-list">
                 HOME
               </div>
             </LinkContainer>
             <LinkContainer to="/history" className="side-bar-list" onClick={this.historyStateChange.bind(this)}>
-              <div className="side-bar-button">
+              <div className="side-bar-list">
                 HISTORY
               </div>
             </LinkContainer>
