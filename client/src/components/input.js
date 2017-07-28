@@ -131,10 +131,7 @@ class Input extends React.Component {
             </div>
             <footer>
               <hr className="footerHR"/>
-              <div className="text-center">
-                <Link className="homeSplitButton btn" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Drag and Drop Test</Link>
-              </div>
-              <Link className="btn btn-primary" to="/output" onClick={this.handleSubmit.bind(this)}>Submit</Link>
+              <Link className="btn btn-primary" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Submit</Link>
             </footer>
           </div>
         </div>

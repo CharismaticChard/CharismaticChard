@@ -46,20 +46,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const splitTax = (debtorTotal) => {
-  let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
-  let debtorTax = this.props.tax * percent;
-  debtorTax = debtorTax.toFixed(2);
-  return Number(debtorTax);
-};
-
-const splitTip = (debtorTotal) => {
-  let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
-  let debtorTip = this.props.tip * percent;
-  debtorTip = debtorTip.toFixed(2);
-  return Number(debtorTip);
-};
-
 class DragAndDrop extends React.Component {
   constructor(props) {
     super(props);
@@ -69,6 +55,28 @@ class DragAndDrop extends React.Component {
     this.makeSortable = this.makeSortable.bind(this);
   }
 
+  splitTax(debtorTotal) {
+    let percent = debtorTotal / (this.props.total - this.props.tax);
+    let debtorTax = this.props.tax * percent;
+    debtorTax = Number(debtorTax.toFixed(2));
+    return debtorTax;
+  };
+  
+  splitTip(debtorTotal) {
+    let percent = debtorTotal / (this.props.total - this.props.tax);
+    let debtorTip = this.props.tip * percent;
+    debtorTip = Number(debtorTip.toFixed(2));
+    return debtorTip;
+  };
+
+  calculateTotal(items) {
+    let total = 0;
+    items.forEach(item => {
+      total += Number(item.price);
+    });
+    return total;
+  };
+
   grabListData() {
     var debtors = [];
     $('.completedList').each((index, list) => {
@@ -77,9 +85,6 @@ class DragAndDrop extends React.Component {
       debtor.name = nameAndPhone[0];
       debtor.phone = nameAndPhone[1];
       debtor.items = [];
-      // debtor.debtTotal = TOTAL;
-      // debtor.tax = splitTax(TOTAL);
-      // debtor.tip = splitTip(TOTAL);
       if (list.children.length > 0) {
         $.each(list.children, (name, obj) => {
           var item = {};
@@ -89,8 +94,13 @@ class DragAndDrop extends React.Component {
           debtor.items.push(item);
         });
       }
+      debtor.total = this.calculateTotal(debtor.items);
+      debtor.tax = this.splitTax(debtor.total);
+      debtor.tip = this.splitTip(debtor.total);
+      debtor.debtTotal = Number((debtor.total + debtor.tax + debtor.tip).toFixed(2));
       debtors.push(debtor);
     });
+
     this.props.setDebtors(debtors);
 
     var $splitterList = $('.splitterList')[0];
@@ -99,9 +109,6 @@ class DragAndDrop extends React.Component {
     splitter.name = nameAndPhone[0];
     splitter.phone = nameAndPhone[1];
     splitter.items = [];
-    // splitter.debtTotal = TOTAL;
-    // splitter.tax = splitTax(TOTAL);
-    // splitter.tip = splitTip(TOTAL);
     if ($splitterList.children.length > 0) {
       $.each($splitterList.children, (name, obj) => {
         var item = {};
@@ -111,6 +118,11 @@ class DragAndDrop extends React.Component {
         splitter.items.push(item);
       });
     }
+    splitter.total = this.calculateTotal(splitter.items);
+    splitter.tax = this.splitTax(splitter.total);
+    splitter.tip = this.splitTip(splitter.total);
+    splitter.debtTotal = Number((splitter.total + splitter.tax + splitter.tip).toFixed(2));
+
     this.props.setSplitter(splitter);
     this.props.setSplitTotal(this.props.total);
     this.props.setTotalTax(this.props.tax);
@@ -150,7 +162,7 @@ class DragAndDrop extends React.Component {
                 <div className="list-group-item boldItemsHeaders containerTitle">
                   <p className="boldItemsHeaders">Items</p>
                 </div>
-                <div className="sortableList">
+                <div className="sortableList itemsList">
                   {
                     this.props.items.map((item) => (
                       <div className="list-group-item" key={item.id}>
@@ -200,12 +212,14 @@ class DragAndDrop extends React.Component {
           </div>
           <div className="row">
             <AddFriends />
-            <button className="btn" onClick={this.grabListData}/>
           </div>
+        </div>
+        <div>
+          <button onClick={this.grabListData} className="btn">Test</button>
         </div>
         <footer>
           <hr className="footerHR"/>
-          <Link className="btn btn-primary" to="/confirmation">Calculate</Link>
+          <Link className="btn btn-primary" to="/confirmation" onClick={this.grabListData}>Calculate</Link>
         </footer>
       </div>
     );

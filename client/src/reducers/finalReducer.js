@@ -8,9 +8,10 @@ export default function reducer(state =
       name: '',
       phone: '',
       items: null,
-      debtTotal: null,
+      total: null,
       tax: null,
-      tip: null
+      tip: null,
+      debtTotal: null,
     },
     debtors: []
   }, action) {
@@ -38,6 +39,9 @@ export default function reducer(state =
   }
   case 'SET_SPLITTER_DEBTTOTAL': {
     return {...state, splitter: {...state.splitter, debtTotal: action.payload}};
+  }
+  case 'SET_SPLITTER_TOTAL': {
+    return {...state, splitter: {...state.splitter, total: action.payload}};
   }
   case 'SET_DEBTORS_TAX': {
     return {...state, splitter: {...state.splitter, tax: action.payload}};
