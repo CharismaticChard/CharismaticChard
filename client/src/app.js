@@ -49,7 +49,7 @@ class App extends React.Component {
     return (
       <Router history={browserHistory}>
         <div className="mainContainer">
-          <Navbar>
+          <Navbar className="nav-bar">
             <MainSidebars />
           </Navbar>
           <Switch>

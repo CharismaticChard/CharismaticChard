@@ -57,7 +57,7 @@ class MainSidebars extends React.Component {
             <div className="bar3"></div>
           </NavItem>
           <Link to="/" >
-            <img src="./assets/splitter-logo.png" className="homeLogo" />
+            <img src="./assets/splitter-logo.gif" className="homeLogo" />
           </Link>
         </Nav>
         <SidebarHepler  side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>

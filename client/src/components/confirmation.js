@@ -55,7 +55,7 @@ class Confirmation extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="head">
         <h3 className="homeWelcome">Review Items</h3>
         <div className="container-fluid">
           <div className="row">

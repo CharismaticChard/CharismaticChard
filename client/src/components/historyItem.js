@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
 class SplitterHistoryItem extends React.Component {
   render() {
     return (
-      <div>
+      <div className="head">
         <h3 className="homeWelcome">Item History</h3>
         <div className="history-button">
           <Link className="btn btn-primary" to="/history" >Split History</Link>
