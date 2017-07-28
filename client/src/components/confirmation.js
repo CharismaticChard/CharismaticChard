@@ -50,14 +50,6 @@ class Confirmation extends React.Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="logo text-center">
-              <img src="./assets/splitter-logo.png" className="mx-auto d-block" width="200"/>
-            </div>
-          </div>
-        </div>
-        <hr />
         <div>
           <h3 className="homeWelcome">Review Items</h3>
           <div className="container-fluid">
@@ -103,6 +95,7 @@ class Confirmation extends React.Component {
             <hr/>
           </div>
           <div className="container-fluid">
+            <hr />
             {
               this.props.debtors !== null ? this.props.debtors.map((debtor, index) => (
                 <div key={index}>
@@ -126,7 +119,6 @@ class Confirmation extends React.Component {
                           <label className="col-xs-6">Price: </label>
                           <p className="col-xs-6">{item.price}</p>
                         </div>
-                        <hr />
                       </div>
                     ))
                   }
@@ -146,12 +138,12 @@ class Confirmation extends React.Component {
                     <label className="col-xs-6">Final Total: </label>
                     <p className="col-xs-6">{debtor.debtTotal}</p>
                   </div>
+                <hr />
                 </div>
               ))
                 : null
             }
           </div>
-          <hr />
           <hr />
           <div className="container-fluid">
             <div className="row">
