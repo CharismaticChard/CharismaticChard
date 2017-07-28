@@ -53,6 +53,7 @@ class Input extends React.Component {
         pair.item = $(elem).val();
         $(elem).val('');
       } else if (keys === 1) {
+        pair.id = index;
         pair.price = $(elem).val();
         items.push(pair);
         $(elem).val('');
@@ -130,6 +131,9 @@ class Input extends React.Component {
             </div>
             <footer>
               <hr className="footerHR"/>
+              <div className="text-center">
+                <Link className="homeSplitButton btn" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Drag and Drop Test</Link>
+              </div>
               <Link className="btn btn-primary" to="/output" onClick={this.handleSubmit.bind(this)}>Submit</Link>
             </footer>
           </div>
