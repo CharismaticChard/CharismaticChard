@@ -167,7 +167,7 @@ class Output extends React.Component {
     this.splitterInfo(debtors);
   }
 
-  splitterInfo (debtors) {
+  splitterInfo(debtors) {
     let name = this.props.splitter.name.split(' ')[0];
     let phone = this.props.splitter.phone;
     let splitter = null; 

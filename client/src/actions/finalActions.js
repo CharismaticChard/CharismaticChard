@@ -25,6 +25,13 @@ const fetchUserNameAndPhone = () => {
   };
 };
 
+const setSplitter = (splitter) => {
+  return {
+    type: 'SET_SPLITTER',
+    payload: splitter,
+  }
+}
+
 const setSplitTotal = (total) => {
   return {
     type: 'SET_SPLIT_TOTAL',
@@ -105,6 +112,7 @@ const setSplitterTip = (tip) => {
 export {
   sendStateToServer,
   fetchUserNameAndPhone,
+  setSplitter,
   setSplitTotal,
   setTotalTax,
   setTotalTip,

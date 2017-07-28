@@ -4,62 +4,117 @@ import Sortable from 'sortablejs';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import AddFriends from './addFriends.js';
-
-//TODO
-//if items still in the items list disable confirm button
-
+import { 
+  setDebtors, 
+  setSplitter,
+  setSplitTotal,
+  setTotalTax,
+  setTotalTip,
+} from '../actions/finalActions.js';
 
 const mapStateToProps = state => {
   return {
     items: state.input.items,
-    friendsInfo: state.output.friendsInfo,
     tax: state.input.tax,
     total: state.input.total,
     tip: state.input.tip,
+
+    friendsInfo: state.output.friendsInfo,
+
+    splitterName: state.final.splitter.name,
+    splitterNumber: state.final.splitter.phone,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    setDebtors: (input) => dispatch(
+      setDebtors(input)
+    ),
+    setSplitter: (input) => dispatch(
+      setSplitter(input)
+    ),
+    setSplitTotal: (input) => dispatch(
+      setSplitTotal(input)
+    ),
+    setTotalTax: (input) => dispatch(
+      setTotalTax(input)
+    ),
+    setTotalTip: (input) => dispatch(
+      setTotalTip(input)
+    ),
   };
+};
+
+const splitTax = (debtorTotal) => {
+  let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
+  let debtorTax = this.props.tax * percent;
+  debtorTax = debtorTax.toFixed(2);
+  return Number(debtorTax);
+};
+
+const splitTip = (debtorTotal) => {
+  let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
+  let debtorTip = this.props.tip * percent;
+  debtorTip = debtorTip.toFixed(2);
+  return Number(debtorTip);
 };
 
 class DragAndDrop extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
-      peopleAndItems: [],
     };
-    this.show = this.show.bind(this);
+    this.grabListData = this.grabListData.bind(this);
     this.makeSortable = this.makeSortable.bind(this);
   }
 
-  show() {
-    var $sortableLists = $('.completedList');
-    var users = [];
-    $sortableLists.each((index, list) => {
-      var user = {};
+  grabListData() {
+    var debtors = [];
+    $('.completedList').each((index, list) => {
+      var debtor = {};
       var nameAndPhone = list.id.split(' ');
-      user.name = nameAndPhone[0];
-      user.phone = nameAndPhone[1];
-      user.items = [];
+      debtor.name = nameAndPhone[0];
+      debtor.phone = nameAndPhone[1];
+      debtor.items = [];
+      // debtor.debtTotal = TOTAL;
+      // debtor.tax = splitTax(TOTAL);
+      // debtor.tip = splitTip(TOTAL);
       if (list.children.length > 0) {
         $.each(list.children, (name, obj) => {
           var item = {};
           var itemAndPrice = obj.textContent.split('  $');
           item.name = itemAndPrice[0];
           item.price = itemAndPrice[1];
-          user.items.push(item);
+          debtor.items.push(item);
         });
       }
-      users.push(user);
+      debtors.push(debtor);
     });
-    console.log(users);
-    this.setState({
-      peopleAndItems: users,
-    });
+    this.props.setDebtors(debtors);
+
+    var $splitterList = $('.splitterList')[0];
+    var splitter = {};
+    var nameAndPhone = $splitterList.id.split(' ');
+    splitter.name = nameAndPhone[0];
+    splitter.phone = nameAndPhone[1];
+    splitter.items = [];
+    // splitter.debtTotal = TOTAL;
+    // splitter.tax = splitTax(TOTAL);
+    // splitter.tip = splitTip(TOTAL);
+    if ($splitterList.children.length > 0) {
+      $.each($splitterList.children, (name, obj) => {
+        var item = {};
+        var itemAndPrice = obj.textContent.split('  $');
+        item.name = itemAndPrice[0];
+        item.price = itemAndPrice[1];
+        splitter.items.push(item);
+      });
+    }
+    this.props.setSplitter(splitter);
+    this.props.setSplitTotal(this.props.total);
+    this.props.setTotalTax(this.props.tax);
+    this.props.setTotalTip(this.props.tip);
   }
 
   makeSortable() {
@@ -123,6 +178,13 @@ class DragAndDrop extends React.Component {
             </div>
             <div className="col-xs-6">
               <h4>Friends List</h4>
+              <div className="containerDivPadding">
+                <div className="containerTitle list-group-item boldItemsHeaders">
+                  {this.props.splitterName}
+                </div>
+                <div className="list-group-item sortableList splitterList" id={this.props.splitterName.split(' ')[0] + ' ' + this.props.splitterNumber}>
+                </div>
+              </div>
               {
                 this.props.friendsInfo.map((person, index) => (
                   <div className="containerDivPadding" key={index}>
@@ -138,7 +200,7 @@ class DragAndDrop extends React.Component {
           </div>
           <div className="row">
             <AddFriends />
-            <button className="btn" onClick={this.show}/>
+            <button className="btn" onClick={this.grabListData}/>
           </div>
         </div>
         <footer>

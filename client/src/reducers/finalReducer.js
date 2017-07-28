@@ -48,6 +48,9 @@ export default function reducer(state =
   case 'SET_DEBTORS': {
     return {...state, debtors: action.payload};
   }
+  case 'SET_SPLITTER': {
+    return {...state, splitter: action.payload};
+  }
   default: {
     return state;
   }
