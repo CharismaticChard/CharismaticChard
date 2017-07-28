@@ -20,6 +20,18 @@ const fetchSplitterHistory = () => {
   };
 };
 
+const fetchSplitterHistoryItem = () => {
+  return (dispatch) => {
+    axios.get('/api/item-history')
+      .then(res => {
+        dispatch({type: 'ITEM-HISTORY', payload: res.data[0].items});
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
 
 const splitterHistory = (input) => {
   return {
@@ -28,9 +40,19 @@ const splitterHistory = (input) => {
   };
 };
 
+const splitterItemHistory = (input) => {
+  return {
+    type: 'ITEM-HISTORY',
+    payload: input
+  };
+};
+
+
 
 export {
   history,
   fetchSplitterHistory,
-  splitterHistory
+  fetchSplitterHistoryItem,
+  splitterHistory,
+  splitterItemHistory
 };

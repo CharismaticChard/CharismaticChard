@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import AddFriends from './addFriends.js';
 import ItemList from './itemList.js';
 import FriendsList from './friendsList.js';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { setFriendsInfo, setDebtors } from '../actions/outputActions.js';
 import {
