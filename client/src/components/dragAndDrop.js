@@ -46,6 +46,20 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const splitTax = (debtorTotal) => {
+  let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
+  let debtorTax = this.props.tax * percent;
+  debtorTax = debtorTax.toFixed(2);
+  return Number(debtorTax);
+};
+
+const splitTip = (debtorTotal) => {
+  let percent = debtorTotal / (this.props.total - this.props.tax - this.props.tip);
+  let debtorTip = this.props.tip * percent;
+  debtorTip = debtorTip.toFixed(2);
+  return Number(debtorTip);
+};
+
 class DragAndDrop extends React.Component {
   constructor(props) {
     super(props);
@@ -98,6 +112,7 @@ class DragAndDrop extends React.Component {
       debtor.tip = this.splitTip(debtor.total);
       debtor.debtTotal = Number((debtor.total + debtor.tax + debtor.tip).toFixed(2));
       debtors.push(debtor);
+    });
     this.props.setDebtors(debtors);
 
     var $splitterList = $('.splitterList')[0];
