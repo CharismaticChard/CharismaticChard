@@ -9,8 +9,6 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import AddFriendsByUserButton from './addFriendsByUser.js';
 
-
-
 import { connect } from 'react-redux';
 
 import { setFriendsInfo } from '../actions/outputActions.js';
@@ -28,8 +26,6 @@ const mapDispatchToProps = dispatch => {
     ),
   };
 };
-
-
 
 export class AddFriends extends React.Component {
   constructor(props) {

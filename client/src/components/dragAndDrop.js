@@ -98,8 +98,6 @@ class DragAndDrop extends React.Component {
       debtor.tip = this.splitTip(debtor.total);
       debtor.debtTotal = Number((debtor.total + debtor.tax + debtor.tip).toFixed(2));
       debtors.push(debtor);
-    });
-
     this.props.setDebtors(debtors);
 
     var $splitterList = $('.splitterList')[0];
