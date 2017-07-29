@@ -51,6 +51,7 @@ class DragAndDrop extends React.Component {
     super(props);
     this.grabListData = this.grabListData.bind(this);
     this.makeSortable = this.makeSortable.bind(this);
+    this.splitItem = this.splitItem.bind(this);
   }
 
   splitTax(debtorTotal) {
@@ -111,7 +112,7 @@ class DragAndDrop extends React.Component {
     if ($splitterList.children.length > 0) {
       $.each($splitterList.children, (name, obj) => {
         var item = {};
-        var itemAndPrice = obj.textContent.split('  $');
+        var itemAndPrice = obj.id.split(' ');
         item.name = itemAndPrice[0];
         item.price = itemAndPrice[1];
         splitter.items.push(item);
@@ -143,33 +144,44 @@ class DragAndDrop extends React.Component {
     this.makeSortable();
   }
 
+  splitItem() {
+    console.log('split');
+  }
+
   render() {
     return (
       <div>
         <div className="container-fluid">
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="list-group col-xs-6">
               <div className="row">
-                <div className="list-group-item boldItemsHeaders containerTitle">
-                  <p className="boldItemsHeaders">Items</p>
-                </div>
-                <div className="sortableList itemsList">
-                  {
-                    this.props.items.map((item) => (
-                      <div className="list-group-item" key={item.id}>
-                        {item.item}  ${item.price}
-                      </div>
-                    ))
-                  }
+                <div className="col-xs-12">
+                  <div className="row list-group-item containerTitle">
+                    <p>Items</p>
+                  </div>
+                  <div className="row sortableList itemsList">
+                    {
+                      this.props.items.map((item) => (
+                        <div className="list-group-item" key={item.id} id={item.item + ' ' + item.price}>
+                          <div className="col-xs-6">
+                            {item.item} ${item.price}
+                            <button className="btn" onClick={this.splitItem}>
+                              Split Item
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
               <br/>
               <div className="row">
                 <div className="col-xs-12">
                   <div className="row">
-                    <div className="col-xs-4 containerTitle boldItemsHeaders">tax</div>
-                    <div className="col-xs-4 containerTitle boldItemsHeaders">total</div>
-                    <div className="col-xs-4 containerTitle boldItemsHeaders">tip</div>
+                    <div className="col-xs-4 containerTitle">tax</div>
+                    <div className="col-xs-4 containerTitle">total</div>
+                    <div className="col-xs-4 containerTitle">tip</div>
                   </div>
                   <div className="row">
                     <div className="col-xs-4">{this.props.tax}</div>
@@ -180,29 +192,37 @@ class DragAndDrop extends React.Component {
               </div>
             </div>
             <div className="col-xs-6">
-              <h4>Friends List</h4>
-              <div className="containerDivPadding">
-                <div className="containerTitle list-group-item boldItemsHeaders">
-                  {this.props.splitterName}
-                </div>
-                <div className="list-group-item sortableList splitterList" id={this.props.splitterName.split(' ')[0] + ' ' + this.props.splitterNumber}>
-                </div>
-              </div>
-              {
-                this.props.friendsInfo.map((person, index) => (
-                  <div className="containerDivPadding" key={index}>
-                    <div className="containerTitle list-group-item boldItemsHeaders">
-                      {person.friendName}
-                    </div>
-                    <div className="list-group-item sortableList completedList" id={person.friendName + ' ' + person.friendNumber}>
+              <div className="row text-center">
+                <div className="col-xs-12">
+                  <div className="row">
+                    <h4>Friends List</h4>
+                  </div>
+                  <div className="row containerDivPadding">
+                    <div className="col-xs-12">
+                      <div className="row containerTitle list-group-item">
+                        {this.props.splitterName}
+                      </div>
+                      <div className="row list-group-item sortableList splitterList" id={this.props.splitterName.split(' ')[0] + ' ' + this.props.splitterNumber}>
+                      </div>
                     </div>
                   </div>
-                ))
-              }
+                </div>
+                {
+                  this.props.friendsInfo.map((person, index) => (
+                    <div className="row containerDivPadding" key={index}>
+                      <div className="col-xs-12">
+                        <div className="row containerTitle list-group-item">
+                          {person.friendName}
+                        </div>
+                        <div className="row list-group-item sortableList completedList" id={person.friendName + ' ' + person.friendNumber}>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+              <AddFriends />
             </div>
-          </div>
-          <div className="row">
-            <AddFriends />
           </div>
         </div>
         <footer>
