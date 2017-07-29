@@ -149,14 +149,6 @@ class DragAndDrop extends React.Component {
       <div>
         <div className="container-fluid">
           <div className="row">
-            <div className="logo text-center">
-              <img src="./assets/splitter-logo.png" className="mx-auto d-block" width="200"/>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div className="container-fluid">
-          <div className="row">
             <div className="list-group col-xs-6">
               <div className="row">
                 <div className="list-group-item boldItemsHeaders containerTitle">
