@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import $ from 'jquery';
+import Button from 'react-bootstrap/lib/Button';
+// import Draggable from 'react-draggable';
+// import ResizableBox from 'react-resizable-component';
+import Rnd from 'react-rnd';
 
 const mapStateToProps = state => {
   return {
@@ -23,6 +27,7 @@ class AddImage extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.dragDiv = this.dragDiv.bind(this);
   }
 
   handleChange(e) {
@@ -35,8 +40,11 @@ class AddImage extends React.Component {
         imagePreviewURL: reader.result
       });
     };
-
     reader.readAsDataURL(file);
+  }
+
+  dragDiv () {
+
   }
 
   render() {
@@ -50,8 +58,23 @@ class AddImage extends React.Component {
 
     if (imagePreviewURL) {
       image = (
-        <div className="col-xs-11 previewImageContainer">
+        <div className="previewImageContainer">
+
+
+          <Rnd
+            default={{
+              x: 0,
+              y: 0,
+              width: 320,
+              height: 200,
+            }}
+            className="item-selection">
+            You can resize the box
+          </Rnd>
           <img className="previewImage" src={imagePreviewURL}/>
+          <Button className="col-xs-2"> 
+            Select
+          </Button>
         </div>
       );
     }
