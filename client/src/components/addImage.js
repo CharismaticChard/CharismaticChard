@@ -54,8 +54,8 @@ class AddImage extends React.Component {
     let left = Number(offset.left);
     let right = link.css('width');
     let bottom = link.css('height');
-    right = Number(right.slice(0, right.length-3)) + left;
-    bottom = Number(bottom.slice(0, bottom.length-3)) + top;
+    right = Number(right.slice(0, right.length - 3)) + left;
+    bottom = Number(bottom.slice(0, bottom.length - 3)) + top;
     let position = $('.item-selection').position();
     this.setState({
       firstX: left,
@@ -64,10 +64,10 @@ class AddImage extends React.Component {
       secondY: bottom
     });
     console.log('X: ' + left + ', Y: ' + top );
-    console.log( 'right: ' + right+ ', bottom: ' + bottom );
+    console.log( 'right: ' + right + ', bottom: ' + bottom );
   }
 
-  imageOnLoad ({target:img}) {
+  imageOnLoad ({ target: img }) {
     this.setState({
       dimensions: {
         height: img.offsetHeight,
