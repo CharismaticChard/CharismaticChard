@@ -287,4 +287,35 @@ describe('actions', () => {
       );
   });
 
+  it('should update the splitter', () => {
+    expect(
+      reducer(
+        intialState,
+        {type: 'SET_SPLITTER', payload: {
+            name: 'test',
+            phone: 'test',
+            items: null,
+            debtTotal: null,
+            tax: null,
+            tip: null
+          }
+        }
+      )).toEqual(
+        {
+          splitTotal: 0,
+          totalTax: 0,
+          totalTip: 0,
+          splitName: null,
+          splitter: {
+            name: 'test',
+            phone: 'test',
+            items: null,
+            debtTotal: null,
+            tax: null,
+            tip: null
+          },
+          debtors: []
+        }
+      );
+  });
 });

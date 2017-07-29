@@ -214,9 +214,6 @@ class DragAndDrop extends React.Component {
             <AddFriends />
           </div>
         </div>
-        <div>
-          <button onClick={this.grabListData} className="btn">Test</button>
-        </div>
         <footer>
           <hr className="footerHR"/>
           <Link className="btn btn-primary" to="/confirmation" onClick={this.grabListData}>Calculate</Link>

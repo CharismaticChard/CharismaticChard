@@ -183,6 +183,8 @@ class Confirmation extends React.Component {
             </footer>
           </div>
         </div>
+        <br></br>
+        <br></br>
       </div>
     );
   }
