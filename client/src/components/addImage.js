@@ -26,18 +26,25 @@ class AddImage extends React.Component {
       firstX: null,
       firstY: null,
       secondX: null,
-      secondY: null
+      secondY: null,
+      imageFirstX: null, 
+      imageFirstY: null, 
+      imageSecondX: null,
+      imageSecondY: null,
+      naturalWidth: null,
+      naturalHeight: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.selectedPosition = this.selectedPosition.bind(this);
     this.imageOnLoad = this.imageOnLoad.bind(this);
+    this.sendImagePosition = this.sendImagePosition.bind(this);
   }
 
   handleChange(e) {
     e.preventDefault();
-    var file = e.target.files[0];
-    var reader = new FileReader();
+    let file = e.target.files[0];
+    let reader = new FileReader();
     reader.onloadend = () => {
       this.setState({
         file: file,
@@ -48,32 +55,69 @@ class AddImage extends React.Component {
   }
 
   selectedPosition () {
+
+    var imagefirstX  = $(".previewImage")[0].getBoundingClientRect().left   + $(window)['scrollLeft']();
+    var imagefirstY  = $(".previewImage")[0].getBoundingClientRect().top    + $(window)['scrollTop']();
+    var imagesecondX = $(".previewImage")[0].getBoundingClientRect().right  + $(window)['scrollLeft']();
+    var imagesecondY = $(".previewImage")[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
+
     let link = $('.item-selection');
     let offset = link.offset();
     let top = Number(offset.top);
     let left = Number(offset.left);
-    let right = link.css('width');
-    let bottom = link.css('height');
-    right = Number(right.slice(0, right.length - 3)) + left;
-    bottom = Number(bottom.slice(0, bottom.length - 3)) + top;
-    let position = $('.item-selection').position();
+    let right = link.width();
+    let bottom = link.height();
+    right = right + left;
+    bottom = bottom + top;
+
     this.setState({
       firstX: left,
       firstY: top,
       secondX: right,
-      secondY: bottom
+      secondY: bottom,
+      imageFirstX: imagefirstX, 
+      imageFirstY: imagefirstY, 
+      imageSecondX: imagesecondX,
+      imageSecondY: imagesecondY
     });
+
+    
+
+    console.log('*********firstX:   ' +  imagefirstX + '  , firstY: ' + imagefirstY); 
     console.log('X: ' + left + ', Y: ' + top );
+    console.log('*********imagesecondX:   ' +  imagesecondX + '  , imagesecondY: ' + imagesecondY); 
     console.log( 'right: ' + right + ', bottom: ' + bottom );
+
   }
 
   imageOnLoad ({ target: img }) {
     this.setState({
       dimensions: {
         height: img.offsetHeight,
-        width: img.offsetWidth
+        width: img.offsetWidth,
+        naturalWidth: img.naturalWidth,
+        naturalHeight: img.naturalHeight
       }
     });
+
+    console.log('width:', img.offsetHeight);
+    console.log('height:', img.offsetWidth);
+
+    console.log('actual width:', img.naturalWidth);
+    console.log('actual height:', img.naturalHeight);
+
+
+
+
+  }
+
+  sendImagePosition () {
+    console.log("**********************************************************************" );
+    console.log('Div.1X:' + this.state.firstX + '   Div.2Y: ' + this.state.firstY );
+    console.log('PicX:' + this.state.imageFirstX + '   PicY: ' + this.state.imageFirstY );
+
+    console.log('Div.2X:' + this.state.secondX + '   Div.2Y: ' + this.state.secondY );
+    console.log('Pic.2X:' + this.state.imageSecondX + '   Pic.2Y: ' + this.state.imageSecondY );
   }
 
   render() {
@@ -84,7 +128,6 @@ class AddImage extends React.Component {
     );
     
     let { imagePreviewURL } = this.state;
-    // console.log('imagePreviewURL', imagePreviewURL)
     if (imagePreviewURL) {
       image = (
         <div className="previewImageContainer">
@@ -99,10 +142,8 @@ class AddImage extends React.Component {
             onDragStop={this.selectedPosition}
             onResizeStop={this.selectedPosition}>
           </Rnd>
-
           <img className="previewImage" src={imagePreviewURL} onLoad={this.imageOnLoad}/>
-          {console.log(this.state.dimensions)}
-          <Button className="col-xs-2" > 
+          <Button className="col-xs-2" onClick={this.sendImagePosition}> 
             Select
           </Button>
         </div>
