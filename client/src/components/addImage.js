@@ -56,10 +56,10 @@ class AddImage extends React.Component {
 
   selectedPosition () {
 
-    var imagefirstX  = $(".previewImage")[0].getBoundingClientRect().left   + $(window)['scrollLeft']();
-    var imagefirstY  = $(".previewImage")[0].getBoundingClientRect().top    + $(window)['scrollTop']();
-    var imagesecondX = $(".previewImage")[0].getBoundingClientRect().right  + $(window)['scrollLeft']();
-    var imagesecondY = $(".previewImage")[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
+    var imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
+    var imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
+    var imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
+    var imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
 
     let link = $('.item-selection');
     let offset = link.offset();
