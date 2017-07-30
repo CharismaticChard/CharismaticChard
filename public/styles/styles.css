@@ -307,6 +307,10 @@ img.displayed {
     width: 90%;
 }
 
+
+footer {
+    padding: 20px;
+}
 .footer {
     position: fixed;
     left:0;
