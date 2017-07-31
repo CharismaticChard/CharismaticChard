@@ -144,8 +144,13 @@ class DragAndDrop extends React.Component {
     this.makeSortable();
   }
 
-  splitItem() {
-    console.log('split');
+  splitItem(e) {
+    e.preventDefault();
+    var target = $(e.target);
+    var div = $(target.parent()[0]);
+    div.clone().appendTo('.itemsList');
+    div.clone().appendTo('.itemsList');
+    this.makeSortable();
   }
 
   render() {
@@ -163,12 +168,10 @@ class DragAndDrop extends React.Component {
                     {
                       this.props.items.map((item) => (
                         <div className="list-group-item" key={item.id} id={item.item + ' ' + item.price}>
-                          <div className="col-xs-6">
-                            {item.item} ${item.price}
-                            <button className="btn" onClick={this.splitItem}>
-                              Split Item
-                            </button>
-                          </div>
+                          {item.item} ${item.price}
+                          <button className="btn" onClick={this.splitItem}>
+                            Split
+                          </button>
                         </div>
                       ))
                     }
