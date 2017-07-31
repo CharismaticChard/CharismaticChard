@@ -3,19 +3,26 @@ import { connect } from 'react-redux';
 import $ from 'jquery';
 import Button from 'react-bootstrap/lib/Button';
 import Rnd from 'react-rnd';
-import { imageItem } from '../actions/imageAction.js';
+import { imageDataInfo, imageItems, sendItemImageToServer } from '../actions/imageAction.js';
 
 
 const mapStateToProps = state => {
   return {
-    savedImages: state.image.imageItem
+    savedImages: state.image.imageItems,
+    imageData: state.image
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    imageItem: (input) => dispatch(
-      imageItem(input)
+    imageDataInfo: (image) => dispatch(
+      imageDataInfo(image)
+    ),
+    imageItems: (items) => dispatch(
+      imageItems(items)
+    ),
+    sendItemImageToServer: (input) => dispatch(
+      sendItemImageToServer(input)
     ),
   };
 };
@@ -27,29 +34,22 @@ class AddImage extends React.Component {
     this.state = {
       file: '',
       imagePreviewURL: '',
-      // dimensions: {},
-      // divTopX: null,
-      // divTopY: null,
-      // divBottomX: null,
-      // divBottomY: null,
-      // imageFirstX: null, 
-      // imageFirstY: null, 
-      // imageSecondX: null,
-      // imageSecondY: null,
       position: null,
-      isSelectButtonClick: false
+      isSelectButtonClick: false,
+      imageData: null
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.selectedPosition = this.selectedPosition.bind(this);
     this.imageOnLoad = this.imageOnLoad.bind(this);
-    this.sendImagePosition = this.sendImagePosition.bind(this);
+    this.setImagePositionsToRedux = this.setImagePositionsToRedux.bind(this);
+    this.sendImageDataToServer = this.sendImageDataToServer.bind(this);
   }
 
   handleChange(e) {
     e.preventDefault();
     let file = e.target.files[0];
     let reader = new FileReader();
+
     reader.onloadend = () => {
       this.setState({
         file: file,
@@ -64,7 +64,6 @@ class AddImage extends React.Component {
     let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
     let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
     let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
-
     let link = $('.item-selection');
     let offset = link.offset();
     let divTopY = Number(offset.top);
@@ -73,24 +72,7 @@ class AddImage extends React.Component {
     let divBottomY = link.height();
     divBottomX = divBottomX + divTopX;
     divBottomY = divBottomY + divTopY;
-
-    // this.setState({
-    //   divTopX: divTopX,
-    //   divTopY: divTopY,
-    //   divBottomX: divBottomX,
-    //   divBottomY: divBottomY,
-    //   imageFirstX: imagefirstX, 
-    //   imageFirstY: imagefirstY, 
-    //   imageSecondX: imagesecondX,
-    //   imageSecondY: imagesecondY
-    // });
-
     this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
-
-    // console.log('*********firstX:   ' +  imagefirstX + '  , firstY: ' + imagefirstY); 
-    // console.log('X: ' + left + ', Y: ' + top );
-    // console.log('*********imagesecondX:   ' +  imagesecondX + '  , imagesecondY: ' + imagesecondY); 
-    // console.log( 'right: ' + right + ', bottom: ' + bottom );
   }
 
   xRelyRel (divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY) {
@@ -98,11 +80,8 @@ class AddImage extends React.Component {
     let yRel = (imagesecondY - imagefirstY ) / this.state.dimensions.naturalHeight;
     let topX = ( divTopX - imagefirstX ) / xRel; 
     let topY = ( divTopY - imagefirstY ) / yRel; 
-
-
     let bottomX = ( divBottomX - imagefirstX ) / xRel;
     let bottomY = ( divBottomY - imagefirstY ) / yRel;
-
     this.setState({
       position: {
         topLeft: {
@@ -115,37 +94,41 @@ class AddImage extends React.Component {
         }
       }
     });
-    // console.log('topLeft', topLeft); 
-    // console.log('bottomY', bottomRight);  
   }
 
 
   imageOnLoad ({ target: img }) {
+    let imageData = this.getBase64Image(img); 
+    this.props.imageDataInfo(imageData);
     this.setState({
       dimensions: {
         height: img.offsetHeight,
         width: img.offsetWidth,
         naturalWidth: img.naturalWidth,
         naturalHeight: img.naturalHeight
-      }
+      },
     });
   }
 
-  sendImagePosition () {
-    this.props.imageItem(this.state.position); 
+  getBase64Image(imgElem) {
+    let canvas = document.createElement('canvas');
+    canvas.width = imgElem.clientWidth;
+    canvas.height = imgElem.clientHeight;
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(imgElem, 0, 0);
+    let dataURL = canvas.toDataURL('image/png');
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  }
+
+  setImagePositionsToRedux () {
+    this.props.imageItems(this.state.position); 
     this.setState({
       isSelectButtonClick: true
     });
-    // console.log("**********************************************************************" );
-    // console.log('topLeft:', this.state.position.topLeft);
-    // console.log('bottomRight:', this.state.position.bottomRight); 
+  }
 
-    // console.log("**********************************************************************" );
-    // console.log('Div.1X:' + this.state.divTopX + '   Div.divTopY: ' + this.state.divTopY );
-    // console.log('PicX:' + this.state.imageFirstX + '   PicY: ' + this.state.imageFirstY );
-
-    // console.log('Div.divBottomX:' + this.state.divBottomX + '   Div.divBottomY: ' + this.state.divBottomY );
-    // console.log('Pic.2X:' + this.state.imageSecondX + '   Pic.2Y: ' + this.state.imageSecondY );
+  sendImageDataToServer () {
+    this.props.sendItemImageToServer(this.props.imageData);
   }
 
   render() {
@@ -170,9 +153,11 @@ class AddImage extends React.Component {
             onDragStop={this.selectedPosition}
             onResizeStop={this.selectedPosition}>
           </Rnd>
-          <img className="previewImage" src={imagePreviewURL} onLoad={this.imageOnLoad}/>
-          <div className="select-image" > 
-            <Button className="col-xs-2" onClick={this.sendImagePosition}> 
+          <div className="uploaded-image">
+            <img className="previewImage" src={imagePreviewURL} onLoad={this.imageOnLoad}/>
+          </div>
+          <div className="select-imageSaved" > 
+            <Button className="col-xs-2" onClick={this.setImagePositionsToRedux}> 
             Select
             </Button>
             { this.state.isSelectButtonClick ? <div>{this.props.savedImages.length} items have been saved!</div> : null }
@@ -186,8 +171,6 @@ class AddImage extends React.Component {
         <div className="container-fluid">
           <div className="row previewImageContainer">
             <div className="col-xs-12"> 
-              {console.log('********** image length?', this.props.savedImages)}
-              {console.log('********** image length?', this.props.savedImages.length)}
               <input className="form-control" type="file" accept="image/*" capture="camera" id="camera" placeholder="Take Picture" onChange={this.handleChange} />
             </div>
           </div>
@@ -198,7 +181,7 @@ class AddImage extends React.Component {
           <br></br>
           <footer>
             <hr className="footerHR"/>
-            <input type="submit" className="btn btn-primary" />
+            <input type="submit" className="btn btn-primary" onClick={this.sendImageDataToServer}/>
           </footer>
         </div>
       </div>

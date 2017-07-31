@@ -1,10 +1,22 @@
 export default function reducer(state = 
-  {
-    imageItem: []
+  { 
+    imageDataInfo: null, 
+    imageItems: [],
+    tax: null,
+    total: null
   }, action) {
   switch (action.type) {
-  case 'IMAGE-ITEM': {
-    return {...state, imageItem: [...state.imageItem, action.payload]};
+  case 'IAMGE-DATAINFO': {
+    return {...state, imageDataInfo: action.payload};
+  }
+  case 'IMAGE-ITEMS': {
+    return {...state, imageItems: [...state.imageItems, action.payload]};
+  }
+  case 'TAX': {
+    return {...state, tax: action.payload};
+  }
+  case 'TOTAL': {
+    return {...state, total: action.payload};
   }
   default: {
     return state;

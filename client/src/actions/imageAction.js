@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const sendItemImageToServer = (items) => {
   return () => { 
-    axios.post('/api/items-image', items)
+    axios.post('/api/analyze-image', items)
       .then(res => {
         console.log(res);
       })
@@ -12,15 +12,38 @@ const sendItemImageToServer = (items) => {
   };
 };
 
-const imageItem = (itemPos) => {
+const imageItems = (itemPos) => {
   return {
-    type: 'IMAGE-ITEM',
+    type: 'IMAGE-ITEMS',
     payload: itemPos,
   };
 };
 
+const imageDataInfo = (image) => {
+  return {
+    type: 'IAMGE-DATAINFO',
+    payload: image,
+  };
+};
+
+const tax = (tax) => {
+  return {
+    type: 'TAX',
+    payload: tax,
+  };
+};
+
+const total = (total) => {
+  return {
+    type: 'TOTAL',
+    payload: total,
+  };
+};
 
 export {
-  imageItem,
-  sendItemImageToServer
+  imageItems,
+  sendItemImageToServer,
+  imageDataInfo,
+  tax,
+  total
 };
