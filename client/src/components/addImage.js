@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Button from 'react-bootstrap/lib/Button';
 import Rnd from 'react-rnd';
 import { imageDataInfo, imageItems, sendItemImageToServer } from '../actions/imageAction.js';
-
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
@@ -129,6 +129,7 @@ class AddImage extends React.Component {
 
   sendImageDataToServer () {
     this.props.sendItemImageToServer(this.props.imageData);
+
   }
 
   render() {
@@ -144,7 +145,7 @@ class AddImage extends React.Component {
         <div className="previewImageContainer">
           <Rnd
             default={{
-              x: 50,
+              x: -100,
               y: 0,
               width: 200,
               height: 50,
@@ -181,7 +182,7 @@ class AddImage extends React.Component {
           <br></br>
           <footer>
             <hr className="footerHR"/>
-            <input type="submit" className="btn btn-primary" onClick={this.sendImageDataToServer}/>
+            <Link className="btn btn-primary" to="/imageResults" onClick={this.sendImageDataToServer}>Submit</Link>
           </footer>
         </div>
       </div>
