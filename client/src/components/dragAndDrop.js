@@ -54,6 +54,21 @@ class DragAndDrop extends React.Component {
     this.splitItem = this.splitItem.bind(this);
   }
 
+  componentDidMount() {
+    this.makeSortable();
+  }
+
+  componentDidUpdate() {
+    this.makeSortable();
+  }
+
+  makeSortable() {
+    var $sortableLists = $('.sortableList');
+    $sortableLists.each((index, list) => {
+      Sortable.create(list, {group: 'test'});
+    });
+  }
+
   splitTax(debtorTotal) {
     let percent = debtorTotal / (this.props.total - this.props.tax);
     let debtorTax = this.props.tax * percent;
@@ -78,22 +93,26 @@ class DragAndDrop extends React.Component {
 
   grabListData() {
     var debtors = [];
+
     $('.completedList').each((index, list) => {
       var debtor = {};
       var nameAndPhone = list.id.split(' ');
+
       debtor.name = this.props.friendsInfo[index].friendName;
       debtor.phone = this.props.friendsInfo[index].friendNumber;
       debtor.email = this.props.friendsInfo[index].friendEmail || null;
       debtor.items = [];
+
       if (list.children.length > 0) {
         $.each(list.children, (name, obj) => {
           var item = {};
-          var itemAndPrice = obj.textContent.split('  $');
+          var itemAndPrice = obj.id.split(' ');
           item.name = itemAndPrice[0];
           item.price = itemAndPrice[1];
           debtor.items.push(item);
         });
       }
+
       debtor.total = this.calculateTotal(debtor.items);
       debtor.tax = this.splitTax(debtor.total);
       debtor.tip = this.splitTip(debtor.total);
@@ -106,9 +125,11 @@ class DragAndDrop extends React.Component {
     var $splitterList = $('.splitterList')[0];
     var splitter = {};
     var nameAndPhone = $splitterList.id.split(' ');
+
     splitter.name = nameAndPhone[0];
     splitter.phone = nameAndPhone[1];
     splitter.items = [];
+
     if ($splitterList.children.length > 0) {
       $.each($splitterList.children, (name, obj) => {
         var item = {};
@@ -118,6 +139,7 @@ class DragAndDrop extends React.Component {
         splitter.items.push(item);
       });
     }
+
     splitter.total = this.calculateTotal(splitter.items);
     splitter.tax = this.splitTax(splitter.total);
     splitter.tip = this.splitTip(splitter.total);
@@ -129,27 +151,21 @@ class DragAndDrop extends React.Component {
     this.props.setTotalTip(this.props.tip);
   }
 
-  makeSortable() {
-    var $sortableLists = $('.sortableList');
-    $sortableLists.each((index, list) => {
-      Sortable.create(list, {group: 'test'});
-    });
-  }
-
-  componentDidMount() {
-    this.makeSortable();
-  }
-
-  componentDidUpdate() {
-    this.makeSortable();
-  }
-
   splitItem(e) {
     e.preventDefault();
     var target = $(e.target);
     var div = $(target.parent()[0]);
-    div.clone().appendTo('.itemsList');
-    div.clone().appendTo('.itemsList');
+    var split = div.attr('id').split(' ');
+    
+    var newId1 = ('(1/2)' + split[0] + ' ' + ((Number(split[1]) / 2).toFixed(2)));
+    var newName1 = ('half ' + split[0] + ' $' + ((Number(split[1]) / 2).toFixed(2)));
+    div.clone().attr('id', newId1).text(newName1).appendTo('.itemsList');
+
+    var newId2 = ('(2/2)' + split[0] + ' ' + ((Number(split[1]) / 2).toFixed(2)));
+    var newName2 = ('half ' + split[0] + ' $' + ((Number(split[1]) / 2).toFixed(2)));
+    div.clone().attr('id', newId2).text(newName2).appendTo('.itemsList');
+
+    div.remove();
     this.makeSortable();
   }
 
