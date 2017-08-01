@@ -5,8 +5,8 @@ const sendItemImageToServer = (items) => {
     axios.post('/api/analyze-image', items)
       .then(res => {
         dispatch({type: 'SET_ITEMS', payload: res.data.items});
-        dispatch({type: 'SET_TAX', payload: res.data.tax});
-        dispatch({type: 'SET_TOTAL', payload: res.data.total});
+        dispatch({type: 'SET_TAX', payload: res.data.tax.price});
+        dispatch({type: 'SET_TOTAL', payload: res.data.total.price});
       })
       .catch(err => {
         console.log(err);
