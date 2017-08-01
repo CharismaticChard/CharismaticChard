@@ -250,7 +250,7 @@ footer {
     margin: 0;
     border: 2px solid #14a2b8;
     border-radius: 4px;
-    min-height: 10px;
+    min-height: 50px;
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -264,6 +264,10 @@ footer {
 
 .sortable-chosen {
     background-color: #14a2b8;
+}
+
+.splitterList {
+    padding: 0px;
 }
 
 .boldItemsHeaders {

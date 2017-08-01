@@ -97,18 +97,19 @@ class Input extends React.Component {
       <div className="container">
         {itemList}
         <div className="inputContainer row formItem">
-          <div className="inputItem col-md-4">
+          <div className="inputItem col-xs-6">
             <Button className="btn btn-sm btn-primary" onClick={this.addItem.bind(this)}>Add Item</Button>
           </div>
-          <div className="inputItem col-md-4">
+          <div className="inputItem col-xs-6">
             <Button className="btn btn-sm btn-primary" onClick={this.removeItem.bind(this)}>Remove Item</Button>
           </div>
-          <footer>
-            <hr className="footerHR"/>
-            <Link className="btn btn-primary" to="/">Cancel</Link>
-            <Link className="btn btn-primary" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Submit</Link>
-          </footer>
         </div>
+        <br />
+        <footer>
+          <hr className="footerHR"/>
+          <Link className="btn btn-primary" to="/">Cancel</Link>
+          <Link className="btn btn-primary" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Submit</Link>
+        </footer>
       </div>
     );
   }
