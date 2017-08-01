@@ -12,6 +12,13 @@ h2 {
   font-family: 'Comfortaa';
 }
 
+h4 {
+    font-family: 'Comfortaa';
+}
+
+h6 {
+    font-family: 'Comfortaa';
+}
 #root {
     width: 100%;
     height: 100%;
@@ -94,6 +101,12 @@ h2 {
     padding: 5px;
 }
 
+.splitBtn {
+    font-size: 10px;
+    margin: 0px;
+    margin-left: 5px;
+}
+
 .logo {
     display: flex;
     justify-content: center;
@@ -108,7 +121,6 @@ h2 {
     height: 100%;
     padding-top: 10%;
 }
-
 
 .homeLogo {
     width: 200px;
@@ -237,6 +249,7 @@ footer {
 .sortableList {
     margin: 0;
     border: 2px solid #14a2b8;
+    border-radius: 4px;
     min-height: 10px;
     padding-left: 0px;
     padding-right: 0px;
@@ -267,8 +280,8 @@ footer {
 }
 
 .containerTitle {
-    background-color: #cccccc;
     text-align: center;
+    border: none;
 }
 
 .list-group-item > p {

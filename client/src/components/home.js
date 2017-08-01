@@ -43,10 +43,10 @@ class Home extends React.Component {
           <hr className="homeHR"/>
         </div>
         <div className="text-center">
-          <Link className="homeSplitButton btn" to="/input">Split</Link>
+          <Link className="homeSplitButton btn" to="/addImage">Split Image</Link>
         </div>
         <div className="text-center">
-          <Link className="homeSplitButton btn" to="/addImage">Add Image</Link>
+          <Link className="homeSplitButton btn" to="/input">Split Manual</Link>
         </div>
       </div>
     );

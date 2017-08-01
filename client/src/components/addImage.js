@@ -274,6 +274,7 @@ class AddImage extends React.Component {
           <br></br>
           <footer>
             <hr className="footerHR"/>
+            <Link className="btn btn-primary" to="/">Cancel</Link>
             <Link className="btn btn-primary" to="/input" onClick={this.sendImageDataToServer}>Submit</Link>
           </footer>
         </div>

@@ -98,7 +98,7 @@ class Input extends React.Component {
         {itemList}
         <div className="inputContainer row formItem">
           <div className="inputItem col-md-4">
-            <Button className="btn btn-sm btn-primary" onClick={this.addItem.bind(this)}>Add Items</Button>
+            <Button className="btn btn-sm btn-primary" onClick={this.addItem.bind(this)}>Add Item</Button>
           </div>
           <div className="inputItem col-md-4">
             <Button className="btn btn-sm btn-primary" onClick={this.removeItem.bind(this)}>Remove Item</Button>
