@@ -1,7 +1,4 @@
 import React from 'react';
-import Nav from 'react-bootstrap/lib/Nav';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -55,7 +52,7 @@ class MainSidebars extends React.Component {
           </Link>
         </Nav>
         <SidebarHepler  side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>
-          <Nav className="side-bar"> 
+          <div className="nav side-bar"> 
             <a href='/profile' className="side-bar-list">
               <div className="side-bar-list">
                 PROFILE
@@ -76,7 +73,7 @@ class MainSidebars extends React.Component {
                 LOG OUT
               </div>
             </a>
-          </Nav>
+          </div>
         </SidebarHepler>
       </div>
     );
