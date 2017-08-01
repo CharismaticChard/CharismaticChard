@@ -246,6 +246,7 @@ class DragAndDrop extends React.Component {
         </div>
         <footer>
           <hr className="footerHR"/>
+          <Link className="btn btn-primary" to="/input">Back</Link>
           <Link className="btn btn-primary" to="/confirmation" onClick={this.grabListData}>Calculate</Link>
         </footer>
       </div>

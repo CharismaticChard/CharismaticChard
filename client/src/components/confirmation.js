@@ -89,6 +89,7 @@ class Confirmation extends React.Component {
           <div>
             <footer>
               <hr className="footerHR"/>
+              <Link className="btn btn-primary" to="/dragAndDrop">back</Link>
               <Button onClick={this.open.bind(this)} bsStyle="primary" bsSize="small">Confirm & Send</Button>
             </footer>
           </div>
