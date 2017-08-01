@@ -434,15 +434,31 @@ footer {
     text-align: center;
 }
 
-.item-selection{
-    /*border-color: white; */
-    /*border-style: dotted;*/
+.select-itemBox {
     border: 3px dotted yellow;
-    width: 90%;
-    /*opacity: .5;*/
 }
 
-.uploaded-image{
+.select-taxBox {
+    border: 3px dotted blue;
+}
+
+.select-totalBox {
+    border: 3px dotted red;
+}
+
+.item-selection {
+    border: 3px dotted black; 
+}
+.uploaded-image {
     margin-bottom: 30px;
 }
+
+.testing {
+    border: 3px dotted red; 
+}
+
+.select-divBox {
+    padding: 20px;
+}
+
 

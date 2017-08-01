@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const sendItemImageToServer = (items) => {
+  console.log('items', items);
   return () => { 
     axios.post('/api/analyze-image', items)
       .then(res => {

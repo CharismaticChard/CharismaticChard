@@ -36,13 +36,18 @@ class AddImage extends React.Component {
       imagePreviewURL: '',
       position: null,
       isSelectButtonClick: false,
-      imageData: null
+      imageData: null,
+      selectBox: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.selectedPosition = this.selectedPosition.bind(this);
     this.imageOnLoad = this.imageOnLoad.bind(this);
     this.setImagePositionsToRedux = this.setImagePositionsToRedux.bind(this);
     this.sendImageDataToServer = this.sendImageDataToServer.bind(this);
+    this.selectItemBox = this.selectItemBox.bind(this);
+    this.selectTaxBox = this.selectTaxBox.bind(this);
+    this.selectTotalBox = this.selectTotalBox.bind(this);
+    // this.selectedPosition1 = this.selectedPosition1.bind(this);
   }
 
   handleChange(e) {
@@ -59,21 +64,62 @@ class AddImage extends React.Component {
     reader.readAsDataURL(file);
   }
 
+  // selectedPosition () {
+  //   let imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
+  //   let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
+  //   let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
+  //   let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
+  //   let link = $('.item-selection');
+  //   console.log('************************')
+  //   let offset = link.offset();
+  //   let divTopY = Number(offset.top);
+  //   let divTopX = Number(offset.left);
+  //   console.log('1111111', divTopY + "   " + divTopX);
+  //   let divBottomX = link.width();
+  //   let divBottomY = link.height();
+  //   divBottomX = divBottomX + divTopX;
+  //   divBottomY = divBottomY + divTopY;
+  //   this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
+  // }
+
+  // selectedPosition () {
+  //   let imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
+  //   let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
+  //   let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
+  //   let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
+  //   let link = $('.item-selection');
+  //   let offset = link.offset();
+  //   let divTopY = Number(offset.top);
+  //   let divTopX = Number(offset.left);
+  //   console.log('DIVTOPXX', divTopX);
+  //   console.log('DIVTOPYY', divTopY);
+  //   let divBottomX = link.width();
+  //   let divBottomY = link.height();
+  //   divBottomX = divBottomX + divTopX;
+  //   divBottomY = divBottomY + divTopY;
+  //   this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
+  // }
+
   selectedPosition () {
     let imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
     let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
     let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
     let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
-    let link = $('.item-selection');
+    
+    let link = $('.' + this.state.selectBox);
     let offset = link.offset();
     let divTopY = Number(offset.top);
     let divTopX = Number(offset.left);
+    console.log('*******************************');
+    console.log('DIVTOPXXxxxxxxxxx', divTopX);
+    console.log('DIVTOPYYyyyyyyyy', divTopY);
     let divBottomX = link.width();
     let divBottomY = link.height();
     divBottomX = divBottomX + divTopX;
     divBottomY = divBottomY + divTopY;
     this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
   }
+
 
   xRelyRel (divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY) {
     let xRel = (imagesecondX - imagefirstX ) / this.state.dimensions.naturalWidth;
@@ -98,10 +144,7 @@ class AddImage extends React.Component {
 
 
   imageOnLoad ({ target: img }) {
-
-    // let imageData = this.getBase64Image(img); 
     this.props.imageDataInfo(img.src.replace(/^data:image\/(png|jpg|jpeg);base64,/, ''));
-
     this.setState({
       dimensions: {
         height: img.offsetHeight,
@@ -110,16 +153,6 @@ class AddImage extends React.Component {
         naturalHeight: img.naturalHeight
       },
     });
-  }
-
-  getBase64Image(imgElem) {
-    let canvas = document.createElement('canvas');
-    canvas.width = imgElem.clientWidth;
-    canvas.height = imgElem.clientHeight;
-    let ctx = canvas.getContext('2d');
-    ctx.drawImage(imgElem, 0, 0);
-    let dataURL = canvas.toDataURL('image/png');
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
 
   setImagePositionsToRedux () {
@@ -134,6 +167,24 @@ class AddImage extends React.Component {
 
   }
 
+  selectItemBox () {
+    this.setState({
+      selectBox: 'select-itemBox'
+    });
+  }
+
+  selectTaxBox () {
+    this.setState({
+      selectBox: 'select-taxBox'
+    });
+  }
+
+  selectTotalBox () {
+    this.setState({
+      selectBox: 'select-totalBox'
+    });
+  }
+
   render() {
     let image = (
       <div className="col-xs-11 previewImageContainer text-center">
@@ -145,17 +196,23 @@ class AddImage extends React.Component {
     if (imagePreviewURL) {
       image = (
         <div className="previewImageContainer">
-          <Rnd
+          <div className="select-divBox text-center">
+            <Button onClick={this.selectItemBox}>Select Items</Button>
+            <Button onClick={this.selectTaxBox}>Select tax</Button>
+            <Button onClick={this.selectTotalBox}>Select total</Button>
+          </div>
+          {this.state.selectBox === null ? null : <Rnd
             default={{
-              x: -100,
+              x: -150,
               y: 0,
               width: 200,
               height: 50,
             }}
-            className="item-selection"
+            className={this.state.selectBox}
             onDragStop={this.selectedPosition}
             onResizeStop={this.selectedPosition}>
-          </Rnd>
+          </Rnd>}
+
           <div className="uploaded-image">
             <img className="previewImage" src={imagePreviewURL} onLoad={this.imageOnLoad}/>
           </div>
@@ -178,7 +235,7 @@ class AddImage extends React.Component {
             </div>
           </div>
           <br></br>
-          <div className="row text-center">
+          <div className="text-center">
             {image}
           </div>
           <br></br>
