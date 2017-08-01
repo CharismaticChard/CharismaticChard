@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import $ from 'jquery';
 import Button from 'react-bootstrap/lib/Button';
 import Rnd from 'react-rnd';
-import { imageDataInfo, imageItems, sendItemImageToServer } from '../actions/imageAction.js';
+import { imageDataInfo, 
+  imageItems, 
+  sendItemImageToServer, 
+  imageTax,
+  imageTotal } from '../actions/imageAction.js';
 import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
@@ -21,6 +25,12 @@ const mapDispatchToProps = dispatch => {
     imageItems: (items) => dispatch(
       imageItems(items)
     ),
+    imageTax: (items) => dispatch(
+      imageTax(items)
+    ),
+    imageTotal: (items) => dispatch(
+      imageTotal(items)
+    ),
     sendItemImageToServer: (input) => dispatch(
       sendItemImageToServer(input)
     ),
@@ -34,27 +44,32 @@ class AddImage extends React.Component {
     this.state = {
       file: '',
       imagePreviewURL: '',
-      position: null,
-      isSelectButtonClick: false,
+      itemPosition: null,
+      taxPosition: null,
+      totalPosition: null,
+      isSelectItemButtonClick: false,
+      isSelectTaxButtonClick: false,
+      isSelectTotalButtonClick: false,
       imageData: null,
       selectBox: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.selectedPosition = this.selectedPosition.bind(this);
     this.imageOnLoad = this.imageOnLoad.bind(this);
-    this.setImagePositionsToRedux = this.setImagePositionsToRedux.bind(this);
     this.sendImageDataToServer = this.sendImageDataToServer.bind(this);
     this.selectItemBox = this.selectItemBox.bind(this);
     this.selectTaxBox = this.selectTaxBox.bind(this);
     this.selectTotalBox = this.selectTotalBox.bind(this);
-    // this.selectedPosition1 = this.selectedPosition1.bind(this);
+    this.setImageItemPositionsToRedux = this.setImageItemPositionsToRedux.bind(this);
+    this.setImageTaxPositionsToRedux = this.setImageTaxPositionsToRedux.bind(this);
+    this.setImageTotalPositionsToRedux = this.setImageTotalPositionsToRedux.bind(this);
+    this.imagePosition = this.imagePosition.bind(this);
   }
 
   handleChange(e) {
     e.preventDefault();
     let file = e.target.files[0];
     let reader = new FileReader();
-
     reader.onloadend = () => {
       this.setState({
         file: file,
@@ -64,72 +79,75 @@ class AddImage extends React.Component {
     reader.readAsDataURL(file);
   }
 
-  // selectedPosition () {
-  //   let imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
-  //   let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
-  //   let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
-  //   let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
-  //   let link = $('.item-selection');
-  //   console.log('************************')
-  //   let offset = link.offset();
-  //   let divTopY = Number(offset.top);
-  //   let divTopX = Number(offset.left);
-  //   console.log('1111111', divTopY + "   " + divTopX);
-  //   let divBottomX = link.width();
-  //   let divBottomY = link.height();
-  //   divBottomX = divBottomX + divTopX;
-  //   divBottomY = divBottomY + divTopY;
-  //   this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
-  // }
-
-  // selectedPosition () {
-  //   let imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
-  //   let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
-  //   let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
-  //   let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
-  //   let link = $('.item-selection');
-  //   let offset = link.offset();
-  //   let divTopY = Number(offset.top);
-  //   let divTopX = Number(offset.left);
-  //   console.log('DIVTOPXX', divTopX);
-  //   console.log('DIVTOPYY', divTopY);
-  //   let divBottomX = link.width();
-  //   let divBottomY = link.height();
-  //   divBottomX = divBottomX + divTopX;
-  //   divBottomY = divBottomY + divTopY;
-  //   this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
-  // }
-
-  selectedPosition () {
+  imagePosition () {
     let imagefirstX = $('.previewImage')[0].getBoundingClientRect().left + $(window)['scrollLeft']();
     let imagefirstY = $('.previewImage')[0].getBoundingClientRect().top + $(window)['scrollTop']();
     let imagesecondX = $('.previewImage')[0].getBoundingClientRect().right + $(window)['scrollLeft']();
     let imagesecondY = $('.previewImage')[0].getBoundingClientRect().bottom + $(window)['scrollTop']();
-    
+    this.selectedPosition(imagefirstX, imagefirstY, imagesecondX, imagesecondY);
+  }
+
+  selectedPosition (imagefirstX, imagefirstY, imagesecondX, imagesecondY) {
     let link = $('.' + this.state.selectBox);
     let offset = link.offset();
     let divTopY = Number(offset.top);
     let divTopX = Number(offset.left);
-    console.log('*******************************');
-    console.log('DIVTOPXXxxxxxxxxx', divTopX);
-    console.log('DIVTOPYYyyyyyyyy', divTopY);
     let divBottomX = link.width();
     let divBottomY = link.height();
     divBottomX = divBottomX + divTopX;
     divBottomY = divBottomY + divTopY;
-    this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY); 
+    this.xRelyRel(divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY);
   }
 
-
   xRelyRel (divTopX, divTopY, divBottomX, divBottomY, imagefirstX, imagefirstY, imagesecondX, imagesecondY) {
-    let xRel = (imagesecondX - imagefirstX ) / this.state.dimensions.naturalWidth;
-    let yRel = (imagesecondY - imagefirstY ) / this.state.dimensions.naturalHeight;
+    let xRel = ( imagesecondX - imagefirstX ) / this.state.dimensions.naturalWidth;
+    let yRel = ( imagesecondY - imagefirstY ) / this.state.dimensions.naturalHeight;
     let topX = ( divTopX - imagefirstX ) / xRel; 
     let topY = ( divTopY - imagefirstY ) / yRel; 
     let bottomX = ( divBottomX - imagefirstX ) / xRel;
     let bottomY = ( divBottomY - imagefirstY ) / yRel;
+    if (this.state.selectBox === 'select-itemBox') {
+      this.setItemPosition(topX, topY, bottomX, bottomY); 
+    } else if (this.state.selectBox === 'select-taxBox') {
+      this.setTaxPosition(topX, topY, bottomX, bottomY); 
+    } else if (this.state.selectBox === 'select-totalBox') {
+      this.setTotalPosition(topX, topY, bottomX, bottomY); 
+    }
+  }
+
+  setTaxPosition (topX, topY, bottomX, bottomY) {
     this.setState({
-      position: {
+      taxPosition: {
+        topLeft: {
+          topX: topX,
+          topY: topY
+        },
+        bottomRight: {
+          bottomX: bottomX,
+          bottomY: bottomY
+        }
+      }
+    });
+  }
+
+  setItemPosition (topX, topY, bottomX, bottomY) {
+    this.setState({
+      itemPosition: {
+        topLeft: {
+          topX: topX,
+          topY: topY
+        },
+        bottomRight: {
+          bottomX: bottomX,
+          bottomY: bottomY
+        }
+      }
+    });
+  }
+
+  setTotalPosition (topX, topY, bottomX, bottomY) {
+    this.setState({
+      totalPosition: {
         topLeft: {
           topX: topX,
           topY: topY
@@ -155,16 +173,30 @@ class AddImage extends React.Component {
     });
   }
 
-  setImagePositionsToRedux () {
-    this.props.imageItems(this.state.position); 
+  setImageItemPositionsToRedux () {
+    this.props.imageItems(this.state.itemPosition); 
     this.setState({
-      isSelectButtonClick: true
+      isSelectItemButtonClick: true
+    });
+  }
+
+  setImageTaxPositionsToRedux () {
+    this.props.imageTax(this.state.taxPosition);
+    this.setState({
+      isSelectTaxButtonClick: true,
+    });
+  }
+
+  setImageTotalPositionsToRedux () {
+    this.props.imageTotal(this.state.totalPosition);
+    this.setState({
+      isSelectTotalButtonClick: true,
     });
   }
 
   sendImageDataToServer () {
+    console.log('thisimageDATAAA', this.props.imageData);
     this.props.sendItemImageToServer(this.props.imageData);
-
   }
 
   selectItemBox () {
@@ -209,18 +241,28 @@ class AddImage extends React.Component {
               height: 50,
             }}
             className={this.state.selectBox}
-            onDragStop={this.selectedPosition}
-            onResizeStop={this.selectedPosition}>
+            onDragStop={this.imagePosition}
+            onResizeStop={this.imagePosition}>
           </Rnd>}
 
           <div className="uploaded-image">
             <img className="previewImage" src={imagePreviewURL} onLoad={this.imageOnLoad}/>
           </div>
           <div className="select-imageSaved" > 
-            <Button className="col-xs-2" onClick={this.setImagePositionsToRedux}> 
-            Select
-            </Button>
-            { this.state.isSelectButtonClick ? <div>{this.props.savedImages.length} items have been saved!</div> : null }
+            <div className="select-divBox text-center">
+              <Button onClick={this.setImageItemPositionsToRedux}> 
+                Save Item
+              </Button>
+              <Button onClick={this.setImageTaxPositionsToRedux}>
+                Save Tax
+              </Button>
+              <Button onClick={this.setImageTotalPositionsToRedux}>
+                Save Total
+              </Button>
+            </div>
+            { this.state.isSelectItemButtonClick ? <div>{this.props.savedImages.length} items have been saved!</div> : null }
+            { this.state.isSelectTaxButtonClick ? <div>Tax has been saved!</div> : null }
+            { this.state.isSelectTotalButtonClick ? <div>Total has been saved!</div> : null }
           </div>
         </div>
       );

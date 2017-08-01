@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const sendItemImageToServer = (items) => {
-  console.log('items', items);
   return () => { 
     axios.post('/api/analyze-image', items)
       .then(res => {
@@ -27,16 +26,16 @@ const imageDataInfo = (image) => {
   };
 };
 
-const tax = (tax) => {
+const imageTax = (tax) => {
   return {
-    type: 'TAX',
+    type: 'IMAGE-TAX',
     payload: tax,
   };
 };
 
-const total = (total) => {
+const imageTotal = (total) => {
   return {
-    type: 'TOTAL',
+    type: 'IMAGE-TOTAL',
     payload: total,
   };
 };
@@ -45,6 +44,6 @@ export {
   imageItems,
   sendItemImageToServer,
   imageDataInfo,
-  tax,
-  total
+  imageTax,
+  imageTotal
 };
