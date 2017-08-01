@@ -9,7 +9,7 @@ html, body {
 }
 
 h2 {
-  font-family: 'Comfortaa';  
+  font-family: 'Comfortaa';
 }
 
 #root {
@@ -91,6 +91,7 @@ h2 {
     background-color: transparent;
     font-family: 'Comfortaa';
     color: black;
+    margin-bottom: 0;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
@@ -111,7 +112,7 @@ h2 {
 
 .footerHR {
     margin: 0;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
 }
 
 .homeWelcome {
@@ -230,7 +231,7 @@ footer {
 img.displayed {
     display: block;
     margin-left: auto;
-    margin-right: auto 
+    margin-right: auto
 }
 
 .login-email-info {
@@ -264,7 +265,7 @@ img.displayed {
 }
 
 .other-signup{
-    width: 150px; 
+    width: 150px;
     background-color: #1398AD;
 }
 
@@ -303,7 +304,7 @@ img.displayed {
 }
 
 .profile-line{
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     width: 90%;
 }
 
@@ -396,6 +397,7 @@ footer {
     background-color: #3FC3D8;
 }
 
+
 .nav-bar {
     /*background-color: lightyellow;*/
 }
@@ -426,15 +428,31 @@ footer {
     text-align: center;
 }
 
-.item-selection{
-    /*border-color: white; */
-    /*border-style: dotted;*/
+.select-itemBox {
     border: 3px dotted yellow;
-    width: 90%;
-    /*opacity: .5;*/
 }
 
-.uploaded-image{
+.select-taxBox {
+    border: 3px dotted blue;
+}
+
+.select-totalBox {
+    border: 3px dotted red;
+}
+
+.item-selection {
+    border: 3px dotted black; 
+}
+.uploaded-image {
     margin-bottom: 30px;
 }
+
+.testing {
+    border: 3px dotted red; 
+}
+
+.select-divBox {
+    padding: 20px;
+}
+
 
