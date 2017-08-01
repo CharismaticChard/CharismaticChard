@@ -26,10 +26,10 @@ class MainSidebars extends React.Component {
     this.state = {
       isVisible: false
     };
-    this.updateModal = this.updateModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
   
-  updateModal() {
+  toggleModal() {
     this.setState({
       isVisible: !this.state.isVisible,
     });
@@ -37,7 +37,7 @@ class MainSidebars extends React.Component {
 
   historyStateChange() {
     this.props.history(true); 
-    this.updateModal();    
+    this.toggleModal();    
   }
 
   render() {
@@ -60,7 +60,7 @@ class MainSidebars extends React.Component {
                 PROFILE
               </div>
             </a>
-            <LinkContainer to="/" className="side-bar-list" onClick={ () => this.updateModal(false)}>
+            <LinkContainer to="/" className="side-bar-list" onClick={this.toggleModal}>
               <div className="side-bar-list">
                 HOME
               </div>
