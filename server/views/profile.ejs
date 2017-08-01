@@ -1,28 +1,31 @@
 <% include head.ejs%>
 
-    <div class="container">
-     <div class="profile-page-logo">
-      <!-- <img src="./assets/splitter-logo-white.png" id="logo-white"/> -->
+    <div class="container profile-top">
+        <image />
+        <% if (user.email) { %>      
+        <div class= "profile">
+            <h2><b><%= user.display %></b></h2><br>
+        </div>
     </div>
-
-       <!-- LOCAL INFORMATION -->
         <div class="profile-info">
-            <% if (user.email) { %>
-            <p>
-                <h2><b><%= user.display %></b></h2><br>
+      
+            <div class="profile-email-phone-info">
                 <strong>email</strong>: <%= user.email %><br>
                 <strong>phone</strong>: <%= user.phone %>
-            </p>
-            <a href="/api/data_allocator/delete-profile" onclick="return confirm('Are you sure you want to delete your profile? \nOnce you delete it, you will not be able to recover it!');" class="btn btn-default">Delete Profile</a>
-            <a href="/update-profile" class="btn btn-default">Update</a>
-            <% } else { %>
-            <a href="/connect/local" class="btn btn-default">Connect Local</a>
-            <% } %>
+            </div>
+            <div class="profile-delete-update-buttons">
+                <a href="/update-profile" class="btn btn-default">Update Profile</a>
+                <a href="/api/data_allocator/delete-profile" onclick="return confirm('Are you sure you want to delete your account? \nOnce you delete it, you will not be able to recover it!');" class="btn btn-default">Delete Account</a>
+                <% } else { %>
+                <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+            </div>
         </div>
-        <hr class="profile-line">
+
         <div class="signin-form">
-            <a href="/" class="form-control " id="login-button" style="margin-bottom: 10px"> <label class='profile'>HOME</label></a>
-            <a href="/logout" class="form-control " id="login-button" style="background-color: #1398AD;" ><label class='profile'>Log Out</label></a>
+            <a href="/" class="homeSplitButton btn">HOME</a>
+            <a href="/logout" class="homeSplitButton btn">Log Out</a>
         </div>
+
 
 <% include foot.ejs%>
