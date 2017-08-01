@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+import browserHistory from 'react-router';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,8 +8,6 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-
-import browserHistory from 'react-router';
 import store from './store.js';
 import Home from './components/home.js';
 import Input from './components/input.js';
@@ -19,11 +17,7 @@ import History from './components/history.js';
 import HistoryItem from './components/historyItem.js';
 import Footer from './components/footer.js';
 import DragAndDrop from './components/dragAndDrop.js';
-// import ImageResults from './components/imageResults.js';
-
-import Navbar from 'react-bootstrap/lib/Navbar';
 import MainSidebars from './components/mainSideBar.js';
-import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
@@ -36,7 +30,6 @@ const mapDispatchToProps = dispatch => {
   return {
   };
 };
-
 
 class App extends React.Component {
   render() {
@@ -64,6 +57,4 @@ class App extends React.Component {
   }
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

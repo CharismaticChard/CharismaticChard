@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/lib/Button';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
-
 import { LinkContainer } from 'react-router-bootstrap';
 import { setItems, setTax, setTotal, setTip } from '../actions/inputActions.js';
 import { setSplitName } from '../actions/finalActions.js';

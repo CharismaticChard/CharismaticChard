@@ -2,9 +2,7 @@ import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { history } from '../actions/historyAction.js';
-
 import SidebarHepler from './sideBarHelper.js';
 
 const mapStateToProps = state => {
