@@ -26,16 +26,18 @@ class MainSidebars extends React.Component {
     this.state = {
       isVisible: false
     };
+    this.updateModal = this.updateModal.bind(this);
   }
   
-  updateModal(isVisible) {
-    this.state.isVisible = isVisible;
-    this.forceUpdate();
+  updateModal() {
+    this.setState({
+      isVisible: !this.state.isVisible,
+    });
   }
 
   historyStateChange() {
     this.props.history(true); 
-    this.updateModal(false);    
+    this.updateModal();    
   }
 
   render() {

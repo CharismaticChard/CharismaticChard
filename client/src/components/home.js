@@ -5,7 +5,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { fetchUserNameAndPhone } from '../actions/finalActions.js';
 import { fetchSplitterHistory, fetchSplitterHistoryItem } from '../actions/historyAction.js';
 
-
 const mapStateToProps = state => {
   return {
   };
