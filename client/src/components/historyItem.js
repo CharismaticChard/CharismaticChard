@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-
 const mapStateToProps = state => {
   return {
     item: state.history.splitterHistoryItem
@@ -13,7 +12,6 @@ const mapDispatchToProps = dispatch => {
   return {
   };
 };
-
 
 class SplitterHistoryItem extends React.Component {
   render() {
@@ -45,5 +43,3 @@ class SplitterHistoryItem extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplitterHistoryItem);
-
-

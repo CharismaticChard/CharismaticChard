@@ -1,13 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { setFriendsInfo } from '../actions/outputActions.js';
 import { sendStateToServer } from '../actions/finalActions.js';
 import DebtorConfirmation from './debtorConfirmation.js';
 import SplitterConfirmation from './splitterConfirmation.js'
-
-import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {

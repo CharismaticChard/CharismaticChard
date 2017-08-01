@@ -114,7 +114,4 @@ class Input extends React.Component {
   }
 }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
-

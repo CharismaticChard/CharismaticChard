@@ -10,7 +10,6 @@ import {
   setTotalTax,
   setTotalTip,
 } from '../actions/finalActions.js';
-
 import AddFriends from './addFriends.js';
 import AddFriendsByUserButton from './addFriendsByUser.js';
 
@@ -20,9 +19,7 @@ const mapStateToProps = state => {
     tax: state.input.tax,
     total: state.input.total,
     tip: state.input.tip,
-
     friendsInfo: state.output.friendsInfo,
-
     splitterName: state.final.splitter.name,
     splitterNumber: state.final.splitter.phone,
   };
