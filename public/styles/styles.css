@@ -262,10 +262,6 @@ footer {
     margin-bottom: 5px;
 }
 
-.container-fluid {
-    margin-left: 25px;
-}
-
 .list-group-item {
     text-align: center;
 }
@@ -393,10 +389,23 @@ img.displayed {
     color: #111;
 }
 
-/*.profile-line{
-    margin-bottom: 10px;
-    width: 90%;
-}*/
+footer {
+    padding: 20px;
+}
+
+.footer {
+    position: fixed;
+    left:0;
+    bottom:0;
+    right:0;
+    margin-top: 50px;
+    font-size: 85%;
+    text-align: center;
+    height: 40px;
+    color: white;
+    padding: 10px;
+    background-color: #3FC3D8;
+}
 
 .Sidebar-demo {
   /*padding: 15px;*/
@@ -469,11 +478,12 @@ img.displayed {
     background-color: #3FC3D8;
 }
 
-
-
-
 .head {
     padding: 30px;
+}
+
+.menuBtn {
+    width: 60px;
 }
 
 .history-line {

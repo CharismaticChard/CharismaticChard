@@ -55,7 +55,7 @@ class Confirmation extends React.Component {
           <SplitterConfirmation />
           <DebtorConfirmation />
           <hr />
-          <div className="container-fluid">
+          <div className="container">
             <div className="row">
               <label className="col-xs-6 boldP">Split Name: </label>
               <p className="col-xs-6">{this.props.final.splitName}</p>

@@ -172,7 +172,7 @@ class DragAndDrop extends React.Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row justify-content-center">
             <div className="list-group col-xs-6">
               <div className="row">

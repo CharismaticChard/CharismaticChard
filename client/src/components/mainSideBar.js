@@ -1,18 +1,14 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
 import Nav from 'react-bootstrap/lib/Nav';
-import Modal from 'react-bootstrap/lib/Modal';
-import SidebarHepler from './sideBarHelper.js';
-import { LinkContainer } from 'react-router-bootstrap';
-import { history } from '../actions/historyAction.js';
-
-import { connect } from 'react-redux';
-
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { history } from '../actions/historyAction.js';
 
+import SidebarHepler from './sideBarHelper.js';
 
 const mapStateToProps = state => {
   return {
@@ -26,8 +22,6 @@ const mapDispatchToProps = dispatch => {
     ),
   };
 };
-
-
 
 class MainSidebars extends React.Component {
   constructor(props, context) {

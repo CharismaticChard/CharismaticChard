@@ -94,21 +94,19 @@ class Input extends React.Component {
     var itemList = (this.props.items.length === 0) ? <ItemInputList items={this.state.items}/> : <ItemEditList />;
 
     return (
-      <div className="head">
-        <div className="container-fluid">
-          {itemList}
-          <div className="inputContainer row formItem">
-            <div className="inputItem col-md-4">
-              <Button className="btn btn-sm btn-primary" onClick={this.addItem.bind(this)}>Add Items</Button>
-            </div>
-            <div className="inputItem col-md-4">
-              <Button className="btn btn-sm btn-primary" onClick={this.removeItem.bind(this)}>Remove Item</Button>
-            </div>
-            <footer>
-              <hr className="footerHR"/>
-              <Link className="btn btn-primary" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Submit</Link>
-            </footer>
+      <div className="container">
+        {itemList}
+        <div className="inputContainer row formItem">
+          <div className="inputItem col-md-4">
+            <Button className="btn btn-sm btn-primary" onClick={this.addItem.bind(this)}>Add Items</Button>
           </div>
+          <div className="inputItem col-md-4">
+            <Button className="btn btn-sm btn-primary" onClick={this.removeItem.bind(this)}>Remove Item</Button>
+          </div>
+          <footer>
+            <hr className="footerHR"/>
+            <Link className="btn btn-primary" to="/dragAndDrop" onClick={this.handleSubmit.bind(this)}>Submit</Link>
+          </footer>
         </div>
       </div>
     );

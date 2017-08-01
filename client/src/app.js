@@ -22,10 +22,6 @@ import DragAndDrop from './components/dragAndDrop.js';
 // import ImageResults from './components/imageResults.js';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import MainSidebars from './components/mainSideBar.js';
 import { connect } from 'react-redux';
 
@@ -46,10 +42,12 @@ class App extends React.Component {
   render() {
     return (
       <Router history={browserHistory}>
-        <div className="mainContainer">
-          <Navbar className="nav-bar">
-            <MainSidebars />
-          </Navbar>
+        <div>
+          <div className="nav-bar navbar navbar-default">
+            <div className="container">
+              <MainSidebars />
+            </div>
+          </div>
           <Switch>
             <Route exact path="/" component={() => <Home />} />
             <Route path="/history" render= {() => this.props.history ? <History /> : <Redirect to='/'/> } />
