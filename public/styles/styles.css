@@ -168,6 +168,18 @@ footer {
     color: white; 
 }
 
+.bar1 {
+    border-radius: 4px;
+}
+
+.bar2 {
+    border-radius: 4px;
+}
+
+.bar3 {
+    border-radius: 4px;
+}
+
 .btn {
     border-color: #19cae6;
     border-width: 2px;
