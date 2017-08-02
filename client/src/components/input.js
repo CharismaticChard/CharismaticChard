@@ -4,7 +4,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { inputLoading } from '../actions/historyAction.js';
-import { addItem, removeItem, setItem, setTax, setTotal, setTip, setSplitName } from '../actions/inputActions.js';
+import { 
+  addItem,
+  removeItem,
+  setItem,
+  setTax,
+  setTotal,
+  setTip,
+  setSplitName
+} from '../actions/inputActions.js';
 
 const mapStateToProps = state => {
   return {
@@ -61,7 +69,7 @@ class Input extends React.Component {
     var index = e.target.id;
     var obj = this.props.items.slice()[index];
     if (e.target.type === 'number') {
-      obj.price = Number(val);
+      obj.price = val;
     } else if (e.target.type === 'text') {
       obj.item = val;
     }
