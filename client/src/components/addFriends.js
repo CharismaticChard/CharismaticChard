@@ -75,7 +75,8 @@ export class AddFriends extends React.Component {
 
   toggle() {
     this.setState({
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
+      validationState: null
     });
   }
 
