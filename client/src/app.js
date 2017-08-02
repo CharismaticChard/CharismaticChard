@@ -8,7 +8,6 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-import store from './store.js';
 import Home from './components/home.js';
 import Input from './components/input.js';
 import Confirmation from './components/confirmation.js';
@@ -18,9 +17,6 @@ import HistoryItem from './components/historyItem.js';
 import Footer from './components/footer.js';
 import DragAndDrop from './components/dragAndDrop.js';
 import MainSidebars from './components/mainSideBar.js';
-import store from './store.js';
-import { connect } from 'react-redux';
-// import { history } from '../actions/historyActions.js';
 
 const mapStateToProps = state => {
   return {
