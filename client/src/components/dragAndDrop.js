@@ -213,7 +213,7 @@ class DragAndDrop extends React.Component {
             <div className="row">
                 <h4>Friends List</h4>
             </div>
-            <div className="row text-center itemsList">
+            <div className="row text-center friendsList">
               <div className="col-xs-12">
                 <div className="row containerDivPadding">
                   <div className="col-xs-12">

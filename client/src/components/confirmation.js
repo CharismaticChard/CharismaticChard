@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
+import Modal from 'react-bootstrap/lib/Modal';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setFriendsInfo } from '../actions/outputActions.js';
