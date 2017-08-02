@@ -3,8 +3,7 @@ import { Button, Modal, Table, Form, FormGroup, FormControl, Col, ControlLabel }
 import AddFriendsByUserButton from './addFriendsByUser.js';
 import { connect } from 'react-redux';
 import { setFriendsInfo } from '../actions/outputActions.js';
-import { AsYouTypeFormatter, PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
-const formatter = new AsYouTypeFormatter('US');
+import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 const mapStateToProps = state => {
@@ -91,7 +90,7 @@ export class AddFriends extends React.Component {
             <Modal.Title>Add a friend</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form horizontal onSubmit={this.toggle.bind(this)}>
+            <Form horizontal onSubmit={this.state.isValid ? this.handleAdd.bind(this) : this.handleFailAdd.bind(this)}>
               <FormGroup controlId="formName">
                 <Col componentClass={ControlLabel} sm={2}>
                   Name
@@ -100,6 +99,8 @@ export class AddFriends extends React.Component {
                   <FormControl type="text" placeholder="Friend's Name" onChange={this.friendName.bind(this)}/>
                 </Col>
               </FormGroup>
+            </Form>
+            <Form horizontal onSubmit={this.state.isValid ? this.handleAdd.bind(this) : this.handleFailAdd.bind(this)}>
               <FormGroup controlId="formPhoneNumber" validationState={this.state.validationState}>
                 <Col componentClass={ControlLabel} sm={2}>
                   Number
