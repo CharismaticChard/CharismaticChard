@@ -8,7 +8,7 @@ html, body {
     min-height: 100%;
 }
 
-h2 {
+h2, h3{
   font-family: 'Comfortaa';
 }
 
@@ -426,6 +426,7 @@ img.displayed {
 .Sidebar-demo {
   /*padding: 15px;*/
 }
+
 .imageAndHamburger{
     padding: 15px;
 }
@@ -496,6 +497,7 @@ img.displayed {
 
 .head {
     padding: 30px;
+    margin-right: 10px;
 }
 
 .menuBtn {
@@ -552,4 +554,13 @@ img.displayed {
 
 .select-divBox {
     padding: 20px;
+}
+
+.sidebar-profile-image {
+    padding: 3px;
+    border-radius: 50%;
+    border: 3px solid #3FC3D8;
+    width: 40%;
+    margin-left: 10px;
+    margin-top: 10px;
 }
