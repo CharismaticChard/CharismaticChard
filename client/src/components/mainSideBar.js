@@ -42,24 +42,28 @@ class MainSidebars extends React.Component {
 
   render() {
     return (
-      <div className='Sidebar-demo'>
-        <Nav className='imageAndHamburger'>
-          <NavItem onClick={ () => this.updateModal(true)}>
-            <div className="bar1"></div>
-            <div className="bar2"></div>
-            <div className="bar3"></div>
-          </NavItem>
-          <Link to="/" >
-            <img src="./assets/splitter-logo-white.gif" className="homeLogo" />
-          </Link>
-        </Nav>
-        <SidebarHepler  side='left' isVisible={ this.state.isVisible } onHide={ () => this.updateModal(false)}>
+      <div className='Sidebar-demo col-xs-12'>
+        <div className="nav row">
+          <div className="col-xs-2 menuBtn align-middle">
+            <div onClick={this.toggleModal} className="nav-item text-center">
+              <div className="bar1"></div>
+              <div className="bar2"></div>
+              <div className="bar3"></div>
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <Link to="/" >
+              <img src="./assets/splitter-logo.gif" className="homeLogo menuBtn" />
+            </Link>
+          </div>
+        </div>
+        <SidebarHepler  side='left' isVisible={this.state.isVisible} onHide={this.toggleModal}>
           <div className="nav side-bar"> 
             <a href='/profile' className="side-bar-list">
               <div className="side-bar-list">
                 PROFILE
               </div>
-            </a>
+            </a>-
             <LinkContainer to="/" className="side-bar-list" onClick={this.toggleModal}>
               <div className="side-bar-list">
                 HOME
