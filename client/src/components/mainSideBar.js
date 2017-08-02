@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { history } from '../actions/historyAction.js';
 import SidebarHepler from './sideBarHelper.js';
+import Nav from 'react-bootstrap/lib/Nav';
+import NavItem from 'react-bootstrap/lib/NavItem';
 
 const mapStateToProps = state => {
   return {
