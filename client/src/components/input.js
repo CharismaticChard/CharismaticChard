@@ -90,7 +90,6 @@ class Input extends React.Component {
 
   render() {
     var itemList = (this.props.items.length === 0) ? <ItemInputList items={this.state.items}/> : <ItemEditList />;
-
     return (
       <div className="container">
         {itemList}
