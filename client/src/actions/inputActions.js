@@ -57,6 +57,6 @@ export {
   setItem,
   addItem,
   removeItem,
-  sendItemImageToServer
+  sendItemImageToServer,
   toggleIsLoading
 };
