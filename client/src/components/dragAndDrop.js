@@ -55,6 +55,12 @@ const mapDispatchToProps = dispatch => {
     setSplitterDebtTotal: (input) => dispatch(
       setSplitterDebtTotal(input)
     ),
+    setSplitterTax: (input) => dispatch(
+      setSplitterTax(input)
+    ),
+    setSplitterTip: (input) => dispatch(
+      setSplitterTip(input)
+    ),
   };
 };
 
@@ -67,28 +73,10 @@ class DragAndDrop extends React.Component {
       splitterList: this.props.splitterItems,
       completedList: this.props.debtors
     };
-  }
-
-  splitTax(debtorTotal) {
-    let percent = debtorTotal / (this.props.splitTotal - this.props.totalTax);
-    let debtorTax = this.props.tax * percent;
-    debtorTax = Number(debtorTax.toFixed(2));
-    return debtorTax;
-  }
-
-  splitTip(debtorTotal) {
-    let percent = debtorTotal / (this.props.splitTotal - this.props.totalTax);
-    let debtorTip = this.props.tip * percent;
-    debtorTip = Number(debtorTip.toFixed(2));
-    return debtorTip;
-  }
-
-  calculateTotal(items) {
-    let total = 0;
-    items.forEach(item => {
-      total += Number(item.price);
-    });
-    return total;
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDebtorItemsChange = this.handleDebtorItemsChange.bind(this);
+    this.handleSplitterItemsChange = this.handleSplitterItemsChange.bind(this);
+    this.handleUnusedItemsChange = this.handleUnusedItemsChange.bind(this);
   }
 
   splitItem(e) {
@@ -98,8 +86,8 @@ class DragAndDrop extends React.Component {
 
     first.price = (Number(first.price) / 2).toString();
     var second = {...first};
-    second.item = '(2/2) ' + first.item;
-    first.item = '(1/2) ' + first.item;
+    second.name = '(2/2) ' + first.name;
+    first.name = '(1/2) ' + first.name;
 
     this.props.setItem(first, index);
     this.props.addItem(second);
@@ -110,7 +98,7 @@ class DragAndDrop extends React.Component {
       var splitData = data.split(' ');
       var price = splitData.pop();
       return {
-        item: splitData.join(' '),
+        name: splitData.join(' '),
         price: price
       };
     });
@@ -130,11 +118,35 @@ class DragAndDrop extends React.Component {
     this.props.setDebtor(debtor, debtorIndex);
   }
 
+  splitTax(debtorTotal) {
+    let percent = debtorTotal / (Number(this.props.splitTotal) - Number(this.props.totalTax));
+    let debtorTax = Number(this.props.totalTax) * percent;
+    debtorTax = Number(debtorTax.toFixed(2));
+    console.log(debtorTax);
+    return debtorTax;
+  }
+
+  splitTip(debtorTotal) {
+    let percent = debtorTotal / (Number(this.props.splitTotal) - Number(this.props.totalTax));
+    let debtorTip = Number(this.props.totalTip) * percent;
+    debtorTip = Number(debtorTip.toFixed(2));
+    return debtorTip;
+  }
+
+  calculateTotal(items) {
+    let total = 0;
+    items.forEach(item => {
+      total += Number(item.price);
+    });
+    return total;
+  }
+
   calculateSplitterTotal() {
-    var total = calculateTotal(this.props.splitterItems);
+    var total = this.calculateTotal(this.props.splitterItems);
     this.props.setSplitterTotal(total);
-    var tax = splitTax(total);
-    var tip = splitTip(total);
+    var tax = this.splitTax(total);
+    console.log(tax);
+    var tip = this.splitTip(total);
     this.props.setSplitterTax(tax);
     this.props.setSplitterTip(tip);
     this.props.setSplitterDebtTotal(total + tax + tip);
@@ -142,22 +154,22 @@ class DragAndDrop extends React.Component {
 
   calculateDebtorTotal(debtor, index) {
     var debtor = {...debtor};
-    debtor.total = calculateTotal(debtor.items);
-    debtor.tax = splitTax(debtor.total);
-    debtor.tip = splitTip(debtor.total);
+    debtor.total = this.calculateTotal(debtor.items);
+    debtor.tax = this.splitTax(debtor.total);
+    debtor.tip = this.splitTip(debtor.total);
     debtor.debtTotal = debtor.total + debtor.tax + debtor.tip;
     this.props.setDebtor(debtor, index);
   }
 
   calculateDebtorsTotals() {
     this.props.debtors.forEach((debtor, index) => {
-      calculateDebtorTotal(debtor, index);
+      this.calculateDebtorTotal(debtor, index);
     });
   }
 
   handleSubmit() {
-    calculateSplitterTotal();
-    calculateDebtorsTotals();
+    this.calculateSplitterTotal();
+    this.calculateDebtorsTotals();
   }
 
   render() {
@@ -172,7 +184,7 @@ class DragAndDrop extends React.Component {
                 </div>
                 <SharedGroup 
                   items={this.props.items}
-                  onChange={this.handleUnusedItemsChange.bind(this)}
+                  onChange={this.handleUnusedItemsChange}
                   splitItem={this.splitItem}
                   className='itemsList'
                 />
@@ -208,7 +220,7 @@ class DragAndDrop extends React.Component {
                     </div>
                     <SharedGroup 
                       items={this.props.splitterItems}
-                      onChange={this.handleSplitterItemsChange.bind(this)}
+                      onChange={this.handleSplitterItemsChange}
                       splitItem={this.splitItem}
                       className='list-group-item splitterList'
                     />
@@ -224,7 +236,7 @@ class DragAndDrop extends React.Component {
                       </div>
                       <SharedGroup 
                         items={this.props.debtors[index].items}
-                        onChange={this.handleDebtorItemsChange.bind(this)}
+                        onChange={this.handleDebtorItemsChange}
                         splitItem={this.splitItem}
                         className='list-group-item completedList'
                         debtorIndex={index}
@@ -249,7 +261,8 @@ class DragAndDrop extends React.Component {
         <footer>
           <hr className="footerHR"/>
           <Link className="btn btn-primary" to="/input">Back</Link>
-          <Link className="btn btn-primary" to="/confirmation" onClick={this.handleSubmit}>Done</Link>
+          <button onClick={this.handleSubmit}>TEST</button>
+          <Link className="btn btn-primary" to="/confirmation" >Done</Link>
         </footer>
       </div>
     );

@@ -47,6 +47,12 @@ export default function reducer(state =
   case 'SET_SPLITTER_TOTAL': {
     return {...state, splitter: {...state.splitter, total: action.payload}};
   }
+  case 'SET_SPLITTER_TAX': {
+    return {...state, splitter: {...state.splitter, tax: action.payload}};
+  }
+  case 'SET_SPLITTER_TIP': {
+    return {...state, splitter: {...state.splitter, tip: action.payload}};
+  }
   case 'SET_DEBTORS': {
     return {...state, debtors: action.payload};
   }
