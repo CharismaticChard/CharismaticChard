@@ -73,7 +73,7 @@ class Input extends React.Component {
     if (e.target.type === 'number') {
       obj.price = val;
     } else if (e.target.type === 'text') {
-      obj.item = val;
+      obj.name = val;
     }
     this.props.setItem(obj, index);
   }
@@ -94,7 +94,7 @@ class Input extends React.Component {
   }
 
   addItem() {
-    this.props.addItem({item: undefined, price: undefined});
+    this.props.addItem({name: null, price: null});
   }
 
   removeItem() {
@@ -117,7 +117,7 @@ class Input extends React.Component {
                 <div key={index} className="inputContainer row formItem">
                   <div className="inputItem col-xs-6">
                     <label className="inputItemBit">Item</label>
-                    <input type="text" className="inputItemBit form-control" id={index} placeholder="Item..." value={item.item} onChange={this.handleChangeDyna} required/>
+                    <input type="text" className="inputItemBit form-control" id={index} placeholder="Item..." value={item.name} onChange={this.handleChangeDyna} required/>
                   </div>
                   <div className="inputItem col-xs-6">
                     <label className="inputItemBit">Price</label>

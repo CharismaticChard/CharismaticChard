@@ -122,7 +122,6 @@ class DragAndDrop extends React.Component {
     let percent = debtorTotal / (Number(this.props.splitTotal) - Number(this.props.totalTax));
     let debtorTax = Number(this.props.totalTax) * percent;
     debtorTax = Number(debtorTax.toFixed(2));
-    console.log(debtorTax);
     return debtorTax;
   }
 
@@ -143,21 +142,20 @@ class DragAndDrop extends React.Component {
 
   calculateSplitterTotal() {
     var total = this.calculateTotal(this.props.splitterItems);
-    this.props.setSplitterTotal(total);
+    this.props.setSplitterTotal((total).toFixed(2));
     var tax = this.splitTax(total);
-    console.log(tax);
     var tip = this.splitTip(total);
-    this.props.setSplitterTax(tax);
-    this.props.setSplitterTip(tip);
-    this.props.setSplitterDebtTotal(total + tax + tip);
+    this.props.setSplitterTax((tax).toFixed(2));
+    this.props.setSplitterTip((tip).toFixed(2));
+    this.props.setSplitterDebtTotal((total + tax + tip).toFixed(2));
   }
 
   calculateDebtorTotal(debtor, index) {
     var debtor = {...debtor};
-    debtor.total = this.calculateTotal(debtor.items);
-    debtor.tax = this.splitTax(debtor.total);
-    debtor.tip = this.splitTip(debtor.total);
-    debtor.debtTotal = debtor.total + debtor.tax + debtor.tip;
+    debtor.total = this.calculateTotal((debtor.items).toFixed(2));
+    debtor.tax = this.splitTax((debtor.total).toFixed(2));
+    debtor.tip = this.splitTip((debtor.total).toFixed(2));
+    debtor.debtTotal = (debtor.total + debtor.tax + debtor.tip).toFixed(2);
     this.props.setDebtor(debtor, index);
   }
 
@@ -200,9 +198,9 @@ class DragAndDrop extends React.Component {
                   <hr />
                 </div>
                 <div className="row">
-                  <div className="col-xs-4">{this.props.totalTax}</div>
-                  <div className="col-xs-4">{this.props.splitTotal}</div>
-                  <div className="col-xs-4">{this.props.totalTip}</div>
+                  <div className="col-xs-4">{(Number(this.props.totalTax)).toFixed(2)}</div>
+                  <div className="col-xs-4">{(Number(this.props.splitTotal)).toFixed(2)}</div>
+                  <div className="col-xs-4">{(Number(this.props.totalTip)).toFixed(2)}</div>
                 </div>
               </div>
             </div>
@@ -261,8 +259,7 @@ class DragAndDrop extends React.Component {
         <footer>
           <hr className="footerHR"/>
           <Link className="btn btn-primary" to="/input">Back</Link>
-          <button onClick={this.handleSubmit}>TEST</button>
-          <Link className="btn btn-primary" to="/confirmation" >Done</Link>
+          <Link className="btn btn-primary" to="/confirmation" onClick={this.handleSubmit}>Done</Link>
         </footer>
       </div>
     );
