@@ -60,7 +60,7 @@ export class AddFriendsByUser extends React.Component {
     let debtor = {
       name: this.props.checkUser.display,
       phone: this.props.checkUser.phone,
-      email: this.props.checkUser.email
+      email: this.props.checkUser.email,
       total: null,
       tax: null,
       tip: null,

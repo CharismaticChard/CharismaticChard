@@ -124,13 +124,6 @@ const setSplitterTip = (tip) => {
   };
 };
 
-const setDebtors = (debtor) => {
-  return {
-    type: 'SET_DEBTORS',
-    payload: debtor,
-  };
-};
-
 const addDebtor = (debtor) => {
   return {
     type: 'ADD_DEBTOR',

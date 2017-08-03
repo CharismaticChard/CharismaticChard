@@ -1,7 +1,7 @@
 import React from 'react';
 import Sortable from 'react-sortablejs';
 
-const SharedGroup = ({items, setItems, splitItem, header, className}) => {
+const SharedGroup = ({items, setItems, splitItem, header, className}) => (
   <Sortable 
     className={className}
     options={{
@@ -11,7 +11,7 @@ const SharedGroup = ({items, setItems, splitItem, header, className}) => {
   >
     {
       items.map((item, index) => (
-        <div className="list-group-item" key={index}>
+        <div className="list-group-item" data-id={item} key={index}>
           {item.item} ${item.price}
           <button className="splitBtn btn" id={index} onClick={splitItem}>
             Split
@@ -20,6 +20,6 @@ const SharedGroup = ({items, setItems, splitItem, header, className}) => {
       ))
     }
   </Sortable>
-};
+);
 
 export default SharedGroup;

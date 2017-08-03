@@ -71,6 +71,7 @@ export class AddFriends extends React.Component {
       name: this.state.name,
       phone: this.state.number,
       email: null,
+      email: null,
       total: null,
       tax: null,
       tip: null,

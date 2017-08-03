@@ -10,7 +10,6 @@ import {
   setTotalTax,
   setTotalTip,
   setSplitterItems,
-  setDebtors,
   addDebtor,
   setDebtorItem,
 } from '../actions/finalActions.js';
