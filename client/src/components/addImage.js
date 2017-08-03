@@ -65,7 +65,7 @@ class AddImage extends React.Component {
     this.setImagePositionsToRedux = this.setImagePositionsToRedux.bind(this);
     this.imagePosition = this.imagePosition.bind(this);
     this.imagePos = this.imagePos.bind(this);
-    this.disableScroll= this.disableScroll.bind(this);
+    this.disableScroll = this.disableScroll.bind(this);
   }
 
   handleChange(e) {
@@ -222,7 +222,7 @@ class AddImage extends React.Component {
   }
 
   imagePos() {
-    return -this.state.dimensions.width/2;
+    return -this.state.dimensions.width / 2;
   }
 
   disableScroll(event) {
@@ -260,14 +260,14 @@ class AddImage extends React.Component {
                 onResizeStop={this.imagePosition}
                 onResizeStart= {this.disableScroll}
                 enableResizing = {{
-                  top:false, 
-                  right:false, 
-                  bottom:true, 
-                  left:false, 
-                  topRight:false, 
-                  bottomRight:false, 
-                  bottomLeft:false, 
-                  topLeft:false 
+                  top: false, 
+                  right: false, 
+                  bottom: true, 
+                  left: false, 
+                  topRight: false, 
+                  bottomRight: false, 
+                  bottomLeft: false, 
+                  topLeft: false 
                 }}
                 dragAxis="y">
               </Rnd>
