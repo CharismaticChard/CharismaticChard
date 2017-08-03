@@ -23,6 +23,7 @@ const mapStateToProps = state => {
     totalTax: state.final.totalTax,
     splitTotal: state.final.splitTotal,
     totalTip: state.final.totalTip,
+    isLoading: state.input.isLoading
   };
 };
 
@@ -111,7 +112,7 @@ class Input extends React.Component {
   }
 
   render() {
-    return this.props.items[0].item !== undefined ? (
+    return !this.props.isLoading ? (
       <div className="container">   
         <div>
           <div className="inputContainer row formItem">
