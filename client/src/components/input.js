@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { inputLoading } from '../actions/historyAction.js';
+import Loading from './loading';
 import { 
   addItem,
   removeItem,
@@ -110,8 +111,8 @@ class Input extends React.Component {
   }
 
   render() {
-    return (
-      <div className="container">
+    return this.props.items[0].item !== undefined ? (
+      <div className="container">   
         <div>
           <div className="inputContainer row formItem">
             <div className="inputItem col-xs-12">
@@ -165,6 +166,8 @@ class Input extends React.Component {
           <Link className="btn btn-primary" to="/dragAndDrop" onClick={this.handleSubmit}>Submit</Link>
         </footer>
       </div>
+    ) : (
+      <Loading/>
     );
   }
 }

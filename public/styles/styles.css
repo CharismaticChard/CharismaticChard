@@ -621,3 +621,13 @@ element.style {
     width: 20px;
     background-color: #08939D;
 }
+
+
+.loading {
+    text-align: center; 
+    padding: 50px;
+    font-family: 'Comfortaa'; 
+    color: #3FC3D8; 
+    margin-top: 70px;
+    font-size: 20px;
+}
