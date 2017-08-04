@@ -1,13 +1,13 @@
-# Project Name
+# Splitter
 
-The project description
+A bill splitting and payment requesting application.
 
 ## Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- [Joseph Kwon](https://github.com/JKwon823)
+- [Carlos Osorio](https://github.com/cosorio94)
+- [Minji Lee](https://github.com/minjilee8816)
+- [Kai Mashima](https://github.com/kai-mashima)
 
 ## Roadmap
 
@@ -102,5 +102,3 @@ To run server: `yarn run start`
 To run tests: `yarn run test`
 
 To run your redis server for the session store `redis-server`
-
-
