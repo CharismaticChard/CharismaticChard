@@ -8,6 +8,7 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
+import Login from './components/login.js';
 import Home from './components/home.js';
 import Input from './components/input.js';
 import Confirmation from './components/confirmation.js';
@@ -46,9 +47,7 @@ class App extends React.Component {
       <Router history={browserHistory}>
         <div>
           <div className="nav-bar navbar navbar-default">
-            <div className="container">
-              <MainSidebars />
-            </div>
+            <MainSidebars />
           </div>
           <Switch>
             <Route exact path="/" component={() => <Home />} />

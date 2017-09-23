@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Nav from 'react-bootstrap/lib/Nav';
 import Modal from 'react-bootstrap/lib/Modal';
-import SidebarHepler from './sideBarHelper.js';
+import SidebarHelper from './sideBarHelper.js';
 import { LinkContainer } from 'react-router-bootstrap';
 import { history } from '../actions/historyAction.js';
 import { connect } from 'react-redux';
@@ -29,7 +29,7 @@ class MainSidebars extends React.Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
-  
+
   toggleModal() {
     this.setState({
       isVisible: !this.state.isVisible,
@@ -37,34 +37,32 @@ class MainSidebars extends React.Component {
   }
 
   historyStateChange() {
-    this.props.history(true); 
-    this.toggleModal();    
+    this.props.history(true);
+    this.toggleModal();
   }
 
   historyStateChange() {
-    this.props.history(true); 
-    this.updateModal(false);    
+    this.props.history(true);
+    this.updateModal(false);
   }
 
   render() {
     return (
-      <div className='Sidebar-demo col-xs-12'>
-        <div className="nav row">
-          <div className="col-xs-2 menuBtn align-middle">
-            <div onClick={this.toggleModal} className="nav-item text-center">
-              <div className="bar1"></div>
-              <div className="bar2"></div>
-              <div className="bar3"></div>
-            </div>
-          </div>
-          <div className="col-xs-6 logo-image">
-            <Link to="/" >
-              <img src="./assets/splitter-logo-white.gif" className="homeLogo menuBtn" />
-            </Link>
+      <div className='menuBtn col-xs-12'>
+        <div className="col-xs-2 align-middle">
+          <div onClick={this.toggleModal} className="nav-item">
+            <div className="bar1"></div>
+            <div className="bar2"></div>
+            <div className="bar3"></div>
           </div>
         </div>
-        <SidebarHepler  side='left' isVisible={this.state.isVisible} onHide={this.toggleModal}>
-          <div className="side-bar"> 
+        <div className="nav row logo-image col-xs-8 menuBtn">
+          <Link to="/" >
+            <img src="./assets/splitter-logo-white.png" className="homeLogo menuBtn" />
+          </Link>
+        </div>
+        <SidebarHelper side='left' isVisible={this.state.isVisible} onHide={this.toggleModal}>
+          <div className="side-bar">
             <div className="bar-profile side-bar-list text-center">
               <a href='/profile' className="bar-list-name">
                 Profile
@@ -85,7 +83,7 @@ class MainSidebars extends React.Component {
               </a>
             </div>
           </div>
-        </SidebarHepler>
+        </SidebarHelper>
       </div>
     );
   }

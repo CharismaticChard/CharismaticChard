@@ -33,4 +33,4 @@ class SidebarHepler extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarHepler); 
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarHepler);
